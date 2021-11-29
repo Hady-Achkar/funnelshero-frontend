@@ -1,0 +1,154 @@
+import React, {useCallback, useState} from 'react'
+import {useEditor, useNode} from '@craftjs/core'
+import {Mail, Phone, Person} from '@material-ui/icons'
+import ContentEditable, {ContentEditableEvent} from 'react-contenteditable'
+import {Container} from '@material-ui/core'
+import {AddOptSubmits} from '../../../services'
+import submitOptinForm from '../../../services/SubmitOptinForm'
+import {AxiosError} from 'axios'
+
+const OptinForm = () => {
+	const {
+		connectors: {connect},
+		setProp,
+	} = useNode()
+
+	const {enabled} = useEditor((state, _) => ({
+		enabled: state.options.enabled,
+	}))
+	const [text, setText] = useState<string>('Sign up')
+
+	const handleChange = useCallback(
+		(e: ContentEditableEvent) => {
+			setText(e.target.value)
+		},
+		[setText]
+	)
+
+	const [optData, setOptData] = useState<AddOptSubmits>()
+
+	const isDisabled: boolean = Boolean(
+		optData?.email === '' || optData?.fullname === '' || optData?.phone === ''
+	)
+
+	const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setOptData((prevState) => ({...prevState, [e.target.id]: e.target.value}))
+	}
+
+	const handleSubmit = (e: React.FormEvent) => {
+		console.log('banaan')
+
+		e.preventDefault()
+		console.log({...optData, funnelTitle: 'My First Funnel'})
+
+		submitOptinForm({...optData, funnelTitle: 'My First Funnel'})
+			.then((res) => {
+				console.log(res)
+			})
+			.catch((err: AxiosError) => {
+				if (err.response) {
+					console.error(err.response.data.error)
+				} else {
+					console.error(err)
+				}
+			})
+	}
+
+	return (
+		<Container innerRef={connect}>
+			<div className="w-full">
+				<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+					<form className="space-y-6" onSubmit={handleSubmit}>
+						<div>
+							<label
+								htmlFor="fullname"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Fullname
+							</label>
+							<div className="mt-1 relative rounded-md shadow-sm">
+								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+									<Person
+										className="h-5 w-5 text-gray-400"
+										aria-hidden="true"
+									/>
+								</div>
+								<input
+									disabled={enabled}
+									type="text"
+									id="fullname"
+									value={optData?.fullname}
+									onChange={handleFormChange}
+									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+									placeholder="you@example.com"
+								/>
+							</div>
+						</div>
+						<div>
+							<label
+								htmlFor="email"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Email Address
+							</label>
+							<div className="mt-1 relative rounded-md shadow-sm">
+								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+									<Mail className="h-5 w-5 text-gray-400" aria-hidden="true" />
+								</div>
+								<input
+									disabled={enabled}
+									type="email"
+									value={optData?.email}
+									onChange={handleFormChange}
+									name="email"
+									id="email"
+									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+									placeholder="you@example.com"
+								/>
+							</div>
+						</div>
+						<div>
+							<label
+								htmlFor="phone"
+								className="block text-sm font-medium text-gray-700"
+							>
+								Phone number
+							</label>
+							<div className="mt-1 relative rounded-md shadow-sm">
+								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+									<Phone className="h-5 w-5 text-gray-400" aria-hidden="true" />
+								</div>
+								<input
+									disabled={enabled}
+									type="text"
+									value={optData?.phone}
+									onChange={handleFormChange}
+									id="phone"
+									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10  sm:text-sm border-gray-300 rounded-md"
+									placeholder="000-00-0000"
+								/>
+							</div>
+							<div className="mt-1 relative rounded-md shadow-sm">
+								<button
+									disabled={enabled || isDisabled}
+									type="submit"
+									className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+								>
+									<ContentEditable
+										html={text}
+										onChange={handleChange}
+										disabled={!enabled}
+									/>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</Container>
+	)
+}
+
+OptinForm.craft = {}
+
+export default OptinForm
