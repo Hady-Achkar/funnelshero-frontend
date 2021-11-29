@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch} from 'react-router-dom'
-import {HomePage, BuilderPage} from '../pages'
+import {HomePage, BuilderPage, SigninPage} from '../pages'
 import Route from './route'
 
 export interface IRoutesConfiguration {
@@ -22,6 +22,12 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		exact: true,
 		isPrivate: false,
 		component: BuilderPage,
+	},
+	{
+		path: '/sign-in',
+		exact: true,
+		isPrivate: false,
+		component: SigninPage,
 	},
 ]
 
