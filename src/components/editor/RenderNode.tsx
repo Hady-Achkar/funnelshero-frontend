@@ -1,12 +1,12 @@
 //@ts-nocheck
 import {useNode, useEditor} from '@craftjs/core'
 import {ROOT_NODE} from '@craftjs/utils'
+import {ArrowCircleUp} from '@mui/icons-material'
 import React, {useEffect, useRef, useCallback} from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
-import {Icons} from '../../assets/icons'
-import Delete from '../../assets/icons/delete.svg'
-import Move from '../../assets/icons/move.svg'
+import Delete from '../../assets/icons/delete-svgrepo-com.svg'
+import Move from '../../assets/icons/move-svgrepo-com.svg'
 
 const IndicatorDiv = styled.div`
 	height: 30px;
@@ -113,7 +113,20 @@ const RenderNode = ({render}) => {
 							<h2 className="flex-1 mr-4">{name}</h2>
 							{moveable ? (
 								<Btn className="mr-2 cursor-move" ref={drag}>
-									<img src={Move} className="medium-icon" />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+										/>
+									</svg>
 								</Btn>
 							) : null}
 							{id !== ROOT_NODE && (
@@ -123,7 +136,20 @@ const RenderNode = ({render}) => {
 										actions.selectNode(parent)
 									}}
 								>
-									<img src={Icons.arrowUp} className="medium-icon" />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M7 11l5-5m0 0l5 5m-5-5v12"
+										/>
+									</svg>
 								</Btn>
 							)}
 							{deletable ? (
@@ -134,7 +160,20 @@ const RenderNode = ({render}) => {
 										actions.delete(id)
 									}}
 								>
-									<img src={Delete} className="medium-icon" />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+										/>
+									</svg>
 								</Btn>
 							) : null}
 						</IndicatorDiv>,
