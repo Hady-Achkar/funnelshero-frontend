@@ -70,14 +70,50 @@ export const Toolbox = () => {
 					title="Container"
 					Icon={CropLandscape}
 					component={Container}
+					isCanva={true}
 				/>
-				<ToolboxItem title="Image" Icon={CropOriginal} component={Image} />
-				<ToolboxItem title="Title" Icon={TextFormat} component={Text} />
-				<ToolboxItem title="Button" Icon={SmartButtonIcon} component={Button} />
-				<ToolboxItem title="Video" Icon={VideoLibrary} component={Video} />
-				<ToolboxItem title="Divider" Icon={PowerInput} component={Divider} />
-				<ToolboxItem title="Icon" Icon={InsertEmoticon} component={Icon} />
-				<ToolboxItem title="Form" Icon={BlurLinear} component={OptinForm} />
+				<ToolboxItem
+					isCanva={false}
+					title="Image"
+					Icon={CropOriginal}
+					component={Image}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Title"
+					Icon={TextFormat}
+					component={Text}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Button"
+					Icon={SmartButtonIcon}
+					component={Button}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Video"
+					Icon={VideoLibrary}
+					component={Video}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Divider"
+					Icon={PowerInput}
+					component={Divider}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Icon"
+					Icon={InsertEmoticon}
+					component={Icon}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Form"
+					Icon={BlurLinear}
+					component={OptinForm}
+				/>
 			</div>
 		</ToolboxDiv>
 	)
