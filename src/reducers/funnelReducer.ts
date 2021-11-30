@@ -16,6 +16,12 @@ const funnelState = (
 	action: FunnelActions
 ) => {
 	switch (action.type) {
+		case 'INITIALIZE_MY_FUNNELS':
+			return {
+				...state,
+				funnels: action.funnels,
+				loading: false,
+			}
 		case 'ADD_FUNNEL':
 			return {
 				...state,
