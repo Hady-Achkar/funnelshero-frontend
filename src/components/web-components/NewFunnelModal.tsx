@@ -1,11 +1,17 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition, Listbox} from '@headlessui/react'
 import {ExclamationIcon} from '@heroicons/react/outline'
 
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
+import {IAddFunnelPayload, startAddFunnel} from '../../actions'
+import {useDispatch} from 'react-redux'
 const NewFunnelModal = ({open, setOpen}) => {
+	const [newFunnelData, setNewFunnelData] = useState<IAddFunnelPayload>({
+		category: '',
+		title: '',
+	})
 	const cancelButtonRef = useRef(null)
 	const people = [
 		{id: 1, name: 'Domestic companies'},
@@ -19,10 +25,18 @@ const NewFunnelModal = ({open, setOpen}) => {
 		{id: 9, name: 'Claudie Smitham'},
 		{id: 10, name: 'Emil Schaefer'},
 	]
-
+	const dispatch = useDispatch()
 	const handleSubmit = (e) => {
 		e.preventDefault()
+		dispatch(startAddFunnel(newFunnelData))
+		setOpen(false)
 	}
+	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setNewFunnelData((prevState) => ({
+			...prevState,
+			[e.target.id]: e.target.value,
+		}))
+	}, [])
 
 	const [selected, setSelected] = useState(people[3])
 	return (
@@ -63,7 +77,7 @@ const NewFunnelModal = ({open, setOpen}) => {
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
 						<div className="h-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-							<form>
+							<form onSubmit={handleSubmit}>
 								<div className="my-2">
 									<label
 										htmlFor="name"
@@ -75,14 +89,24 @@ const NewFunnelModal = ({open, setOpen}) => {
 										<input
 											type="text"
 											name="name"
-											id="name"
+											id="title"
+											onChange={handleChange}
 											className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 											placeholder="The awesome funnel!"
 										/>
 									</div>
 								</div>
 
-								<Listbox value={selected} onChange={setSelected}>
+								<Listbox
+									value={selected}
+									onChange={(e) => {
+										setSelected(e)
+										setNewFunnelData((prevState) => ({
+											...prevState,
+											category: e.name,
+										}))
+									}}
+								>
 									{({open}) => (
 										<>
 											<Listbox.Label className="block text-sm font-medium text-gray-700">
