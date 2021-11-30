@@ -4,8 +4,13 @@ import cx from 'classnames'
 import {Header} from './Header'
 import {Sidebar} from './Sidebar'
 import {Toolbox} from './Toolbox'
+import {GetSingleFunnel} from '../../../services'
 
-const Viewport: React.FC = ({children}) => {
+interface IProps {
+	children: React.ReactElement
+	data: GetSingleFunnel.Funnel
+}
+const Viewport: React.FC<IProps> = ({children, data}) => {
 	const {
 		enabled,
 		connectors,
@@ -42,7 +47,7 @@ const Viewport: React.FC = ({children}) => {
 			>
 				<Toolbox />
 				<div className="page-container flex flex-1 h-full flex-col bg-indigo-50">
-					<Header />
+					<Header data={data} />
 					<div
 						className={cx([
 							'craftjs-renderer flex-1 h-full w-full transition pb-8 overflow-auto',
