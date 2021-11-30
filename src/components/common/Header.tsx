@@ -6,7 +6,6 @@ import Logo from '../../assets/icon-only.png'
 import {logoutAction} from '../../actions'
 import {Menu, Transition} from '@headlessui/react'
 import {ChevronDownIcon} from '@heroicons/react/solid'
-import {Button} from '@material-ui/core'
 import classNames from 'classnames'
 
 const navigation = [
@@ -18,7 +17,10 @@ const navigation = [
 ]
 
 const Header = () => {
-	const {isAuthenticated} = useSelector((state: AppState) => state.auth)
+	const {
+		isAuthenticated,
+		user: {fullName, email},
+	} = useSelector((state: AppState) => state.auth)
 	const dispatch = useDispatch()
 	const handleLogout = () => {
 		dispatch(logoutAction())
@@ -75,14 +77,14 @@ const Header = () => {
 										<div className="px-4 py-3">
 											<p className="text-sm">Signed in as</p>
 											<p className="text-sm font-medium text-gray-900 truncate">
-												tom@example.com
+												{email}
 											</p>
 										</div>
 										<div className="py-1">
 											<Menu.Item>
 												{({active}) => (
-													<a
-														href="#"
+													<Link
+														to="#"
 														className={classNames(
 															active
 																? 'bg-gray-100 text-gray-900'
@@ -91,13 +93,13 @@ const Header = () => {
 														)}
 													>
 														Account settings
-													</a>
+													</Link>
 												)}
 											</Menu.Item>
 											<Menu.Item>
 												{({active}) => (
-													<a
-														href="#"
+													<Link
+														to="#"
 														className={classNames(
 															active
 																? 'bg-gray-100 text-gray-900'
@@ -106,13 +108,13 @@ const Header = () => {
 														)}
 													>
 														Support
-													</a>
+													</Link>
 												)}
 											</Menu.Item>
 											<Menu.Item>
 												{({active}) => (
-													<a
-														href="#"
+													<Link
+														to="/dashboard"
 														className={classNames(
 															active
 																? 'bg-gray-100 text-gray-900'
@@ -120,8 +122,8 @@ const Header = () => {
 															'block px-4 py-2 text-sm'
 														)}
 													>
-														License
-													</a>
+														Dashboard
+													</Link>
 												)}
 											</Menu.Item>
 										</div>

@@ -1,5 +1,4 @@
-import React, {useContext} from 'react'
-import classnames from 'classnames'
+import React from 'react'
 import {Box, CircularProgress, Container} from '@material-ui/core'
 interface IProps {
 	loading?: boolean
@@ -8,16 +7,21 @@ interface IProps {
 const Wrapper: React.FC<IProps> = ({loading, children}, restProp) => {
 	if (loading) {
 		return (
-			<Container>
-				<Box sx={{display: 'flex'}}>
-					<CircularProgress />
-				</Box>
+			<Container
+				maxWidth="xl"
+				className=" justify-center items-center h-screen
+				"
+				style={{
+					display: 'flex',
+				}}
+			>
+				<CircularProgress />
 			</Container>
 		)
 	}
 	return (
 		<Container
-			fluid
+			maxWidth="xl"
 			{...restProp}
 			style={{
 				margin: 0,
