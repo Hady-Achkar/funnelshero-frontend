@@ -80,7 +80,11 @@ const Viewport: React.FC<IProps> = (props) => {
 						</div>
 					</div>
 				</div>
-				<Sidebar />
+				<Sidebar
+					data={data}
+					handleChangePage={handleChangePage}
+					mainPage={mainPage}
+				/>
 			</div>
 		</div>
 	)
