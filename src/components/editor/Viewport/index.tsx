@@ -9,8 +9,11 @@ import {GetSingleFunnel} from '../../../services'
 interface IProps {
 	children: React.ReactElement
 	data: GetSingleFunnel.Funnel
+	handleChangePage: (page: GetSingleFunnel.Page) => void
+	mainPage: GetSingleFunnel.Page
 }
-const Viewport: React.FC<IProps> = ({children, data}) => {
+const Viewport: React.FC<IProps> = (props) => {
+	const {children, data, handleChangePage, mainPage} = props
 	const {
 		enabled,
 		connectors,
@@ -39,6 +42,8 @@ const Viewport: React.FC<IProps> = ({children, data}) => {
 			// }, 200)
 		})
 	}, [setOptions])
+	const {actions, query} = useEditor()
+	actions.deserialize(mainPage?.data)
 
 	return (
 		<div className="viewport">
@@ -47,7 +52,11 @@ const Viewport: React.FC<IProps> = ({children, data}) => {
 			>
 				<Toolbox />
 				<div className="page-container flex flex-1 h-full flex-col bg-indigo-50">
-					<Header data={data} />
+					<Header
+						data={data}
+						handleChangePage={handleChangePage}
+						mainPage={mainPage}
+					/>
 					<div
 						className={cx([
 							'craftjs-renderer flex-1 h-full w-full transition pb-8 overflow-auto',
