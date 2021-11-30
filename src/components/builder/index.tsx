@@ -13,9 +13,9 @@ import {
 	Text,
 	Image,
 } from '../'
-import {GetMyFunnels} from '../../services'
+import {GetSingleFunnel} from '../../services'
 interface IProps {
-	data: GetMyFunnels.Funnel
+	data: GetSingleFunnel.Funnel
 }
 const Builder: React.FC<IProps> = ({data}) => {
 	const theme = createTheme({
@@ -55,7 +55,7 @@ const Builder: React.FC<IProps> = ({data}) => {
 							}
 						/>
 					</Frame> */}
-					<Viewport>
+					<Viewport data={data}>
 						<Frame data={data?.pages[0].data}>
 							<Element
 								canvas

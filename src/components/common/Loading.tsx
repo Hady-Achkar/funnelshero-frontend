@@ -6,7 +6,7 @@ const Wrapper: React.FC = () => {
 		<Container
 			maxWidth="xl"
 			style={{height: '100vh'}}
-			className={'flex justify-center items-center'}
+			className="flex justify-center items-center"
 		>
 			<CircularProgress />
 		</Container>
