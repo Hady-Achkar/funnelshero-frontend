@@ -5,70 +5,25 @@ import copy from 'copy-to-clipboard'
 import React, {Fragment, useCallback, useState} from 'react'
 import styled from 'styled-components'
 import lz from 'lzutf8'
-import Checkmark from '../../../public/icons/check.svg'
-import Customize from '../../../public/icons/customize.svg'
-import RedoSvg from '../../../public/icons/toolbox/redo.svg'
-import UndoSvg from '../../../public/icons/toolbox/undo.svg'
 import {
 	CheckIcon,
-	ChevronLeftIcon,
 	ChevronRightIcon,
 	HomeIcon,
 	SelectorIcon,
 } from '@heroicons/react/solid'
-import {GetSingleFunnel} from '../../../services'
+import {GetMyFunnels, GetSingleFunnel} from '../../../services'
 import {Listbox, Transition} from '@headlessui/react'
 import classNames from 'classnames'
-
-const HeaderDiv = styled.div`
-	width: 100%;
-	height: 45px;
-	z-index: 99999;
-	position: relative;
-	padding: 0px 10px;
-	background: #d4d4d4;
-	display: flex;
-`
-
-const Btn = styled.a`
-	display: flex;
-	align-items: center;
-	padding: 5px 15px;
-	border-radius: 3px;
-	color: #fff;
-	font-size: 13px;
-	svg {
-		margin-right: 6px;
-		width: 12px;
-		height: 12px;
-		fill: #fff;
-		opacity: 0.9;
-	}
-`
-
-const Item = styled.a<{disabled?: boolean}>`
-	margin-right: 10px;
-	cursor: pointer;
-	svg {
-		width: 20px;
-		height: 20px;
-		fill: #707070;
-	}
-	${(props) =>
-		props.disabled &&
-		`
-    opacity:0.5;
-    cursor: not-allowed;
-  `}
-`
-
+import {NewPageModal} from '../..'
 interface IProps {
-	data: GetSingleFunnel.Funnel
+	data: GetMyFunnels.Funnel
 	handleChangePage: (page: GetSingleFunnel.Page) => void
 	mainPage: GetSingleFunnel.Page
 }
 export const Header: React.FC<IProps> = (props) => {
 	const {data, handleChangePage, mainPage} = props
+
+	const [newPageModalOpen, setNewPageModalOpen] = useState<boolean>(false)
 	const {enabled, canUndo, canRedo, actions} = useEditor((state, query) => ({
 		enabled: state.options.enabled,
 		canUndo: query.history.canUndo(),
@@ -89,54 +44,10 @@ export const Header: React.FC<IProps> = (props) => {
 
 	const isDisabled = Boolean(json === '')
 
-	const pages = [
-		{name: 'Funnels', href: '/dashboard', current: false},
-		{name: 'Funnel name', href: '#', current: true},
-	]
 	return (
-		// <HeaderDiv className="header text-white transition w-full">
-		// 	<div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
-		// 		{enabled && (
-		// 			<div className="flex-1 flex">
-		// 				<Tooltip title="Undo" placement="bottom">
-		// 					<Item disabled={!canUndo} onClick={() => actions.history.undo()}>
-		// 						<UndoSvg />
-		// 					</Item>
-		// 				</Tooltip>
-		// 				<Tooltip title="Redo" placement="bottom">
-		// 					<Item disabled={!canRedo} onClick={() => actions.history.redo()}>
-		// 						<RedoSvg />
-		// 					</Item>
-		// 				</Tooltip>
-		// 			</div>
-		// 		)}
-		// 		<div className="flex">
-		// 			{/* @ts-ignore */}
-		// 			<Button onClick={handleEncode}>Encode me</Button>
-		// 			<Button onClick={handleDecode} disabled={isDisabled}>
-		// 				Decode me
-		// 			</Button>
-		// 			<Btn
-		// 				className={cx([
-		// 					'transition cursor-pointer',
-		// 					{
-		// 						'bg-green-400': enabled,
-		// 						'bg-primary': !enabled,
-		// 					},
-		// 				])}
-		// 				onClick={() => {
-		// 					actions.setOptions((options) => (options.enabled = !enabled))
-		// 				}}
-		// 			>
-		// 				{enabled ? <Checkmark /> : <Customize />}
-		// 				{enabled ? 'Finish Editing' : 'Edit'}
-		// 			</Btn>
-		// 		</div>
-		// 	</div>
-		// </HeaderDiv>
 		<div className="bg-white p-3 shadow-sm">
 			<div className="mt-2 md:flex md:items-center md:justify-between ">
-				<div className="flex-1 min-w-0">
+				{/* <div className="flex-1 min-w-0">
 					<nav className="flex" aria-label="Breadcrumb">
 						<ol role="list" className="flex items-center space-x-4">
 							<li>
@@ -165,7 +76,7 @@ export const Header: React.FC<IProps> = (props) => {
 							))}
 						</ol>
 					</nav>
-				</div>
+				</div> */}
 				<Listbox
 					value={mainPage}
 					onChange={(e) => {
@@ -257,6 +168,18 @@ export const Header: React.FC<IProps> = (props) => {
 						</Tooltip>
 					</div>
 				</div> */}
+				<div>
+					<button
+						type="button"
+						className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+						onClick={() => {
+							setNewPageModalOpen(true)
+						}}
+					>
+						Add New Page
+					</button>
+				</div>
+
 				{!enabled ? (
 					<div>
 						<button
@@ -303,6 +226,11 @@ export const Header: React.FC<IProps> = (props) => {
 					</div>
 				)}
 				<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
+				<NewPageModal
+					open={newPageModalOpen}
+					setOpen={setNewPageModalOpen}
+					funnelId={data?._id}
+				/>
 			</div>
 		</div>
 	)
