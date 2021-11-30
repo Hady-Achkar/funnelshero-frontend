@@ -10,6 +10,7 @@ import PagesIcon from '../../../../assets/icons/pages-svgrepo-com.svg'
 import LayerIcon from '../../../../assets/icons/layers-svgrepo-com.svg'
 import Toolbar from '../../Toolbar'
 import {GetMyFunnels, GetSingleFunnel} from '../../../../services'
+import classNames from 'classnames'
 
 export const SidebarDiv = styled.div<{enabled: boolean}>`
 	width: 280px;
@@ -65,31 +66,45 @@ export const Sidebar: React.FC<IProps> = (props) => {
 					visible={pagesVisible}
 					onChange={(val) => setPagesVisible(val)}
 				>
-					<div className="">
-						<div className="py-1 h-full bg-white">
-							{data?.pages.map((page) => {
-								return (
-									<React.Fragment key={page._id}>
-										<div onClick={() => handleChangePage(page)}>
-											{page.title}
+					<div className="py-1 h-full bg-white">
+						{data?.pages.map((page) => {
+							return (
+								<div
+									key={page._id}
+									className="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6  overflow-hidden"
+								>
+									<dt>
+										<div
+											className="absolute bg-indigo-500 rounded-md p-3 cursor-pointer hover:bg-indigo-300"
+											onClick={() => handleChangePage(page)}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="white"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+												/>
+											</svg>
 										</div>
-									</React.Fragment>
-								)
-							})}
-							<div
-								className="px-5 py-2 flex flex-col items-center h-full justify-center text-center"
-								style={{
-									color: 'rgba(0, 0, 0, 0.5607843137254902)',
-									fontSize: '11px',
-								}}
-							>
-								<h2 className="pb-1">Click on a component to start editing.</h2>
-								<h2>
-									You could also double click on the layers below to edit their
-									names, like in Photoshop
-								</h2>
-							</div>
-						</div>
+										<p className="ml-16 text-sm font-medium text-gray-900 truncate">
+											{page.title}
+										</p>
+									</dt>
+									<dd className="ml-16 pb-6 flex items-baseline sm:pb-7">
+										<p className="text-xs font-semibold text-gray-500 cursor-pointer hover:text-indigo-400">
+											Rename
+										</p>
+									</dd>
+								</div>
+							)
+						})}
 					</div>
 				</SidebarItem>
 			</div>
