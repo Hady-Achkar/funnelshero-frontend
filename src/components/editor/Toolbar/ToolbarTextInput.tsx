@@ -8,15 +8,17 @@ const useStyles = makeStyles({
 		padding: 0,
 		width: '100%',
 		// background:"#efeff1",
-		borderRadius: '100px',
+		// borderRadius: '100px',
 		border: 'none',
 		margin: 0,
 		marginTop: 7,
 		position: 'relative',
+		borderRadius: '15px',
 	},
 	input: {
-		background: '#efeff1',
-		borderRadius: '100px',
+		background: 'rgb(238,242,255)',
+		borderColor: '#101010',
+		borderRadius: '15px',
 		fontSize: '12px',
 		paddingLeft: '28px',
 		paddingBottom: '8px',
@@ -35,7 +37,7 @@ const useLabelStyles = makeStyles({
 	},
 	formControl: {
 		fontSize: '18px',
-		borderRadius: '100px',
+		borderRadius: '15px',
 		paddingLeft: '0px',
 		paddingTop: '3px',
 		marginBottom: '3px',
@@ -86,7 +88,7 @@ const ToolbarTextInput = ({
 					}}
 				>
 					<div
-						className="fixed top-0 left-0 w-full h-full cursor-pointer"
+						className="fixed top-0 left-0 w-full h-full cursor-pointer bg-indi"
 						onClick={(e) => {
 							e.preventDefault()
 							e.stopPropagation()
@@ -105,6 +107,7 @@ const ToolbarTextInput = ({
 				label={label}
 				style={{margin: 0, width: '100%'}}
 				value={internalValue || ''}
+				className="focus:ring-indigo-500 bg-white focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {
 						onChange((e.target as any).value)
@@ -128,7 +131,7 @@ const ToolbarTextInput = ({
 							}}
 						>
 							<div
-								className="w-2 h-2 inline-block rounded-full relative"
+								className="w-2 h-2 inline-block relative"
 								style={{
 									left: '15px',
 									background: internalValue,

@@ -13,10 +13,11 @@ import {GetMyFunnels, GetSingleFunnel} from '../../../../services'
 import classNames from 'classnames'
 
 export const SidebarDiv = styled.div<{enabled: boolean}>`
-	width: 280px;
+	width: 400px;
 	opacity: ${(props) => (props.enabled ? 1 : 0)};
 	background: #fff;
-	margin-right: ${(props) => (props.enabled ? 0 : -280)}px;
+	margin-right: ${(props) => (props.enabled ? 0 : -400)}px;
+	overflow-y: scroll;
 `
 interface IProps {
 	data: GetMyFunnels.Funnel
@@ -40,13 +41,13 @@ export const Sidebar: React.FC<IProps> = (props) => {
 				<SidebarItem
 					icon={CustomizeIcon}
 					title="Design"
-					height={!layersVisible ? 'full' : '55%'}
+					height={!pagesVisible ? 'full' : '55%'}
 					visible={toolbarVisible}
 					onChange={(val) => setToolbarVisible(val)}
 				>
 					<Toolbar />
 				</SidebarItem>
-				<SidebarItem
+				{/* <SidebarItem
 					icon={LayerIcon}
 					title="Layers"
 					height={!toolbarVisible ? 'full' : '45%'}
@@ -56,7 +57,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 					<div className="">
 						<Layers expandRootOnLoad={false} />
 					</div>
-				</SidebarItem>
+				</SidebarItem> */}
 
 				<SidebarItem
 					//@ts-ignore
@@ -71,11 +72,11 @@ export const Sidebar: React.FC<IProps> = (props) => {
 							return (
 								<div
 									key={page._id}
-									className="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6  overflow-hidden"
+									className="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6 overflow-y-scroll"
 								>
 									<dt>
 										<div
-											className="absolute bg-indigo-500 rounded-md p-3 cursor-pointer hover:bg-indigo-300"
+											className="absolute bg-indigo-500 rounded-md p-3 cursor-pointer hover:bg-indigo-600"
 											onClick={() => handleChangePage(page)}
 										>
 											<svg
@@ -94,11 +95,11 @@ export const Sidebar: React.FC<IProps> = (props) => {
 											</svg>
 										</div>
 										<p className="ml-16 text-sm font-medium text-gray-900 truncate">
-											{page.title}
+											{page.title} Page
 										</p>
 									</dt>
 									<dd className="ml-16 pb-6 flex items-baseline sm:pb-7">
-										<p className="text-xs font-semibold text-gray-500 cursor-pointer hover:text-indigo-400">
+										<p className="text-xs font-semibold text-blue-400 cursor-pointer hover:text-indigo-400">
 											Rename
 										</p>
 									</dd>
