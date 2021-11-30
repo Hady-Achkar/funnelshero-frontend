@@ -1,4 +1,4 @@
-import {Editor, Frame, Element} from '@craftjs/core'
+import {Editor, Frame, Element, useEditor} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
 import React from 'react'
 import {createTheme} from '@material-ui/core/styles'
@@ -16,8 +16,11 @@ import {
 import {GetSingleFunnel} from '../../services'
 interface IProps {
 	data: GetSingleFunnel.Funnel
+	mainPage: GetSingleFunnel.Page
+	handleChangePage: (page: GetSingleFunnel.Page) => void
 }
-const Builder: React.FC<IProps> = ({data}) => {
+const Builder: React.FC<IProps> = (props) => {
+	const {data, mainPage, handleChangePage} = props
 	const theme = createTheme({
 		typography: {
 			fontFamily: [
@@ -38,6 +41,7 @@ const Builder: React.FC<IProps> = ({data}) => {
 		HyperLink,
 		Divider,
 	}
+	console.log(mainPage?.data)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -55,17 +59,12 @@ const Builder: React.FC<IProps> = ({data}) => {
 							}
 						/>
 					</Frame> */}
-					<Viewport data={data}>
-						<Frame data={data?.pages[0].data}>
-							<Element
-								canvas
-								is={Container}
-								width="800px"
-								background={{r: 255, g: 255, b: 255, a: 1}}
-								padding={['40', '40', '40', '40']}
-								custom={{displayName: 'App'}}
-							/>
-						</Frame>
+					<Viewport
+						data={data}
+						handleChangePage={handleChangePage}
+						mainPage={mainPage}
+					>
+						<Frame data={mainPage?.data}></Frame>
 					</Viewport>
 				</Editor>
 			</div>
