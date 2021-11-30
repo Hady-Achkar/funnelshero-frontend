@@ -4,6 +4,7 @@ import cx from 'classnames'
 import copy from 'copy-to-clipboard'
 import React, {Fragment, useCallback, useState} from 'react'
 import styled from 'styled-components'
+import DeleteIcon from '../../../assets/icons/delete-svgrepo-com.svg'
 import lz from 'lzutf8'
 import {
 	CheckIcon,
@@ -12,8 +13,9 @@ import {
 	SelectorIcon,
 } from '@heroicons/react/solid'
 import {GetMyFunnels, GetSingleFunnel} from '../../../services'
-import {Listbox, Transition} from '@headlessui/react'
+import {Listbox, Transition, Menu} from '@headlessui/react'
 import classNames from 'classnames'
+import {useHistory} from 'react-router-dom'
 import {NewPageModal} from '../..'
 import {startSavePageData} from '../../../actions'
 import {useDispatch} from 'react-redux'
@@ -33,6 +35,8 @@ export const Header: React.FC<IProps> = (props) => {
 	}))
 	const [json, setJson] = useState<any>('')
 	const {query} = useEditor()
+
+	const history = useHistory()
 	const handleEncode = () => {
 		const serialized = query.serialize()
 		const compressed = lz.encodeBase64(lz.compress(serialized))
@@ -60,10 +64,13 @@ export const Header: React.FC<IProps> = (props) => {
 
 	const isDisabled = Boolean(json === '')
 
+	const handleDelete = () => {
+		console.log('im deleted, lol')
+	}
+
 	return (
 		<div className="bg-white p-3 shadow-sm">
-			<div className="mt-2 md:flex md:items-center md:justify-between ">
-				{/* <div className="flex-1 min-w-0">
+			{/* <div className="flex-1 min-w-0">
 					<nav className="flex" aria-label="Breadcrumb">
 						<ol role="list" className="flex items-center space-x-4">
 							<li>
@@ -93,7 +100,8 @@ export const Header: React.FC<IProps> = (props) => {
 						</ol>
 					</nav>
 				</div> */}
-				<Listbox
+
+			{/* <Listbox
 					value={mainPage}
 					onChange={(e) => {
 						handleChangePage(e)
@@ -170,7 +178,7 @@ export const Header: React.FC<IProps> = (props) => {
 						</>
 					)}
 				</Listbox>
-				{/* <div className="flex-1 min-w-0">
+				<div className="flex-1 min-w-0">
 					<div>
 						<Tooltip title="Undo" placement="bottom">
 							<Item disabled={!canUndo} onClick={() => actions.history.undo()}>
@@ -183,40 +191,33 @@ export const Header: React.FC<IProps> = (props) => {
 							</Item>
 						</Tooltip>
 					</div>
-				</div> */}
-				<div>
-					<button
-						type="button"
-						className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
-						onClick={() => {
-							setNewPageModalOpen(true)
-						}}
-					>
-						Add New Page
-					</button>
 				</div>
 
-				{!enabled ? (
-					<div>
-						<button
-							type="button"
-							className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
-							onClick={() => {
-								actions.setOptions((options) => (options.enabled = !enabled))
-							}}
-						>
-							Edit
-						</button>
-						<button
-							type="button"
-							className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-						>
-							Publish
-						</button>
-					</div>
-				) : (
-					<div>
-						{/* <div className="inline-flex justify-between">
+				<div className="flex-1 min-w-0">
+					<div className="flex-1">
+						{!enabled ? (
+							<div>
+								<button
+									type="button"
+									className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+									onClick={() => {
+										actions.setOptions(
+											(options) => (options.enabled = !enabled)
+										)
+									}}
+								>
+									Edit
+								</button>
+								<button
+									type="button"
+									className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+								>
+									Publish
+								</button>
+							</div>
+						) : (
+							<div>
+								<div className="inline-flex justify-between">
 							<div
 								className="inline-flex text-indigo-500 text-xl cursor-pointer "
 								onClick={actions.history.undo}
@@ -229,26 +230,116 @@ export const Header: React.FC<IProps> = (props) => {
 							>
 								Redo
 							</div>
-						</div> */}
-						<button
-							type="button"
-							className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-							onClick={() => {
-								// actions.setOptions((options) => (options.enabled = !enabled))
-								handleDecode()
-							}}
-						>
-							Save page
-						</button>
+						</div>
+							</div>
+						)}
 					</div>
-				)}
-				<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
-				<NewPageModal
-					open={newPageModalOpen}
-					setOpen={setNewPageModalOpen}
-					funnelId={data?._id}
-				/>
+				</div> */}
+
+			<div className="sm:flex sm:items-center sm:justify-between">
+				<nav className="flex" aria-label="Breadcrumb">
+					<ol role="list" className="flex items-center space-x-4">
+						<li>
+							<div>
+								<p
+									onClick={() => history.push('/')}
+									className="text-gray-400 hover:text-gray-500 cursor-pointer"
+								>
+									<HomeIcon
+										className="flex-shrink-0 h-5 w-5"
+										aria-hidden="true"
+									/>
+									<span className="sr-only">Home</span>
+								</p>
+							</div>
+						</li>
+						<li>
+							<div className="flex items-center">
+								<ChevronRightIcon
+									className="flex-shrink-0 h-5 w-5 text-gray-400"
+									aria-hidden="true"
+								/>
+								<p
+									onClick={() => history.push('/dashboard')}
+									className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 cursor-pointer"
+								>
+									My funnels
+								</p>
+							</div>
+						</li>
+						<li>
+							<div className="flex items-center">
+								<ChevronRightIcon
+									className="flex-shrink-0 h-5 w-5 text-gray-400"
+									aria-hidden="true"
+								/>
+								<p className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700 cursor-pointer">
+									{data.title}
+								</p>
+							</div>
+						</li>
+					</ol>
+				</nav>
+				<div className="mt-3 flex sm:mt-0 sm:ml-4">
+					{enabled ? (
+						<React.Fragment>
+							<button
+								type="button"
+								className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 "
+								onClick={() => {
+									handleDelete
+								}}
+							>
+								Delete page
+							</button>
+							<button
+								type="button"
+								className="ml-3 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+								onClick={() => {
+									setNewPageModalOpen(true)
+								}}
+							>
+								New page
+							</button>
+							<button
+								type="button"
+								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+								onClick={() => {
+									// actions.setOptions((options) => (options.enabled = !enabled))
+									handleDecode()
+								}}
+							>
+								Save page
+							</button>
+						</React.Fragment>
+					) : (
+						<div>
+							<button
+								type="button"
+								className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+								onClick={() => {
+									actions.setOptions((options) => (options.enabled = !enabled))
+								}}
+							>
+								Edit
+							</button>
+							<button
+								type="button"
+								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+							>
+								Publish
+							</button>
+						</div>
+					)}
+				</div>
 			</div>
+
+			<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
+			<NewPageModal
+				open={newPageModalOpen}
+				setOpen={setNewPageModalOpen}
+				funnelId={data?._id}
+			/>
 		</div>
 	)
 }
