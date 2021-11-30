@@ -1,12 +1,18 @@
+import {GetSinglePage} from '../../services'
 import {GetMyFunnels} from '../../services/GetMyFunnels'
 
 export const ADD_FUNNEL = 'ADD_FUNNEL'
 export const LOAD = 'LOAD'
 export const UNLOAD = 'UNLOAD'
 export const INITIALIZE_MY_FUNNELS = 'INITIALIZE_MY_FUNNELS'
+export const ADD_PAGE = 'ADD_PAGE'
 export interface initializeMyFunnels {
 	type: typeof INITIALIZE_MY_FUNNELS
 	funnels: GetMyFunnels.Funnel[]
+}
+export interface addNewPage {
+	type: typeof ADD_PAGE
+	funnel: GetMyFunnels.Funnel
 }
 export interface AddFunnelAction {
 	type: typeof ADD_FUNNEL
@@ -23,3 +29,4 @@ export type FunnelActions =
 	| LoadAction
 	| UnloadAction
 	| initializeMyFunnels
+	| addNewPage

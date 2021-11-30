@@ -4,11 +4,11 @@ import cx from 'classnames'
 import {Header} from './Header'
 import {Sidebar} from './Sidebar'
 import {Toolbox} from './Toolbox'
-import {GetSingleFunnel} from '../../../services'
+import {GetMyFunnels, GetSingleFunnel} from '../../../services'
 
 interface IProps {
 	children: React.ReactElement
-	data: GetSingleFunnel.Funnel
+	data: GetMyFunnels.Funnel
 	handleChangePage: (page: GetSingleFunnel.Page) => void
 	mainPage: GetSingleFunnel.Page
 }

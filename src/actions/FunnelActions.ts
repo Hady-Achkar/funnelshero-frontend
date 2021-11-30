@@ -1,17 +1,25 @@
 import {Dispatch} from 'redux'
 import {AppActions} from '../models/redux'
 import {AppState} from '../reducers'
-import {getMyFunnels, GetMyFunnels} from '../services'
+import {addSinglePage, getMyFunnels, GetMyFunnels} from '../services'
 import addNewFunnel from '../services/AddFunnel'
 export interface IAddFunnelPayload {
 	category: string
 	title: string
+}
+export interface IAddPage {
+	title: string
+	funnelId: string
 }
 export const addNewFunnelAction = (
 	payload: GetMyFunnels.Funnel
 ): AppActions => ({
 	type: 'ADD_FUNNEL',
 	payload,
+})
+export const addNewPageAction = (funnel: GetMyFunnels.Funnel): AppActions => ({
+	type: 'ADD_PAGE',
+	funnel,
 })
 export const initializeMyFunnels = (
 	funnels: GetMyFunnels.Funnel[]
@@ -31,6 +39,24 @@ export const startAddFunnel = (payload: IAddFunnelPayload) => {
 			.then((res) => {
 				const {funnel} = res?.data
 				dispatch(addNewFunnelAction(funnel))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
+export const startAddPage = (payload: IAddPage) => {
+	const {title, funnelId} = payload
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		dispatch(loadState)
+		addSinglePage(title, funnelId)
+			.then((res) => {
+				const {funnel} = res?.data
+				dispatch(addNewPageAction(funnel))
 			})
 			.catch((err) => {
 				if (err.response) {

@@ -2,9 +2,10 @@ import {FunnelActions} from '../models/redux/funnelTypes'
 import storage from 'redux-persist/lib/storage'
 import {persistReducer} from 'redux-persist'
 import {IFunnel} from '../types'
+import {GetMyFunnels} from '../services'
 
 interface FunnelsState {
-	funnels: IFunnel[]
+	funnels: GetMyFunnels.Funnel[]
 	loading: boolean
 }
 const initState: FunnelsState = {
@@ -22,10 +23,23 @@ const funnelState = (
 				funnels: action.funnels,
 				loading: false,
 			}
+
 		case 'ADD_FUNNEL':
 			return {
 				...state,
 				funnels: [...state.funnels, action.payload],
+				loading: false,
+			}
+		case 'ADD_PAGE':
+			const updatedFunnels = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: updatedFunnels,
 				loading: false,
 			}
 		case 'LOAD':
