@@ -8,6 +8,7 @@ type Params = {
 const Funnel = () => {
 	const {funnelTitle} = useParams<Params>()
 	const [funnel, setFunnel] = useState<GetSingleFunnel.Funnel>()
+	const [mainPage, setMainPage] = useState<GetSingleFunnel.Page>()
 	const [loading, setLoading] = useState<boolean>(false)
 
 	const fetchFunnel = useCallback(() => {
@@ -16,6 +17,7 @@ const Funnel = () => {
 			.then((res) => {
 				const {funnel} = res.data
 				setFunnel(funnel)
+				setMainPage(funnel.pages[0])
 				setLoading(false)
 			})
 			.catch((err) => {
@@ -31,11 +33,18 @@ const Funnel = () => {
 		fetchFunnel()
 		return () => fetchFunnel()
 	}, [funnelTitle])
+	const handleChangePage = useCallback((page: GetSingleFunnel.Page) => {
+		setMainPage(page)
+	}, [])
 
 	return (
 		<div>
 			<Wrapper loading={loading}>
-				<Builder data={funnel} />
+				<Builder
+					data={funnel}
+					mainPage={mainPage}
+					handleChangePage={handleChangePage}
+				/>
 			</Wrapper>
 		</div>
 	)
