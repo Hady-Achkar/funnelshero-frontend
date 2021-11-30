@@ -20,6 +20,7 @@ export default {
 		BASE_URL: 'https://manager.funnelshero.com',
 		MY_FUNNELS: '/my-funnels',
 		NEW_FUNNEL: '/new-funnel',
+		ADD_PAGE: '/new-page',
 	},
 	ICONS: {
 		GET_RANDOM: '/',

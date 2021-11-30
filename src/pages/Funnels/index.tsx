@@ -1,41 +1,32 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {GetSingleFunnel, getSingleFunnel} from '../../services'
+import {GetMyFunnels, GetSingleFunnel, getSingleFunnel} from '../../services'
 import {Builder, Wrapper} from '../../components'
 import {useParams} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import {AppState} from '../../reducers'
 type Params = {
 	funnelTitle: string
 }
 const Funnel = () => {
 	const {funnelTitle} = useParams<Params>()
-	const [funnel, setFunnel] = useState<GetSingleFunnel.Funnel>()
+	const [funnel, setFunnel] = useState<GetMyFunnels.Funnel>()
 	const [mainPage, setMainPage] = useState<GetSingleFunnel.Page>()
-	const [loading, setLoading] = useState<boolean>(false)
-
+	const {funnels} = useSelector((state: AppState) => state.funnels)
 	const fetchFunnel = useCallback(() => {
-		setLoading(true)
-		getSingleFunnel(funnelTitle)
-			.then((res) => {
-				const {funnel} = res.data
-				setFunnel(funnel)
-				setMainPage(funnel.pages[0])
-				setLoading(false)
-			})
-			.catch((err) => {
-				if (err.response) {
-					console.log(err.response.data)
-				} else {
-					console.log(err)
-				}
-			})
-	}, [])
+		const stateFunnel = funnels.find((f) => f.title === funnelTitle)
+		setFunnel(stateFunnel)
+		setMainPage(stateFunnel.pages[0])
+	}, [funnels])
 
 	useEffect(() => {
 		fetchFunnel()
 		return () => fetchFunnel()
-	}, [funnelTitle])
+	}, [funnelTitle, funnels])
 	const handleChangePage = useCallback((page: GetSingleFunnel.Page) => {
 		setMainPage(page)
 	}, [])
+	const loading = !Boolean(funnel)
+	console.log(funnel?.pages.length)
 
 	return (
 		<div>

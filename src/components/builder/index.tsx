@@ -13,9 +13,9 @@ import {
 	Text,
 	Image,
 } from '../'
-import {GetSingleFunnel} from '../../services'
+import {GetMyFunnels, GetSingleFunnel} from '../../services'
 interface IProps {
-	data: GetSingleFunnel.Funnel
+	data: GetMyFunnels.Funnel
 	mainPage: GetSingleFunnel.Page
 	handleChangePage: (page: GetSingleFunnel.Page) => void
 }
@@ -41,7 +41,6 @@ const Builder: React.FC<IProps> = (props) => {
 		HyperLink,
 		Divider,
 	}
-	console.log(mainPage?.data)
 
 	return (
 		<ThemeProvider theme={theme}>
