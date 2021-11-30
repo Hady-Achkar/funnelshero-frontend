@@ -26,7 +26,6 @@ const Funnel = () => {
 		setMainPage(page)
 	}, [])
 	const loading = !Boolean(funnel)
-	console.log(funnel?.pages.length)
 
 	return (
 		<div>

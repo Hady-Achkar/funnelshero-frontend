@@ -2,16 +2,7 @@ import {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
 import {ManagerAxios} from '../lib'
 
-export const getMyFunnels = (): Promise<
-	AxiosResponse<GetMyFunnels.RootObject>
-> => {
-	return ManagerAxios({
-		method: 'GET',
-		url: ApiConstants.MANAGER.MY_FUNNELS,
-	})
-}
-
-export declare namespace GetMyFunnels {
+export declare module EditPage {
 	export interface Page {
 		_id: string
 		title: string
@@ -36,7 +27,27 @@ export declare namespace GetMyFunnels {
 	export interface RootObject {
 		status: 'Success' | 'Failure'
 		message: string
-		funnels: Funnel[]
+		funnel: Funnel
 		requestTime: Date
 	}
 }
+
+const savePage = (
+	title: string,
+	data: string,
+	funnelId: string,
+	pageId: string
+): Promise<AxiosResponse<EditPage.RootObject>> => {
+	return ManagerAxios({
+		method: 'PUT',
+		url: ApiConstants.MANAGER.EDIT_PAGE,
+		data: {
+			title,
+			data,
+			funnelId,
+			pageId,
+		},
+	})
+}
+
+export default savePage

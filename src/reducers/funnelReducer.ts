@@ -17,6 +17,18 @@ const funnelState = (
 	action: FunnelActions
 ) => {
 	switch (action.type) {
+		case 'EDIT_PAGE':
+			const updatedFunnelsWithUpdatedPage = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: updatedFunnelsWithUpdatedPage,
+				loading: false,
+			}
 		case 'INITIALIZE_MY_FUNNELS':
 			return {
 				...state,
