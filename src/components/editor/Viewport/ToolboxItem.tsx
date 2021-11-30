@@ -6,9 +6,10 @@ interface IProps {
 	title: string
 	component: typeof Element
 	Icon: any
+	isCanva: boolean
 }
 const ToolboxItem: React.FC<IProps> = (props) => {
-	const {title, component, Icon} = props
+	const {title, component, Icon, isCanva} = props
 	const {
 		connectors: {create},
 	} = useEditor((state) => ({
@@ -17,7 +18,7 @@ const ToolboxItem: React.FC<IProps> = (props) => {
 	return (
 		<div
 			className="w-full p-3 rounded-md text-xs font-medium divide-y divide-gray-200"
-			ref={(ref) => create(ref, <Element canvas is={component} />)}
+			ref={(ref) => create(ref, <Element canvas={isCanva} is={component} />)}
 			role="list"
 		>
 			<Tooltip title={title} placement="right">
