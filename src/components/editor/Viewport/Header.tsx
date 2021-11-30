@@ -15,6 +15,8 @@ import {GetMyFunnels, GetSingleFunnel} from '../../../services'
 import {Listbox, Transition} from '@headlessui/react'
 import classNames from 'classnames'
 import {NewPageModal} from '../..'
+import {startSavePageData} from '../../../actions'
+import {useDispatch} from 'react-redux'
 interface IProps {
 	data: GetMyFunnels.Funnel
 	handleChangePage: (page: GetSingleFunnel.Page) => void
@@ -36,10 +38,24 @@ export const Header: React.FC<IProps> = (props) => {
 		const compressed = lz.encodeBase64(lz.compress(serialized))
 		setJson(compressed)
 	}
+	// title: string
+	// data: string
+	// funnelId: string
+	// pageId: string
+	const dispatch = useDispatch()
 	const handleDecode = () => {
-		const deCompressed = lz.decompress(lz.decodeBase64(json))
+		const serialized = query.serialize()
+		const compressed = lz.encodeBase64(lz.compress(serialized))
+		const deCompressed = lz.decompress(lz.decodeBase64(compressed))
 		// const deSerialized = actions.deserialize(deCompressed);
-		copy(deCompressed)
+		dispatch(
+			startSavePageData({
+				title: mainPage?.title,
+				data: deCompressed,
+				funnelId: data?._id,
+				pageId: mainPage?._id,
+			})
+		)
 	}
 
 	const isDisabled = Boolean(json === '')
@@ -218,10 +234,11 @@ export const Header: React.FC<IProps> = (props) => {
 							type="button"
 							className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
 							onClick={() => {
-								actions.setOptions((options) => (options.enabled = !enabled))
+								// actions.setOptions((options) => (options.enabled = !enabled))
+								handleDecode()
 							}}
 						>
-							Finish editing
+							Save page
 						</button>
 					</div>
 				)}
