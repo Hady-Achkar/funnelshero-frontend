@@ -8,8 +8,9 @@ import {Loading, NewFunnelModal, Wrapper} from '../../components'
 import {MainFooter} from '../../components'
 import {MainHeader} from '../../components'
 import {Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import {startAddFunnel} from '../../actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {startAddFunnel, startInitializeMyFunnels} from '../../actions'
+import {AppState} from '../../reducers'
 
 const products = [
 	{
@@ -24,34 +25,17 @@ const products = [
 	},
 ]
 const Dashboard: React.FC = () => {
-	const [loading, setLoading] = useState<boolean>(false)
-	const [myFunnels, setMyFunnels] = useState<GetMyFunnels.Funnel[]>([])
 	const [open, setOpen] = useState(false)
-	const fetchMyFunnels = useCallback(() => {
-		setLoading(true)
-		getMyFunnels()
-			.then((res) => {
-				const {funnels} = res.data
-				setMyFunnels(funnels)
-				setLoading(false)
-			})
-			.catch((err) => {
-				if (err.response.data) {
-					console.log(err.response.data)
-				} else {
-					console.log(err)
-				}
-			})
-	}, [])
-	useEffect(() => {
-		fetchMyFunnels()
-		return () => fetchMyFunnels()
-	}, [])
+	const {funnels, loading} = useSelector((state: AppState) => state.funnels)
 	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(startInitializeMyFunnels())
+	}, [])
 	const handleAddNewFunnel = useCallback(() => {
 		setOpen(true)
-		dispatch(startAddFunnel({category: 'category', title: 'title'}))
-	}, [dispatch])
+		// dispatch(startAddFunnel({category: 'category', title: 'title'}))
+	}, [])
 
 	return (
 		<React.Fragment>
@@ -73,7 +57,7 @@ const Dashboard: React.FC = () => {
 						</div>
 
 						<div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-							{myFunnels.map((funnel) => (
+							{funnels.map((funnel) => (
 								<div key={funnel?._id} className="group relative">
 									<div className="w-full h-56 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
 										<img
