@@ -21,6 +21,7 @@ export default {
 		MY_FUNNELS: '/my-funnels',
 		NEW_FUNNEL: '/new-funnel',
 		ADD_PAGE: '/new-page',
+		EDIT_PAGE: '/page',
 	},
 	ICONS: {
 		GET_RANDOM: '/',
