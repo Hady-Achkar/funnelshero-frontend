@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {AppState} from '../../reducers'
@@ -7,6 +7,7 @@ import {logoutAction} from '../../actions'
 import {Menu, Transition} from '@headlessui/react'
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
+import ConfirmationModal from './ConfirmationModal'
 
 const navigation = [
 	{name: 'Pricing', href: '/pricing'},
@@ -17,14 +18,18 @@ const navigation = [
 ]
 
 const Header = () => {
+	const [open, setOpen] = useState<boolean>(false)
+
 	const {
 		isAuthenticated,
 		user: {fullName, email},
 	} = useSelector((state: AppState) => state.auth)
 	const dispatch = useDispatch()
 	const handleLogout = () => {
+		setOpen(false)
 		dispatch(logoutAction())
 	}
+
 	return (
 		<header className="bg-white shadow-sm ">
 			<nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -128,24 +133,22 @@ const Header = () => {
 											</Menu.Item>
 										</div>
 										<div className="py-1">
-											<form method="POST" action="#">
-												<Menu.Item>
-													{({active}) => (
-														<button
-															type="submit"
-															className={classNames(
-																active
-																	? 'bg-gray-100 text-gray-900'
-																	: 'text-gray-700',
-																'block w-full text-left px-4 py-2 text-sm'
-															)}
-															onClick={handleLogout}
-														>
-															Sign out
-														</button>
-													)}
-												</Menu.Item>
-											</form>
+											<Menu.Item>
+												{({active}) => (
+													<button
+														type="submit"
+														className={classNames(
+															active
+																? 'bg-gray-100 text-gray-900'
+																: 'text-gray-700',
+															'block w-full text-left px-4 py-2 text-sm'
+														)}
+														onClick={() => setOpen(true)}
+													>
+														Sign out
+													</button>
+												)}
+											</Menu.Item>
 										</div>
 									</Menu.Items>
 								</Transition>
@@ -180,6 +183,15 @@ const Header = () => {
 					))}
 				</div>
 			</nav>
+			<ConfirmationModal
+				open={open}
+				variant="Info"
+				title="Logout"
+				text="Are you sure you want to logout?"
+				buttonText="Yes, sure"
+				setOpen={() => setOpen(false)}
+				action={handleLogout}
+			/>
 		</header>
 	)
 }
