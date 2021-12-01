@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Arrow from '../../../../assets/icons/arrow.svg'
-
 const SidebarItemDiv = styled.div<{visible?: boolean; height?: string}>`
 	height: ${(props) =>
 		props.visible && props.height && props.height !== 'full'
@@ -64,7 +62,20 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 					<h2 className="text-sm text-gray-700">{title}</h2>
 				</div>
 				<Chevron visible={visible}>
-					<img src={Arrow} />
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M17 13l-5 5m0 0l-5-5m5 5V6"
+						/>
+					</svg>
 				</Chevron>
 			</HeaderDiv>
 			{visible ? (

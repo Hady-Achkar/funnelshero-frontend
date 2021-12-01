@@ -56,9 +56,7 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 				<div className="px-6 w-full">
 					<Grid container direction="row" alignItems="center" spacing={3}>
 						<Grid item xs={4}>
-							<h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
-								{title}
-							</h5>
+							<p className=" text-left text-sm text-gray-700">{title}</p>
 						</Grid>
 						{summary && props ? (
 							<Grid item xs={8}>
@@ -76,8 +74,7 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{padding: '0px 24px 20px'}}>
-				<Divider />
-				<Grid container spacing={1}>
+				<Grid container spacing={1} className="divide-y divide-gray-200">
 					{children}
 				</Grid>
 			</ExpansionPanelDetails>

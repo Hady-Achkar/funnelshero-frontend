@@ -5,7 +5,15 @@ import getRandomImages from '../../../services/GetRandomImages'
 import searchImages from '../../../services/SearchImages'
 import {GetRandomImages} from '../../../services'
 import {File} from '../../../services/GetFiles'
-import {Grid, Container, Toolbar, LinearProgress, Box} from '@material-ui/core'
+import {
+	Grid,
+	Container,
+	Toolbar,
+	LinearProgress,
+	Box,
+	ImageList,
+	ImageListItem,
+} from '@material-ui/core'
 import Wrapper from '../../common/Wrapper'
 import {useNode} from '@craftjs/core'
 import {ImageSearch as ImageSearchIcon} from '@material-ui/icons'
@@ -100,23 +108,22 @@ export const ImageSettings = () => {
 			</ToolbarSection>
 			<ToolbarSection full={true} title="Unsplash">
 				<Grid container className="mb-3">
-					<div className="relative rounded-md shadow-sm">
+					<div className="relative rounded-md shadow-sm w-full">
 						<div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
 							<ImageSearchIcon />
 						</div>
 						<input
 							type="text"
-							className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 text-sm ring-gray-500 rounded-md py-1"
-							placeholder="search.."
+							className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 text-sm ring-gray-500 rounded-md py-2"
 							onKeyPress={searchImagesHelper}
 						/>
 					</div>
 				</Grid>
 				<Wrapper loading={loading}>
-					<Grid container>
+					<ImageList cols={3} rowHeight={100}>
 						{images.map((image) => {
 							return (
-								<Grid justifyContent="center" item xs={6} key={image.id}>
+								<ImageListItem key={image.id}>
 									<img
 										src={image.urls.small}
 										className="rounded cursor-pointer hover:border-indigo-500"
@@ -124,37 +131,39 @@ export const ImageSettings = () => {
 										onClick={() =>
 											setProp((prop) => (prop.src = image.urls.regular))
 										}
+										style={{height: '100%'}}
 									/>
-								</Grid>
+								</ImageListItem>
 							)
 						})}
-					</Grid>
+					</ImageList>
 				</Wrapper>
 			</ToolbarSection>
 			<ToolbarSection full={true} title="Files">
 				<Wrapper loading={selfImagesLoading}>
-					<Grid container>
+					<ImageList cols={3} rowHeight={100}>
 						{myImages.map((image, index) => {
 							return (
-								<Grid justifyContent="center" item xs={6} key={index}>
+								<ImageListItem key={index}>
 									<img
 										src={image.Key}
 										className="rounded cursor-pointer hover:border-indigo-500"
 										alt={`Funnelshero - custom image`}
 										onClick={() => setProp((prop) => (prop.src = image.Key))}
+										style={{height: '100%'}}
 									/>
-								</Grid>
+								</ImageListItem>
 							)
 						})}
-					</Grid>
+					</ImageList>
 				</Wrapper>
 			</ToolbarSection>
-			<Toolbar>
+			{/* <Toolbar>
 				<Box className="w-full">
 					<label className="my-2">Storage used: {storage.toFixed(2)} MB</label>
 					<LinearProgress variant="determinate" value={storage} />
 				</Box>
-			</Toolbar>
+			</Toolbar> */}
 		</React.Fragment>
 	)
 }
