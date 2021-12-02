@@ -1,6 +1,6 @@
 import {useEditor} from '@craftjs/core'
 import {Layers} from '@craftjs/layers'
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import styled from 'styled-components'
 
 import {SidebarItem} from './SidebarItem'
@@ -11,6 +11,8 @@ import LayerIcon from '../../../../assets/icons/layers-svgrepo-com.svg'
 import Toolbar from '../../Toolbar'
 import {GetMyFunnels, GetSingleFunnel} from '../../../../services'
 import classNames from 'classnames'
+import {Menu, Transition} from '@headlessui/react'
+import {NewPageModal} from '../../..'
 
 export const SidebarDiv = styled.div<{enabled: boolean}>`
 	width: 400px;
@@ -35,13 +37,15 @@ export const Sidebar: React.FC<IProps> = (props) => {
 		enabled: state.options.enabled,
 	}))
 
+	const [newPageModalOpen, setNewPageModalOpen] = useState<boolean>(false)
+
 	return (
 		<SidebarDiv enabled={enabled} className="sidebar transition bg-white w-2">
 			<div className="flex flex-col h-full">
 				<SidebarItem
 					icon={CustomizeIcon}
 					title="Design"
-					height={!pagesVisible ? 'full' : '55%'}
+					height={!pagesVisible ? 'full' : '40%'}
 					visible={toolbarVisible}
 					onChange={(val) => setToolbarVisible(val)}
 				>
@@ -63,52 +67,92 @@ export const Sidebar: React.FC<IProps> = (props) => {
 					//@ts-ignore
 					icon={PagesIcon}
 					title="Pages"
-					height={!toolbarVisible ? 'full' : '45%'}
+					height={!toolbarVisible ? 'full' : '60%'}
 					visible={pagesVisible}
 					onChange={(val) => setPagesVisible(val)}
 				>
-					<div className="py-1 h-full bg-white">
-						{data?.pages.map((page) => {
-							return (
-								<div
-									key={page._id}
-									className="relative bg-white pt-5 px-4 sm:pt-6 sm:px-6 overflow-y-scroll"
+					<div className="p-3 py-5 border-b divide-gray-200">
+						<div className="flex items-center space-x-3">
+							<div
+								className="bg-indigo-50 inline-block rounded-md p-3 cursor-pointer hover:bg-indigo-100"
+								onClick={() => setNewPageModalOpen(true)}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
 								>
-									<dt>
-										<div
-											className="absolute bg-indigo-500 rounded-md p-3 cursor-pointer hover:bg-indigo-600"
-											onClick={() => handleChangePage(page)}
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="h-6 w-6"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="white"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-												/>
-											</svg>
-										</div>
-										<p className="ml-16 text-sm font-medium text-gray-900 truncate">
-											{page.title} Page
-										</p>
-									</dt>
-									<dd className="ml-16 pb-6 flex items-baseline sm:pb-7">
-										<p className="text-xs font-semibold text-blue-400 cursor-pointer hover:text-indigo-400">
-											Rename
-										</p>
-									</dd>
-								</div>
-							)
-						})}
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M12 4v16m8-8H4"
+									/>
+								</svg>
+							</div>
+
+							<p className="w-full text-sm font-medium flex items-center text-gray-700 truncate">
+								Create a new page
+							</p>
+						</div>
 					</div>
+
+					{data?.pages.map((page) => {
+						return (
+							<div className="p-3 py-5 border-b divide-gray-200" key={page._id}>
+								<div className="flex items-center space-x-3">
+									<div
+										className="bg-indigo-500 inline-block rounded-md p-3 cursor-pointer hover:bg-indigo-600"
+										onClick={() => handleChangePage(page)}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-6 w-6"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="white"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+											/>
+										</svg>
+									</div>
+
+									<p className="w-full text-sm font-medium flex items-center text-gray-900 truncate">
+										{page.title} Page
+									</p>
+									<div className="flex items-center justify-end p-3 pb-4 w-full hover:opacity-80 cursor-pointer">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-5 w-5"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="gray"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+											/>
+										</svg>
+									</div>
+								</div>
+							</div>
+						)
+					})}
 				</SidebarItem>
 			</div>
+			<NewPageModal
+				open={newPageModalOpen}
+				setOpen={setNewPageModalOpen}
+				funnelId={data?._id}
+			/>
 		</SidebarDiv>
 	)
 }

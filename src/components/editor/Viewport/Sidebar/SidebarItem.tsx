@@ -13,8 +13,8 @@ const SidebarItemDiv = styled.div<{visible?: boolean; height?: string}>`
 const Chevron = styled.a<{visible: boolean}>`
 	transform: rotate(${(props) => (props.visible ? 180 : 0)}deg);
 	svg {
-		width: 8px;
-		height: 8px;
+		width: 16px;
+		height: 16px;
 	}
 `
 
@@ -49,10 +49,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 			className="flex flex-col  bg-white  shadow-sm mt-2  py-3"
 		>
 			<HeaderDiv
-				onClick={() => {
-					if (onChange) onChange(!visible)
-				}}
-				className={`cursor-pointer rounded  flex items-center px-2 ${
+				className={`rounded  flex items-center px-2 ${
 					visible ? 'shadow-sm' : ''
 				}`}
 			>
@@ -64,16 +61,17 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 				<Chevron visible={visible}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
+						className="cursor-pointer"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						onClick={() => {
+							if (onChange) onChange(!visible)
+						}}
 					>
 						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth={2}
-							d="M17 13l-5 5m0 0l-5-5m5 5V6"
+							fillRule="evenodd"
+							d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+							clipRule="evenodd"
 						/>
 					</svg>
 				</Chevron>
