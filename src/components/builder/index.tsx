@@ -1,7 +1,9 @@
 import {Editor, Frame, Element, useEditor} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
-import React from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import {createTheme} from '@material-ui/core/styles'
+import lz from 'lzutf8'
+
 import {
 	RenderNode,
 	Container,
@@ -14,6 +16,9 @@ import {
 	Image,
 } from '../'
 import {GetMyFunnels, GetSingleFunnel} from '../../services'
+import {useDispatch} from 'react-redux'
+import {startSavePageData} from '../../actions'
+import {IPage} from '../../types'
 interface IProps {
 	data: GetMyFunnels.Funnel
 	mainPage: GetSingleFunnel.Page
@@ -42,6 +47,28 @@ const Builder: React.FC<IProps> = (props) => {
 		Divider,
 	}
 
+	const dispatch = useDispatch()
+	const ref = useRef<string>()
+	useEffect(() => {
+		ref.current = mainPage?._id
+	}, [mainPage])
+
+	const handleSaveOnChange = useCallback((query) => {
+		if (ref.current === mainPage._id) {
+			const json = query.serialize()
+			const compressed = lz.encodeBase64(lz.compress(json))
+			const deCompressed = lz.decompress(lz.decodeBase64(compressed))
+			// const deSerialized = actions.deserialize(deCompressed);
+			dispatch(
+				startSavePageData({
+					title: mainPage?.title,
+					data: deCompressed,
+					funnelId: data?._id,
+					pageId: mainPage?._id,
+				})
+			)
+		}
+	}, [])
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="h-full">
@@ -50,6 +77,7 @@ const Builder: React.FC<IProps> = (props) => {
 					enabled={true}
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
+					onNodesChange={handleSaveOnChange}
 				>
 					{/* <Frame>
 						<Reader
@@ -71,4 +99,4 @@ const Builder: React.FC<IProps> = (props) => {
 	)
 }
 
-export default Builder
+export default React.memo(Builder)
