@@ -27,7 +27,6 @@ interface IProps {
 export const Header: React.FC<IProps> = (props) => {
 	const {data, handleChangePage, mainPage} = props
 
-	const [newPageModalOpen, setNewPageModalOpen] = useState<boolean>(false)
 	const {enabled, canUndo, canRedo, actions} = useEditor((state, query) => ({
 		enabled: state.options.enabled,
 		canUndo: query.history.canUndo(),
@@ -283,7 +282,7 @@ export const Header: React.FC<IProps> = (props) => {
 				<div className="mt-3 flex sm:mt-0 sm:ml-4">
 					{enabled ? (
 						<React.Fragment>
-							<button
+							{/* <button
 								type="button"
 								className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-600 "
 								onClick={() => {
@@ -300,16 +299,39 @@ export const Header: React.FC<IProps> = (props) => {
 								}}
 							>
 								New page
-							</button>
+							</button> */}
+							<div className="inline-flex items-center cursor-pointer hover:opacity-80">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+									/>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+							</div>
+
 							<button
 								type="button"
 								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
 								onClick={() => {
-									// actions.setOptions((options) => (options.enabled = !enabled))
-									handleDecode()
+									actions.setOptions((options) => (options.enabled = !enabled))
+									// handleDecode()
 								}}
 							>
-								Save page
+								Preview
 							</button>
 						</React.Fragment>
 					) : (
@@ -335,11 +357,6 @@ export const Header: React.FC<IProps> = (props) => {
 			</div>
 
 			<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
-			<NewPageModal
-				open={newPageModalOpen}
-				setOpen={setNewPageModalOpen}
-				funnelId={data?._id}
-			/>
 		</div>
 	)
 }
