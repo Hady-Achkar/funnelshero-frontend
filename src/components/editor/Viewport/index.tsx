@@ -5,6 +5,7 @@ import {Header} from './Header'
 import {Sidebar} from './Sidebar'
 import {Toolbox} from './Toolbox'
 import {GetMyFunnels, GetSingleFunnel} from '../../../services'
+import lz from 'lzutf8'
 
 interface IProps {
 	children: React.ReactElement
