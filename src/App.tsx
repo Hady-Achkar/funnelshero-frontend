@@ -4,19 +4,25 @@ import Routes from './routes'
 import './index.css'
 import 'tailwindcss/tailwind.css'
 import {ManagerAxios, FileAxios, IconAxios, AuthAxios, ImagesAxios} from './lib'
+import {useDispatch} from 'react-redux'
+import {logoutAction} from './actions'
 const App: React.FC = () => {
 	const history = useHistory()
+	const dispatch = useDispatch()
 	ManagerAxios.interceptors.response.use(
 		(response) => {
 			return response
 		},
 		(err) => {
 			if (err.response.status === 500) {
+				if (err.response.data.error === 'jwt expired') {
+					dispatch(logoutAction())
+				}
 				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {
-				history.push('/login')
+				history.push('/sign-in')
 			}
 			return Promise.reject(err)
 		}
@@ -27,6 +33,9 @@ const App: React.FC = () => {
 		},
 		(err) => {
 			if (err.response.status === 500) {
+				if (err.response.data.error === 'jwt expired') {
+					dispatch(logoutAction())
+				}
 				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
@@ -43,6 +52,9 @@ const App: React.FC = () => {
 		},
 		(err) => {
 			if (err.response.status === 500) {
+				if (err.response.data.error === 'jwt expired') {
+					dispatch(logoutAction())
+				}
 				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
@@ -56,10 +68,18 @@ const App: React.FC = () => {
 		(response) => {
 			return response
 		},
-		(error) => {
-			history.push('/404')
-			console.log(error.response)
-			return Promise.reject(error)
+		(err) => {
+			if (err.response.status === 500) {
+				if (err.response.data.error === 'jwt expired') {
+					dispatch(logoutAction())
+				}
+				history.push('/500')
+			} else if (err.response.status === 400 || err.response.status === 404) {
+				history.push('/404')
+			} else {
+				history.push('/sign-in')
+			}
+			return Promise.reject(err)
 		}
 	)
 	ImagesAxios.interceptors.response.use(
@@ -68,6 +88,9 @@ const App: React.FC = () => {
 		},
 		(err) => {
 			if (err.response.status === 500) {
+				if (err.response.data.error === 'jwt expired') {
+					dispatch(logoutAction())
+				}
 				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
