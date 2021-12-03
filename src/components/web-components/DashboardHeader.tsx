@@ -51,7 +51,7 @@ const DashboardHeader = () => {
 								<div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
 									<div className="flex-shrink-0 flex items-center">
 										<img
-											className="block h-8 w-auto"
+											className="block h-8 w-auto hover:opacity-80 cursor-pointer"
 											src={Logo}
 											alt="Workflow"
 											onClick={() => history.push('/')}

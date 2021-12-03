@@ -33,12 +33,16 @@ const Header = () => {
 	return (
 		<header>
 			<Popover className="relative bg-white">
-				<div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
+				<div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-4 sm:px-6 md:justify-start md:space-x-10 lg:px-6">
 					<div className="flex justify-start lg:w-0 lg:flex-1">
-						<a href="#">
+						<Link to="/">
 							<span className="sr-only">Workflow</span>
-							<img className="h-8 w-auto sm:h-10" src={Logo} alt="" />
-						</a>
+							<img
+								className="block h-8 w-auto hover:opacity-80 cursor-pointer"
+								src={Logo}
+								alt=""
+							/>
+						</Link>
 					</div>
 					<div className="-mr-2 -my-2 md:hidden">
 						<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -52,7 +56,7 @@ const Header = () => {
 							<Link
 								to={item.href}
 								key={index}
-								className="text-gray-500 font-light text-md hover:text-gray-900"
+								className="text-gray-500 font-medium text-md hover:text-indigo-600 "
 							>
 								{item.name}
 							</Link>
@@ -64,7 +68,7 @@ const Header = () => {
 								<Menu as="div" className="relative z-50 inline-block text-left">
 									<div>
 										<Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-											Settings
+											Account
 											<ChevronDownIcon
 												className="-mr-1 ml-2 h-5 w-5"
 												aria-hidden="true"

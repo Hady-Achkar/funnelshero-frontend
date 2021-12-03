@@ -7,7 +7,7 @@ import {getMyFunnels, GetMyFunnels} from '../../services'
 import {Loading, NewFunnelModal, Wrapper} from '../../components'
 import {MainFooter} from '../../components'
 import {MainHeader} from '../../components'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {startAddFunnel, startInitializeMyFunnels} from '../../actions'
 import {AppState} from '../../reducers'
@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
 	const [open, setOpen] = useState(false)
 	const {funnels, loading} = useSelector((state: AppState) => state.funnels)
 	const dispatch = useDispatch()
-
+	const history = useHistory()
 	useEffect(() => {
 		dispatch(startInitializeMyFunnels())
 	}, [])
@@ -128,7 +128,12 @@ const Dashboard: React.FC = () => {
 															index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
 														}
 													>
-														<td className="px-6 py-8 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer">
+														<td
+															onClick={() =>
+																history.push(`/funnels/${item.title}`)
+															}
+															className="px-6 py-8 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+														>
 															{item.title}
 														</td>
 														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
