@@ -11,7 +11,6 @@ import {Link, useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {startAddFunnel, startInitializeMyFunnels} from '../../actions'
 import {AppState} from '../../reducers'
-import {useHistory} from 'react-router-dom'
 import {
 	CalendarIcon,
 	LocationMarkerIcon,
@@ -64,7 +63,6 @@ const Dashboard: React.FC = () => {
 		setOpen(true)
 		// dispatch(startAddFunnel({category: 'category', title: 'title'}))
 	}, [])
-	const history = useHistory()
 	const handleNavigate = useCallback(
 		(funnel: IFunnel) => {
 			history.push(`/funnels/${funnel.title}`)
@@ -143,7 +141,6 @@ const Dashboard: React.FC = () => {
 														<td
 															onClick={() => handleNavigate(item)}
 															className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
-
 														>
 															{item.title}
 														</td>
