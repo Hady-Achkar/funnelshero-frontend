@@ -15,14 +15,13 @@ import {
 	Text,
 	Image,
 } from '../'
-import {GetMyFunnels, GetSingleFunnel} from '../../services'
 import {useDispatch} from 'react-redux'
 import {startSavePageData} from '../../actions'
-import {IPage} from '../../types'
+import {IFunnel, IPage} from '../../types'
 interface IProps {
-	data: GetMyFunnels.Funnel
-	mainPage: GetSingleFunnel.Page
-	handleChangePage: (page: GetSingleFunnel.Page) => void
+	data: IFunnel
+	mainPage: IPage
+	handleChangePage: (page: IPage) => void
 }
 const Builder: React.FC<IProps> = (props) => {
 	const {data, mainPage, handleChangePage} = props
@@ -50,10 +49,11 @@ const Builder: React.FC<IProps> = (props) => {
 	const dispatch = useDispatch()
 	const ref = useRef<string>()
 	useEffect(() => {
+		console.log(ref.current === mainPage._id)
 		ref.current = mainPage?._id
 	}, [mainPage])
 
-	const handleSaveOnChange = useCallback((query) => {
+	const handleSaveOnChange = (query) => {
 		if (ref.current === mainPage._id) {
 			const json = query.serialize()
 			const compressed = lz.encodeBase64(lz.compress(json))
@@ -68,7 +68,7 @@ const Builder: React.FC<IProps> = (props) => {
 				})
 			)
 		}
-	}, [])
+	}
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="h-full">
