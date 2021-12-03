@@ -11,7 +11,7 @@ import {Link, useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {startAddFunnel, startInitializeMyFunnels} from '../../actions'
 import {AppState} from '../../reducers'
-
+import {useHistory} from 'react-router-dom'
 import {
 	CalendarIcon,
 	LocationMarkerIcon,
@@ -19,6 +19,7 @@ import {
 } from '@heroicons/react/solid'
 import {Container} from '@material-ui/core'
 import moment from 'moment'
+import {IFunnel} from '../../types'
 import DashboardHeader from '../../components/web-components/DashboardHeader'
 
 const positions = [
@@ -59,6 +60,17 @@ const Dashboard: React.FC = () => {
 	useEffect(() => {
 		dispatch(startInitializeMyFunnels())
 	}, [])
+	const handleAddNewFunnel = useCallback(() => {
+		setOpen(true)
+		// dispatch(startAddFunnel({category: 'category', title: 'title'}))
+	}, [])
+	const history = useHistory()
+	const handleNavigate = useCallback(
+		(funnel: IFunnel) => {
+			history.push(`/funnels/${funnel.title}`)
+		},
+		[history]
+	)
 
 	return (
 		<React.Fragment>
@@ -129,10 +141,9 @@ const Dashboard: React.FC = () => {
 														}
 													>
 														<td
-															onClick={() =>
-																history.push(`/funnels/${item.title}`)
-															}
-															className="px-6 py-8 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+															onClick={() => handleNavigate(item)}
+															className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+
 														>
 															{item.title}
 														</td>

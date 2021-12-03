@@ -1,6 +1,7 @@
 import {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
 import {ManagerAxios} from '../lib'
+import {IFunnel} from '../types'
 
 export const getMyFunnels = (): Promise<
 	AxiosResponse<GetMyFunnels.RootObject>
@@ -21,22 +22,10 @@ export declare namespace GetMyFunnels {
 		link: string
 	}
 
-	export interface Funnel {
-		favIcon: string
-		pages: Page[]
-		_id: string
-		category: string
-		title: string
-		contactEmail: string
-		createdAt: Date
-		updatedAt: Date
-		baseDomain: string
-	}
-
 	export interface RootObject {
 		status: 'Success' | 'Failure'
 		message: string
-		funnels: Funnel[]
+		funnels: IFunnel[]
 		requestTime: Date
 	}
 }

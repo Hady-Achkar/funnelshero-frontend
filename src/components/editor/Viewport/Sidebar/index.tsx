@@ -1,18 +1,14 @@
 import {useEditor} from '@craftjs/core'
-import {Layers} from '@craftjs/layers'
-import React, {Fragment, useState} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-
 import {SidebarItem} from './SidebarItem'
-
 import CustomizeIcon from '../../../../assets/icons/edit-svgrepo-com.svg'
 import PagesIcon from '../../../../assets/icons/pages-svgrepo-com.svg'
-import LayerIcon from '../../../../assets/icons/layers-svgrepo-com.svg'
 import Toolbar from '../../Toolbar'
-import {GetMyFunnels, GetSingleFunnel} from '../../../../services'
-import classNames from 'classnames'
-import {Menu, Transition} from '@headlessui/react'
+import {GetSingleFunnel} from '../../../../services'
 import {NewPageModal} from '../../..'
+import {IFunnel} from '../../../../types'
+import moment from 'moment'
 
 export const SidebarDiv = styled.div<{enabled: boolean}>`
 	width: 400px;
@@ -22,7 +18,7 @@ export const SidebarDiv = styled.div<{enabled: boolean}>`
 	overflow-y: scroll;
 `
 interface IProps {
-	data: GetMyFunnels.Funnel
+	data: IFunnel
 	handleChangePage: (page: GetSingleFunnel.Page) => void
 	mainPage: GetSingleFunnel.Page
 }
@@ -102,7 +98,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 					{data?.pages.map((page) => {
 						return (
 							<div className="p-3 py-5 border-b divide-gray-200" key={page._id}>
-								<div className="flex items-center space-x-3">
+								<div className="flex items-center space-x-3 w-full">
 									<div
 										className="bg-indigo-500 inline-block rounded-md p-3 cursor-pointer hover:bg-indigo-600"
 										onClick={() => handleChangePage(page)}
@@ -122,11 +118,21 @@ export const Sidebar: React.FC<IProps> = (props) => {
 											/>
 										</svg>
 									</div>
-
-									<p className="w-full text-sm font-medium flex items-center text-gray-900 truncate">
-										{page.title} Page
-									</p>
-									<div className="flex items-center justify-end p-3 pb-4 w-full hover:opacity-80 cursor-pointer">
+									<div className="w-full">
+										<p className="text-sm font-medium flex items-center text-gray-900 truncate">
+											{page.title} Page
+										</p>
+										<div>
+											<p
+												style={{
+													fontSize: '12px',
+												}}
+											>
+												Last publish {moment(page?.publishedAt).format('LLL')}
+											</p>
+										</div>
+									</div>
+									<div className="flex items-center justify-end p-3 pb-4 hover:opacity-80 cursor-pointer">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="h-5 w-5"

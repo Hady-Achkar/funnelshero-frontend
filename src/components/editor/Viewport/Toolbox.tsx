@@ -102,7 +102,7 @@ export const Toolbox = () => {
 					Icon={PowerInput}
 					component={Divider}
 				/>
-				<ToolboxItem
+				{/* <ToolboxItem
 					isCanva={false}
 					title="Icon"
 					Icon={InsertEmoticon}
@@ -113,7 +113,7 @@ export const Toolbox = () => {
 					title="Form"
 					Icon={BlurLinear}
 					component={OptinForm}
-				/>
+				/> */}
 			</div>
 		</ToolboxDiv>
 	)

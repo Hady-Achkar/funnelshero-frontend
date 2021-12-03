@@ -1,31 +1,20 @@
 import {useEditor} from '@craftjs/core'
-import {Tooltip, Button} from '@material-ui/core'
-import cx from 'classnames'
-import copy from 'copy-to-clipboard'
-import React, {Fragment, useCallback, useState} from 'react'
-import styled from 'styled-components'
-import DeleteIcon from '../../../assets/icons/delete-svgrepo-com.svg'
+import React, {useState} from 'react'
 import lz from 'lzutf8'
-import {
-	CheckIcon,
-	ChevronRightIcon,
-	HomeIcon,
-	SelectorIcon,
-} from '@heroicons/react/solid'
-import {GetMyFunnels, GetSingleFunnel} from '../../../services'
-import {Listbox, Transition, Menu} from '@headlessui/react'
-import classNames from 'classnames'
+import {ChevronRightIcon, HomeIcon} from '@heroicons/react/solid'
+import {GetSingleFunnel} from '../../../services'
 import {useHistory} from 'react-router-dom'
-import {NewPageModal} from '../..'
-import {startSavePageData} from '../../../actions'
+import {startSavePageData, startPublishPage} from '../../../actions'
 import {useDispatch} from 'react-redux'
+import {IFunnel, IPage} from '../../../types'
+import ConfirmationModal from '../../common/ConfirmationModal'
 interface IProps {
-	data: GetMyFunnels.Funnel
-	handleChangePage: (page: GetSingleFunnel.Page) => void
-	mainPage: GetSingleFunnel.Page
+	data: IFunnel
+	handleChangePage: (page: IPage) => void
+	mainPage: IPage
 }
 export const Header: React.FC<IProps> = (props) => {
-	const {data, handleChangePage, mainPage} = props
+	const {data, mainPage} = props
 
 	const {enabled, canUndo, canRedo, actions} = useEditor((state, query) => ({
 		enabled: state.options.enabled,
@@ -66,6 +55,13 @@ export const Header: React.FC<IProps> = (props) => {
 	const handleDelete = () => {
 		console.log('im deleted, lol')
 	}
+	const [openConfirmPublish, setOpenConfirmPublish] = useState<boolean>(false)
+
+	const handlePublishPage = () => {
+		dispatch(startPublishPage(data?._id, mainPage?._id))
+		setOpenConfirmPublish(false)
+	}
+	const isPublished = Boolean(mainPage?.isPublished)
 
 	return (
 		<div className="bg-white p-3 shadow-sm">
@@ -322,7 +318,6 @@ export const Header: React.FC<IProps> = (props) => {
 									/>
 								</svg>
 							</div>
-
 							<button
 								type="button"
 								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
@@ -332,6 +327,14 @@ export const Header: React.FC<IProps> = (props) => {
 								}}
 							>
 								Preview
+							</button>
+							<button
+								type="button"
+								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+								onClick={() => setOpenConfirmPublish(true)}
+								disabled={isPublished}
+							>
+								Publish
 							</button>
 						</React.Fragment>
 					) : (
@@ -355,7 +358,15 @@ export const Header: React.FC<IProps> = (props) => {
 					)}
 				</div>
 			</div>
-
+			<ConfirmationModal
+				open={openConfirmPublish}
+				variant="Info"
+				title="Publish Page"
+				text="Are you sure you want to publish this page?"
+				buttonText="Yes, sure"
+				setOpen={() => setOpenConfirmPublish(false)}
+				action={handlePublishPage}
+			/>
 			<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
 		</div>
 	)
