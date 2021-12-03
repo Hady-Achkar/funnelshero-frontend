@@ -7,7 +7,7 @@ import {getMyFunnels, GetMyFunnels} from '../../services'
 import {Loading, NewFunnelModal, Wrapper} from '../../components'
 import {MainFooter} from '../../components'
 import {MainHeader} from '../../components'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {startAddFunnel, startInitializeMyFunnels} from '../../actions'
 import {AppState} from '../../reducers'
@@ -20,6 +20,7 @@ import {
 import {Container} from '@material-ui/core'
 import moment from 'moment'
 import {IFunnel} from '../../types'
+import DashboardHeader from '../../components/web-components/DashboardHeader'
 
 const positions = [
 	{
@@ -55,7 +56,7 @@ const Dashboard: React.FC = () => {
 	const [open, setOpen] = useState(false)
 	const {funnels, loading} = useSelector((state: AppState) => state.funnels)
 	const dispatch = useDispatch()
-
+	const history = useHistory()
 	useEffect(() => {
 		dispatch(startInitializeMyFunnels())
 	}, [])
@@ -70,25 +71,17 @@ const Dashboard: React.FC = () => {
 		},
 		[history]
 	)
+
 	return (
 		<React.Fragment>
-			<MainHeader />
+			<DashboardHeader />
 			<Wrapper loading={loading}>
-				<div className="bg-white  py-9" style={{minHeight: '86vh'}}>
+				<div className="bg-white  py-9" style={{minHeight: '95vh'}}>
 					<Container>
-						<div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+						<div className="pb-5 sm:flex sm:items-center sm:justify-between">
 							<h3 className="text-lg leading-6 font-medium text-gray-900">
 								My Funnels
 							</h3>
-							<div className="mt-3 sm:mt-0 sm:ml-4">
-								<button
-									type="button"
-									className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-									onClick={handleAddNewFunnel}
-								>
-									Create New Funnel
-								</button>
-							</div>
 						</div>
 
 						<div className="flex flex-col">
@@ -103,6 +96,12 @@ const Dashboard: React.FC = () => {
 														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
 													>
 														Title
+													</th>
+													<th
+														scope="col"
+														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+													>
+														Category
 													</th>
 													<th
 														scope="col"
@@ -144,24 +143,28 @@ const Dashboard: React.FC = () => {
 														<td
 															onClick={() => handleNavigate(item)}
 															className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+
 														>
 															{item.title}
 														</td>
-														<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
+															{item.category}
+														</td>
+														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
 															{item.baseDomain}
 														</td>
-														<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+														<td className="px-6 py-8 whitespace-nowrap text-sm text-center text-gray-500">
 															{item.pages.length} pages
 														</td>
-														<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
 															{item.contactEmail}
 														</td>
-														<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
 															<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
 																Active
 															</span>
 														</td>
-														<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+														<td className="px-6 py-8 whitespace-nowrap text-right text-sm font-medium">
 															<svg
 																xmlns="http://www.w3.org/2000/svg"
 																className="h-5 w-5 text-gray-500 hover:text-gray-600 cursor-pointer "
@@ -194,7 +197,6 @@ const Dashboard: React.FC = () => {
 					</Container>
 				</div>
 			</Wrapper>
-			<NewFunnelModal open={open} setOpen={setOpen} />
 		</React.Fragment>
 	)
 }
