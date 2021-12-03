@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {useEditor} from '@craftjs/core'
 import cx from 'classnames'
 import {Header} from './Header'
 import {Sidebar} from './Sidebar'
 import {Toolbox} from './Toolbox'
-import {GetMyFunnels, GetSingleFunnel} from '../../../services'
-import lz from 'lzutf8'
+import {GetSingleFunnel} from '../../../services'
+import {IFunnel, IPage} from '../../../types'
 
 interface IProps {
 	children: React.ReactElement
-	data: GetMyFunnels.Funnel
-	handleChangePage: (page: GetSingleFunnel.Page) => void
-	mainPage: GetSingleFunnel.Page
+	data: IFunnel
+	handleChangePage: (page: IPage) => void
+	mainPage: IPage
 }
 const Viewport: React.FC<IProps> = (props) => {
 	const {children, data, handleChangePage, mainPage} = props

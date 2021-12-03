@@ -5,7 +5,7 @@ import {IFunnel} from '../types'
 import {GetMyFunnels} from '../services'
 
 interface FunnelsState {
-	funnels: GetMyFunnels.Funnel[]
+	funnels: IFunnel[]
 	loading: boolean
 }
 const initState: FunnelsState = {
@@ -17,6 +17,18 @@ const funnelState = (
 	action: FunnelActions
 ) => {
 	switch (action.type) {
+		case 'PUBLISH_PAGE':
+			const filteredWithNewPublish = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: filteredWithNewPublish,
+				loading: false,
+			}
 		case 'EDIT_PAGE':
 			const updatedFunnelsWithUpdatedPage = state.funnels.map((item) => {
 				if (item._id === action.funnel._id) {

@@ -1,9 +1,15 @@
 import {Dispatch} from 'redux'
 import {AppActions} from '../models/redux'
 import {AppState} from '../reducers'
-import {addSinglePage, getMyFunnels, GetMyFunnels} from '../services'
+import {
+	addSinglePage,
+	getMyFunnels,
+	GetMyFunnels,
+	publishPage,
+} from '../services'
 import addNewFunnel from '../services/AddFunnel'
 import saveFunnel from '../services/EditPage'
+import {IFunnel} from '../types'
 export interface IAddFunnelPayload {
 	category: string
 	title: string
@@ -18,30 +24,29 @@ export interface IEditPage {
 	funnelId: string
 	pageId: string
 }
-export const addNewFunnelAction = (
-	payload: GetMyFunnels.Funnel
-): AppActions => ({
+export const addNewFunnelAction = (payload: IFunnel): AppActions => ({
 	type: 'ADD_FUNNEL',
 	payload,
 })
-export const addNewPageAction = (funnel: GetMyFunnels.Funnel): AppActions => ({
+export const addNewPageAction = (funnel: IFunnel): AppActions => ({
 	type: 'ADD_PAGE',
 	funnel,
 })
-export const editPageAction = (funnel: GetMyFunnels.Funnel): AppActions => ({
+export const editPageAction = (funnel: IFunnel): AppActions => ({
 	type: 'EDIT_PAGE',
 	funnel,
 })
-export const initializeMyFunnels = (
-	funnels: GetMyFunnels.Funnel[]
-): AppActions => ({
+export const initializeMyFunnels = (funnels: IFunnel[]): AppActions => ({
 	type: 'INITIALIZE_MY_FUNNELS',
 	funnels,
 })
 export const loadState = (): AppActions => ({
 	type: 'LOAD',
 })
-
+export const publishPageAction = (funnel: IFunnel): AppActions => ({
+	type: 'PUBLISH_PAGE',
+	funnel,
+})
 export const startAddFunnel = (payload: IAddFunnelPayload) => {
 	const {category, title} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
@@ -86,6 +91,23 @@ export const startSavePageData = (payload: IEditPage) => {
 			.then((res) => {
 				const {funnel} = res?.data
 				dispatch(editPageAction(funnel))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
+export const startPublishPage = (funnelId: string, pageId) => {
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		dispatch(loadState)
+		publishPage(funnelId, pageId)
+			.then((res) => {
+				const {funnel} = res?.data
+				dispatch(publishPageAction(funnel))
 			})
 			.catch((err) => {
 				if (err.response) {
