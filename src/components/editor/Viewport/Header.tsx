@@ -8,6 +8,7 @@ import {startSavePageData, startPublishPage} from '../../../actions'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../../types'
 import ConfirmationModal from '../../common/ConfirmationModal'
+import FunnelsSettings from '../../common/FunnelSettings'
 interface IProps {
 	data: IFunnel
 	handleChangePage: (page: IPage) => void
@@ -62,6 +63,8 @@ export const Header: React.FC<IProps> = (props) => {
 		setOpenConfirmPublish(false)
 	}
 	const isPublished = Boolean(mainPage?.isPublished)
+
+	const [settingsModal, setSettingsModal] = useState(false)
 
 	return (
 		<div className="bg-white p-3 shadow-sm">
@@ -299,10 +302,11 @@ export const Header: React.FC<IProps> = (props) => {
 							<div className="inline-flex items-center cursor-pointer hover:opacity-80">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="h-6 w-6"
+									className="h-6 w-6 text-gray-500"
 									fill="none"
 									viewBox="0 0 24 24"
 									stroke="currentColor"
+									onClick={() => setSettingsModal(true)}
 								>
 									<path
 										strokeLinecap="round"
@@ -374,6 +378,7 @@ export const Header: React.FC<IProps> = (props) => {
 				setOpen={() => setOpenConfirmPublish(false)}
 				action={handlePublishPage}
 			/>
+			<FunnelsSettings open={settingsModal} setOpen={setSettingsModal} />
 			<div className="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4"></div>
 		</div>
 	)
