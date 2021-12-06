@@ -2,21 +2,33 @@ import {FunnelActions} from '../models/redux/funnelTypes'
 import storage from 'redux-persist/lib/storage'
 import {persistReducer} from 'redux-persist'
 import {IFunnel} from '../types'
-import {GetMyFunnels} from '../services'
 
 interface FunnelsState {
 	funnels: IFunnel[]
 	loading: boolean
 }
+
 const initState: FunnelsState = {
 	funnels: [],
 	loading: true,
 }
 const funnelState = (
 	state: FunnelsState = initState,
-	action: FunnelActions
+	action: FunnelActions,
 ) => {
 	switch (action.type) {
+		case 'TOGGLE_ACTIVE_FUNNEL':
+			const filteredWithoutNewActive = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: filteredWithoutNewActive,
+				loading: false,
+			}
 		case 'PUBLISH_PAGE':
 			const filteredWithNewPublish = state.funnels.map((item) => {
 				if (item._id === action.funnel._id) {

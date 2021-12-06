@@ -14,7 +14,7 @@ export default {
 		BASE_URL: 'https://unsplash.funnelshero.com',
 	},
 	MANAGER: {
-		GET_SINGAL_FUNNEL: '/get-funnel',
+		GET_SINGLE_FUNNEL: '/get-funnel',
 		GET_SINGLE_PAGE: '/get-page',
 		SUBMIT_OPTIN_FORM: '/opt-form',
 		BASE_URL: 'https://manager.funnelshero.com',
@@ -23,6 +23,7 @@ export default {
 		ADD_PAGE: '/new-page',
 		EDIT_PAGE: '/page',
 		PUBLISH_PAGE: '/publish',
+		TOGGLE_ACTIVATE_FUNNEL:'/toggle'
 	},
 	ICONS: {
 		GET_RANDOM: '/',

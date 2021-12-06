@@ -53,22 +53,6 @@ const Builder: React.FC<IProps> = (props) => {
 		ref.current = mainPage?._id
 	}, [mainPage])
 
-	const handleSaveOnChange = (query) => {
-		if (ref.current === mainPage._id) {
-			const json = query.serialize()
-			const compressed = lz.encodeBase64(lz.compress(json))
-			const deCompressed = lz.decompress(lz.decodeBase64(compressed))
-			// const deSerialized = actions.deserialize(deCompressed);
-			dispatch(
-				startSavePageData({
-					title: mainPage?.title,
-					data: deCompressed,
-					funnelId: data?._id,
-					pageId: mainPage?._id,
-				})
-			)
-		}
-	}
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="h-full">
@@ -77,7 +61,6 @@ const Builder: React.FC<IProps> = (props) => {
 					enabled={true}
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
-					onNodesChange={handleSaveOnChange}
 				>
 					{/* <Frame>
 						<Reader
