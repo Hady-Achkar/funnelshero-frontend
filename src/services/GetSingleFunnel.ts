@@ -7,7 +7,7 @@ export const getSingleFunnel = async (
 ): Promise<AxiosResponse<GetSingleFunnel.RootObject>> => {
 	return await ManagerAxios({
 		method: 'GET',
-		url: `${ApiConstants.MANAGER.GET_SINGAL_FUNNEL}?title=${title}`,
+		url: `${ApiConstants.MANAGER.GET_SINGLE_FUNNEL}?title=${title}`,
 	})
 }
 export declare module GetSingleFunnel {
