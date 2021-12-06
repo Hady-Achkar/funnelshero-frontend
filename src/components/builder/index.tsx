@@ -65,7 +65,7 @@ const Builder: React.FC<IProps> = (props) => {
 						handleChangePage={handleChangePage}
 						mainPage={mainPage}
 					>
-						<Frame data={mainPage?.data}></Frame>
+						<Frame data={mainPage?.data}/>
 					</Viewport>
 				</Editor>
 			</div>
