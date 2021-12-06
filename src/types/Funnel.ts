@@ -18,8 +18,10 @@ export interface IFunnel {
 	favIcon: string
 	pages: IPage[]
 	_id: string
+	proDomain: string
 	category: string
 	title: string
+	isActive:boolean
 	contactEmail: string
 	createdAt: Date
 	updatedAt: Date

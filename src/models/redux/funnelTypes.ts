@@ -7,32 +7,46 @@ export const INITIALIZE_MY_FUNNELS = 'INITIALIZE_MY_FUNNELS'
 export const ADD_PAGE = 'ADD_PAGE'
 export const EDIT_PAGE = 'EDIT_PAGE'
 export const PUBLISH_PAGE = 'PUBLISH_PAGE'
+export const TOGGLE_ACTIVE_FUNNEL = 'TOGGLE_ACTIVE_FUNNEL'
+
 export interface initializeMyFunnels {
 	type: typeof INITIALIZE_MY_FUNNELS
 	funnels: IFunnel[]
 }
+
 export interface publishPage {
 	type: typeof PUBLISH_PAGE
 	funnel: IFunnel
 }
+
+export interface toggleActiveFunnel {
+	type: typeof TOGGLE_ACTIVE_FUNNEL
+	funnel: IFunnel
+}
+
 export interface editPageAction {
 	type: typeof EDIT_PAGE
 	funnel: IFunnel
 }
+
 export interface addNewPage {
 	type: typeof ADD_PAGE
 	funnel: IFunnel
 }
+
 export default interface AddFunnelAction {
 	type: typeof ADD_FUNNEL
 	payload: IFunnel
 }
+
 export interface LoadAction {
 	type: typeof LOAD
 }
+
 export interface UnloadAction {
 	type: typeof UNLOAD
 }
+
 export type FunnelActions =
 	| AddFunnelAction
 	| LoadAction
@@ -41,3 +55,4 @@ export type FunnelActions =
 	| addNewPage
 	| editPageAction
 	| publishPage
+	| toggleActiveFunnel
