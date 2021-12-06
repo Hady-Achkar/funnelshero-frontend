@@ -1,28 +1,18 @@
-import {Editor, Frame, Element, useEditor} from '@craftjs/core'
+import {Editor, Frame} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {createTheme} from '@material-ui/core/styles'
-import lz from 'lzutf8'
 
-import {
-	RenderNode,
-	Container,
-	Button,
-	Divider,
-	HyperLink,
-	Video,
-	Viewport,
-	Text,
-	Image,
-} from '../'
+import {Button, Container, Divider, HyperLink, Image, Paragraph, RenderNode, Text, Video, Viewport} from '../'
 import {useDispatch} from 'react-redux'
-import {startSavePageData} from '../../actions'
 import {IFunnel, IPage} from '../../types'
+
 interface IProps {
 	data: IFunnel
 	mainPage: IPage
 	handleChangePage: (page: IPage) => void
 }
+
 const Builder: React.FC<IProps> = (props) => {
 	const {data, mainPage, handleChangePage} = props
 	const theme = createTheme({
@@ -44,6 +34,7 @@ const Builder: React.FC<IProps> = (props) => {
 		Video,
 		HyperLink,
 		Divider,
+		Paragraph,
 	}
 
 	const dispatch = useDispatch()
@@ -55,7 +46,7 @@ const Builder: React.FC<IProps> = (props) => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className="h-full">
+			<div className='h-full'>
 				<Editor
 					resolver={contentElements}
 					enabled={true}
@@ -74,7 +65,7 @@ const Builder: React.FC<IProps> = (props) => {
 						handleChangePage={handleChangePage}
 						mainPage={mainPage}
 					>
-						<Frame data={mainPage?.data}></Frame>
+						<Frame data={mainPage?.data}/>
 					</Viewport>
 				</Editor>
 			</div>
