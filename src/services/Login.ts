@@ -16,6 +16,22 @@ const login = async (
 	})
 }
 
+export const googleLogin = async (
+	fname: string,
+	lname: string,
+	email: string
+): Promise<AxiosResponse<Login.RootObject>> => {
+	return await AuthAxios({
+		method: 'POST',
+		url: ApiConstants.AUTH.GOOGLE_LOGIN,
+		data: {
+			email,
+			lname,
+			fname,
+		},
+	})
+}
+
 export default login
 export interface LoginPayload {
 	readonly email: string
