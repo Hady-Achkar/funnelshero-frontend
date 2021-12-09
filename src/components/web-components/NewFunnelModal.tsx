@@ -13,17 +13,12 @@ const NewFunnelModal = ({open, setOpen}) => {
 		title: '',
 	})
 	const cancelButtonRef = useRef(null)
-	const people = [
+	const categories = [
 		{id: 1, name: 'Domestic companies'},
 		{id: 2, name: 'Barber shops'},
 		{id: 3, name: 'Malls and stores'},
 		{id: 4, name: 'Gym and spa'},
 		{id: 5, name: 'Clothing'},
-		{id: 6, name: 'Hellen Schmidt'},
-		{id: 7, name: 'Caroline Schultz'},
-		{id: 8, name: 'Mason Heaney'},
-		{id: 9, name: 'Claudie Smitham'},
-		{id: 10, name: 'Emil Schaefer'},
 	]
 	const dispatch = useDispatch()
 	const handleSubmit = (e) => {
@@ -38,7 +33,7 @@ const NewFunnelModal = ({open, setOpen}) => {
 		}))
 	}, [])
 
-	const [selected, setSelected] = useState(people[3])
+	const [selected, setSelected] = useState(categories[3])
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog
@@ -133,7 +128,7 @@ const NewFunnelModal = ({open, setOpen}) => {
 													leaveTo="opacity-0"
 												>
 													<Listbox.Options className=" mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-														{people.map((person) => (
+														{categories.map((person) => (
 															<Listbox.Option
 																key={person.id}
 																className={({active}) =>
