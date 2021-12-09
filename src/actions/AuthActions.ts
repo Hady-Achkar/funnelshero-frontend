@@ -4,6 +4,7 @@ import {AppState} from '../reducers'
 import Cookies from 'universal-cookie'
 import {IUser} from '../models/IUser'
 import login from '../services/Login'
+import {googleLogin} from '../services'
 import {LoginPayload} from '../services'
 
 const cookies = new Cookies()
@@ -18,6 +19,47 @@ export const startLogin = (payload: LoginPayload) => {
 	const {email, password} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		login(email, password)
+			.then((res) => {
+				const {token, fullName, email, _id, type} = res?.data
+				if (token) {
+					cookies.set('token', token, {path: '/'})
+					cookies.set('fullName', fullName, {path: '/'})
+					cookies.set('email', email, {path: '/'})
+					cookies.set('_id', _id, {path: '/'})
+					cookies.set('type', type, {path: '/'})
+					console.log('logged in')
+
+					dispatch(
+						loginAction({
+							token,
+							fullName,
+							email,
+							_id,
+							type,
+						})
+					)
+				}
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
+
+interface GoogleLoginPayload {
+	fname: string
+	lname: string
+	email: string
+}
+
+export const startGoogleLogin = (payload: GoogleLoginPayload) => {
+	const {fname, lname, email} = payload
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		googleLogin(fname, lname, email)
 			.then((res) => {
 				const {token, fullName, email, _id, type} = res?.data
 				if (token) {
