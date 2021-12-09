@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {Wrapper} from '../../components'
+import {NewFunnelModal, Wrapper} from '../../components'
 import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {startInitializeMyFunnels, startToggleActiveFunnel} from '../../actions'
@@ -8,6 +8,7 @@ import {Container} from '@material-ui/core'
 import {IFunnel} from '../../types'
 import DashboardHeader from '../../components/web-components/DashboardHeader'
 import ConfirmationModal from '../../components/common/ConfirmationModal'
+import {PlusIcon} from '@heroicons/react/solid'
 
 const Dashboard: React.FC = () => {
 	const {funnels, loading} = useSelector((state: AppState) => state.funnels)
@@ -31,6 +32,8 @@ const Dashboard: React.FC = () => {
 		setActiveModalOpen(false)
 	}, [dispatch, mainFunnel])
 
+	const [modalOpen, setModalOpen] = useState<boolean>(false)
+
 	return (
 		<React.Fragment>
 			<DashboardHeader />
@@ -47,117 +50,151 @@ const Dashboard: React.FC = () => {
 							<div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 								<div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
 									<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-										<table className="min-w-full divide-y divide-gray-200">
-											<thead className="bg-gray-50">
-												<tr>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Title
-													</th>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Category
-													</th>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Base Domain
-													</th>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Pages
-													</th>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Contact Email
-													</th>
-													<th
-														scope="col"
-														className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-													>
-														Status
-													</th>
-													<th scope="col" className="relative px-6 py-3">
-														<span className="sr-only">Edit</span>
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												{funnels.map((item, index) => (
-													<tr
-														key={item._id}
-														className={
-															index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-														}
-													>
-														<td
-															onClick={() => handleNavigate(item)}
-															className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+										{funnels.length > 0 ? (
+											<table className="min-w-full divide-y divide-gray-200">
+												<thead className="bg-gray-50">
+													<tr>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
 														>
-															{item.title}
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
-															{item.category}
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
-															{item.baseDomain}
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-sm text-center text-gray-500">
-															{item.pages.length} pages
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
-															{item.contactEmail}
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
-															{item?.isActive ? (
-																<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-																	Active
-																</span>
-															) : (
-																<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-																	Not Active
-																</span>
-															)}
-														</td>
-														<td className="px-6 py-8 whitespace-nowrap text-right text-sm font-medium">
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="h-5 w-5 text-gray-500 hover:text-gray-600 cursor-pointer "
-																fill="none"
-																viewBox="0 0 24 24"
-																stroke="currentColor"
-																onClick={() => {
-																	setActiveModalOpen(true)
-																	setMainFunnel(item)
-																}}
-															>
-																<path
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																	strokeWidth={2}
-																	d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-																/>
-																<path
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																	strokeWidth={2}
-																	d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-																/>
-															</svg>
-														</td>
+															Title
+														</th>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+														>
+															Category
+														</th>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+														>
+															Base Domain
+														</th>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+														>
+															Pages
+														</th>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+														>
+															Contact Email
+														</th>
+														<th
+															scope="col"
+															className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+														>
+															Status
+														</th>
+														<th scope="col" className="relative px-6 py-3">
+															<span className="sr-only">Edit</span>
+														</th>
 													</tr>
-												))}
-											</tbody>
-										</table>
+												</thead>
+												<tbody>
+													{funnels.map((item, index) => (
+														<tr
+															key={item._id}
+															className={
+																index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+															}
+														>
+															<td
+																onClick={() => handleNavigate(item)}
+																className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-800 cursor-pointer"
+															>
+																{item.title}
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
+																{item.category}
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
+																{item.baseDomain}
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-sm text-center text-gray-500">
+																{item.pages.length} pages
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
+																{item.contactEmail}
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-sm text-gray-500">
+																{item?.isActive ? (
+																	<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+																		Active
+																	</span>
+																) : (
+																	<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+																		Not Active
+																	</span>
+																)}
+															</td>
+															<td className="px-6 py-8 whitespace-nowrap text-right text-sm font-medium">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	className="h-5 w-5 text-gray-500 hover:text-gray-600 cursor-pointer "
+																	fill="none"
+																	viewBox="0 0 24 24"
+																	stroke="currentColor"
+																	onClick={() => {
+																		setActiveModalOpen(true)
+																		setMainFunnel(item)
+																	}}
+																>
+																	<path
+																		strokeLinecap="round"
+																		strokeLinejoin="round"
+																		strokeWidth={2}
+																		d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+																	/>
+																	<path
+																		strokeLinecap="round"
+																		strokeLinejoin="round"
+																		strokeWidth={2}
+																		d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+																	/>
+																</svg>
+															</td>
+														</tr>
+													))}
+												</tbody>
+											</table>
+										) : (
+											<div className="text-center py-4">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													className="mx-auto h-12 w-12 text-gray-400 font-light"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+													/>
+												</svg>
+												<h3 className="mt-2 text-sm font-medium text-gray-900">
+													No funnels
+												</h3>
+												<p className="mt-1 text-sm text-gray-500">
+													Get started by creating a new funnel.
+												</p>
+												<div className="mt-6">
+													<button
+														type="button"
+														className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+														onClick={() => setModalOpen(true)}
+													>
+														New Funnel
+													</button>
+												</div>
+											</div>
+										)}
 									</div>
 								</div>
 							</div>
@@ -177,6 +214,7 @@ const Dashboard: React.FC = () => {
 						</div>
 					</Container>
 				</div>
+				<NewFunnelModal open={modalOpen} setOpen={setModalOpen} />
 			</Wrapper>
 		</React.Fragment>
 	)
