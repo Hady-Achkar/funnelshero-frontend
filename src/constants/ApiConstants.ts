@@ -7,6 +7,7 @@ export default {
 	AUTH: {
 		BASE_URL: 'https://auth.funnelshero.com',
 		LOGIN: '/sign-in',
+		GOOGLE_LOGIN: '/google',
 	},
 	IMAGES: {
 		GET_RANDOM: '/',
@@ -23,7 +24,7 @@ export default {
 		ADD_PAGE: '/new-page',
 		EDIT_PAGE: '/page',
 		PUBLISH_PAGE: '/publish',
-		TOGGLE_ACTIVATE_FUNNEL:'/toggle'
+		TOGGLE_ACTIVATE_FUNNEL: '/toggle',
 	},
 	ICONS: {
 		GET_RANDOM: '/',
