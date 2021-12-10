@@ -31,7 +31,6 @@ const FunnelsSettings = ({open, setOpen}) => {
 		}
 	}, [funnelTitle])
 
-	console.log('funnel state:', funnelState)
 
 	const [tabs, setTabs] = useState([
 		{
@@ -45,7 +44,7 @@ const FunnelsSettings = ({open, setOpen}) => {
 			current: false,
 		},
 		{name: 'Analytics', component: <div>hello 3</div>, current: false},
-		{name: 'Navigation', component: <div>hello 4</div>, current: false},
+		{name: 'Menus', component: <div>hello 4</div>, current: false},
 	])
 
 	const handleToggleTabs = useCallback((index: number) => {
@@ -57,7 +56,6 @@ const FunnelsSettings = ({open, setOpen}) => {
 			}),
 		])
 	}, [])
-	console.log(tabs)
 
 	return (
 		<Transition.Root show={open} as={Fragment}>

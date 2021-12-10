@@ -29,7 +29,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 	const [enabled, setEnabled] = useState(false)
 	const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState<boolean>(false)
 	const dispatch = useDispatch()
-	const [confirmationModalOpen, setconfirmationModalOpen] =
+	const [confirmationModalOpen, setConfirmationModalOpen] =
 		useState<boolean>(false)
 
 	const {funnelTitle} = useParams<Params>()
@@ -55,7 +55,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 
 	const handleToggleActivate = useCallback(() => {
 		dispatch(startToggleActiveFunnel(funnelState?._id))
-		setconfirmationModalOpen(false)
+		setConfirmationModalOpen(false)
 	}, [dispatch, funnelState])
 	const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setFunnelState(prevState => ({
@@ -122,14 +122,11 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 							<Listbox
 								value={funnelState?.category}
 								onChange={(event) => {
-									//@ts-ignore
-									console.log(event.name)
 									setFunnelState(prevState => ({
 										...prevState,
 										//@ts-ignore
 										category: event.name,
 									}))
-									//implement on Change
 								}}
 							>
 								{({open}) => (
@@ -252,7 +249,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 							<div className='mt-1 sm:mt-0 sm:col-span-2'>
 								<Switch
 									checked={funnelState?.isActive}
-									onChange={() => setconfirmationModalOpen(true)}
+									onChange={() => setConfirmationModalOpen(true)}
 									className={classNames(
 										funnelState?.isActive ? 'bg-teal-500' : 'bg-gray-200',
 										'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none ',
@@ -300,7 +297,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 					funnelState?.isActive ? 'Deactivate' : 'Activate'
 				} this funnel?`}
 				buttonText='Yes, sure'
-				setOpen={() => setconfirmationModalOpen(false)}
+				setOpen={() => setConfirmationModalOpen(false)}
 				action={handleToggleActivate}
 			/>
 			<ConfirmationModal
