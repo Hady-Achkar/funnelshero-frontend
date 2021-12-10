@@ -88,6 +88,12 @@ const funnelState = (
 				...state,
 				loading: false,
 			}
+		case 'DELETE_FUNNEL':
+			return {
+				...state,
+				loading: false,
+				funnels: state.funnels.filter((item) => item._id !== action.funnelId),
+			}
 		default:
 			return state
 	}
