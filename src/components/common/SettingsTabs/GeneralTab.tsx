@@ -65,6 +65,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 	}, [])
 	const handleDeleteFunnel = useCallback(() => {
 		dispatch(startDeleteFunnel(funnelState?._id))
+		history.push('/dashboard')
 	}, [funnelState])
 	return (
 		<form className='space-y-8 divide-y divide-gray-200'>
