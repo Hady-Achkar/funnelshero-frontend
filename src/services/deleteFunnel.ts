@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
-import {FileAxios} from '../lib'
+import {ManagerAxios} from '../lib'
 
 interface RootObject {
 	status: 'Success' | 'Failure'
@@ -9,7 +9,7 @@ interface RootObject {
 }
 
 const deleteFunnel = (funnelId: string): Promise<AxiosResponse<RootObject>> => {
-	return FileAxios({
+	return ManagerAxios({
 		method: 'DELETE',
 		url: ApiConstants.MANAGER.DELETE_FUNNEL,
 		data: {
