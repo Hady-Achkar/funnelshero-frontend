@@ -1,6 +1,12 @@
 import React from 'react'
 import {Switch} from 'react-router-dom'
-import {HomePage, SigninPage, DashboardPage, FunnelPage} from '../pages'
+import {
+	HomePage,
+	SigninPage,
+	DashboardPage,
+	FunnelPage,
+	AccountSettings,
+} from '../pages'
 import Route from './route'
 
 export interface IRoutesConfiguration {
@@ -34,6 +40,12 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		exact: true,
 		isPrivate: true,
 		component: FunnelPage,
+	},
+	{
+		path: '/account-settings',
+		exact: true,
+		isPrivate: true,
+		component: AccountSettings,
 	},
 ]
 

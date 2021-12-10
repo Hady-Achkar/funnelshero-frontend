@@ -56,7 +56,7 @@ const Header = () => {
 							<Link
 								to={item.href}
 								key={index}
-								className="text-gray-500 font-medium text-md hover:text-indigo-600 "
+								className="text-gray-700 font-light text-md hover:text-indigo-600 "
 							>
 								{item.name}
 							</Link>
@@ -96,7 +96,7 @@ const Header = () => {
 												<Menu.Item>
 													{({active}) => (
 														<Link
-															to="#"
+															to="/account-settings"
 															className={classNames(
 																active
 																	? 'bg-gray-100 text-gray-900'
