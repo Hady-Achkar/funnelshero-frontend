@@ -8,10 +8,16 @@ export const ADD_PAGE = 'ADD_PAGE'
 export const EDIT_PAGE = 'EDIT_PAGE'
 export const PUBLISH_PAGE = 'PUBLISH_PAGE'
 export const TOGGLE_ACTIVE_FUNNEL = 'TOGGLE_ACTIVE_FUNNEL'
+export const DELETE_FUNNEL = 'DELETE_FUNNEL'
 
 export interface initializeMyFunnels {
 	type: typeof INITIALIZE_MY_FUNNELS
 	funnels: IFunnel[]
+}
+
+export interface deleteFunnel {
+	type: typeof DELETE_FUNNEL
+	funnelId: string
 }
 
 export interface publishPage {
@@ -56,3 +62,4 @@ export type FunnelActions =
 	| editPageAction
 	| publishPage
 	| toggleActiveFunnel
+	| deleteFunnel
