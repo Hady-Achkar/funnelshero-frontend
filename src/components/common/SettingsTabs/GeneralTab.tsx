@@ -45,13 +45,13 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 		} else {
 			setFunnelState(funnel)
 		}
-	}, [funnelTitle])
+	}, [funnelTitle, funnels])
 	useEffect(() => {
 		fetchFunnel()
 		return () => {
 			fetchFunnel()
 		}
-	}, [funnelTitle])
+	}, [funnelTitle, funnels])
 
 	const handleToggleActivate = useCallback(() => {
 		dispatch(startToggleActiveFunnel(funnelState?._id))
