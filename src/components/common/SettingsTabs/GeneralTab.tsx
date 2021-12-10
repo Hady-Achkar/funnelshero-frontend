@@ -287,7 +287,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 
 			<ConfirmationModal
 				open={confirmationModalOpen}
-				variant="Warning"
+				variant={funnelState?.isActive ? 'Warning' : 'Success'}
 				title={`${funnelState?.isActive ? 'Deactivate' : 'Activate'} ${
 					funnelState?.title
 				}`}

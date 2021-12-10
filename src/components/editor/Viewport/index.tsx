@@ -48,16 +48,16 @@ const Viewport: React.FC<IProps> = (props) => {
 
 	return (
 		<div className="viewport">
+			<Header
+				data={data}
+				handleChangePage={handleChangePage}
+				mainPage={mainPage}
+			/>
 			<div
 				className={cx(['flex h-full overflow-hidden flex-row w-full fixed'])}
 			>
 				<Toolbox />
 				<div className="page-container flex flex-1 h-full flex-col bg-indigo-50">
-					<Header
-						data={data}
-						handleChangePage={handleChangePage}
-						mainPage={mainPage}
-					/>
 					<div
 						className={cx([
 							'craftjs-renderer flex-1 h-full w-full transition pb-8 overflow-auto',
