@@ -5,7 +5,6 @@ import {useNode} from '@craftjs/core'
 
 const ParagraphSettings = () => {
 	const {
-		connectors: {connect},
 		setProp,
 	} = useNode()
 	const quillRef = useRef<Quill>()
@@ -30,7 +29,6 @@ const quill= new Quill('#paragraph-editor', {
 			<div
 				id={'paragraph-editor'}
 				className='group aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden'
-				ref={connect}
 			/>
 		</React.Fragment>
 

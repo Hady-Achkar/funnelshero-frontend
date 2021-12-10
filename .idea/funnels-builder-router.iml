@@ -9,5 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="funnels-manager" />
+    <orderEntry type="module" module-name="funnel-bundles" />
+    <orderEntry type="module" module-name="funnel-admin" />
   </component>
 </module>
