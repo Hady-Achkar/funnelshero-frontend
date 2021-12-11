@@ -1,7 +1,7 @@
 import {Dispatch} from 'redux'
 import {AppActions} from '../models'
 import {AppState} from '../reducers'
-import {addSinglePage, getMyFunnels, publishPage, ToggleActivateFunnel} from '../services'
+import {addSinglePage, getMyFunnels, publishPage, ToggleActivateFunnel, deleteFunnel} from '../services'
 import addNewFunnel from '../services/AddFunnel'
 import saveFunnel from '../services/EditPage'
 import {IFunnel} from '../types'
@@ -49,6 +49,10 @@ export const loadState = (): AppActions => ({
 export const publishPageAction = (funnel: IFunnel): AppActions => ({
 	type: 'PUBLISH_PAGE',
 	funnel,
+})
+export const deleteFunnelAction = (funnelId: string): AppActions => ({
+	type: 'DELETE_FUNNEL',
+	funnelId,
 })
 export const startAddFunnel = (payload: IAddFunnelPayload) => {
 	const {category, title} = payload
@@ -103,6 +107,23 @@ export const startAddPage = (payload: IAddPage) => {
 			})
 	}
 }
+export const startDeleteFunnel = (funnelId: string) => {
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		dispatch(loadState)
+		deleteFunnel(funnelId)
+			.then((res) => {
+				dispatch(deleteFunnelAction(funnelId))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
+
 export const startSavePageData = (payload: IEditPage) => {
 	const {data, funnelId, pageId, title} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {

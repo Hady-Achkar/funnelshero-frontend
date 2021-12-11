@@ -25,6 +25,7 @@ export default {
 		EDIT_PAGE: '/page',
 		PUBLISH_PAGE: '/publish',
 		TOGGLE_ACTIVATE_FUNNEL: '/toggle',
+		DELETE_FUNNEL:'/funnel'
 	},
 	ICONS: {
 		GET_RANDOM: '/',

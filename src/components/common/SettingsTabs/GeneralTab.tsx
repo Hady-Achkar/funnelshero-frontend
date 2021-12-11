@@ -12,7 +12,7 @@ import {categories} from '../../../constants'
 import {IFunnel} from '../../../types'
 import ConfirmationModal from '../ConfirmationModal'
 import {useDispatch, useSelector} from 'react-redux'
-import {startToggleActiveFunnel} from '../../../actions'
+import {startToggleActiveFunnel, startDeleteFunnel} from '../../../actions'
 import {useParams, useHistory} from 'react-router-dom'
 import {AppState} from '../../../reducers'
 
@@ -20,14 +20,19 @@ interface IProps {
 	open: boolean
 	setOpen: React.Dispatch<SetStateAction<boolean>>
 }
+
+type Params = {
+	funnelTitle: string
+}
 const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 	const [selected, setSelected] = useState(categories[3])
 	const [enabled, setEnabled] = useState(false)
+	const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState<boolean>(false)
 	const dispatch = useDispatch()
-	const [confirmationModalOpen, setconfirmationModalOpen] =
+	const [confirmationModalOpen, setConfirmationModalOpen] =
 		useState<boolean>(false)
 
-	const {funnelTitle} = useParams()
+	const {funnelTitle} = useParams<Params>()
 	const {funnels} = useSelector((state: AppState) => state.funnels)
 
 	const [funnelState, setFunnelState] = useState<IFunnel>()
@@ -40,90 +45,106 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 		} else {
 			setFunnelState(funnel)
 		}
-	}, [funnelTitle])
+	}, [funnelTitle, funnels])
 	useEffect(() => {
 		fetchFunnel()
 		return () => {
 			fetchFunnel()
 		}
-	}, [funnelTitle])
+	}, [funnelTitle, funnels])
 
 	const handleToggleActivate = useCallback(() => {
 		dispatch(startToggleActiveFunnel(funnelState?._id))
-		setconfirmationModalOpen(false)
+		setConfirmationModalOpen(false)
 	}, [dispatch, funnelState])
-
+	const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setFunnelState(prevState => ({
+			...prevState,
+			[event.target.id]: event.target.value,
+		}))
+	}, [])
+	const handleDeleteFunnel = useCallback(() => {
+		dispatch(startDeleteFunnel(funnelState?._id))
+		history.push('/dashboard')
+	}, [funnelState])
 	return (
-		<form className="space-y-8 divide-y divide-gray-200">
+		<form className='space-y-8 divide-y divide-gray-200'>
 			<div
-				className="space-y-8 divide-y divide-gray-200 sm:space-y-5"
+				className='space-y-8 divide-y divide-gray-200 sm:space-y-5'
 				style={{minHeight: '60vh'}}
 			>
 				<div>
-					<div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-						<div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5 ">
+					<div className='mt-6 sm:mt-5 space-y-6 sm:space-y-5'>
+						<div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5 '>
 							<label
-								htmlFor="title"
-								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+								htmlFor='title'
+								className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
 							>
 								Funnel title
 							</label>
-							<div className="mt-1 sm:mt-0 sm:col-span-2">
-								<div className="max-w-lg flex rounded-md shadow-sm">
+							<div className='mt-1 sm:mt-0 sm:col-span-2'>
+								<div className='max-w-lg flex rounded-md shadow-sm'>
 									<input
-										type="text"
-										name="title"
-										id="title"
-										autoComplete="title"
-										className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300"
+										type='text'
+										name='title'
+										id='title'
+										autoComplete='title'
+										value={funnelState?.title}
+										onChange={handleChange}
+										className='flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300'
 									/>
 								</div>
 							</div>
 						</div>
 
-						<div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+						<div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
 							<label
-								htmlFor="email"
-								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+								htmlFor='contactEmail'
+								className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
 							>
 								Contact email
 							</label>
-							<div className="mt-1 sm:mt-0 sm:col-span-2">
-								<div className="max-w-lg flex rounded-md shadow-sm">
+							<div className='mt-1 sm:mt-0 sm:col-span-2'>
+								<div className='max-w-lg flex rounded-md shadow-sm'>
 									<input
-										type="email"
-										name="email"
-										id="email"
-										autoComplete="email"
-										className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300"
+										type='email'
+										name='contactEmail'
+										id='contactEmail'
+										autoComplete='email'
+										value={funnelState?.contactEmail}
+										onChange={handleChange}
+										className='flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded sm:text-sm border-gray-300'
 									/>
 								</div>
 							</div>
 						</div>
-						<div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+						<div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
 							<Listbox
-								value={selected}
-								onChange={(e) => {
-									setSelected(e)
-
-									//implement on Change
+								value={funnelState?.category}
+								onChange={(event) => {
+									setFunnelState(prevState => ({
+										...prevState,
+										//@ts-ignore
+										category: event.name,
+									}))
 								}}
 							>
 								{({open}) => (
 									<>
-										<Listbox.Label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+										<Listbox.Label className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'>
 											Category
 										</Listbox.Label>
-										<div className="mt-1 sm:mt-0 sm:col-span-2">
-											<div className="max-w-lg flex rounded-md shadow-sm">
-												<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-													<span className="block truncate">
-														{selected?.name}
+										<div className='mt-1 sm:mt-0 sm:col-span-2'>
+											<div className='max-w-lg flex rounded-md shadow-sm'>
+												<Listbox.Button
+													className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+													<span className='block truncate'>
+														{funnelState?.category}
 													</span>
-													<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+													<span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
 														<SelectorIcon
-															className="h-5 w-5 text-gray-400"
-															aria-hidden="true"
+															className='h-5 w-5 text-gray-400'
+															aria-hidden='true'
 														/>
 													</span>
 												</Listbox.Button>
@@ -132,20 +153,21 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 											<Transition
 												show={open}
 												as={Fragment}
-												leave="transition ease-in duration-100"
-												leaveFrom="opacity-100"
-												leaveTo="opacity-0"
+												leave='transition ease-in duration-100'
+												leaveFrom='opacity-100'
+												leaveTo='opacity-0'
 											>
-												<Listbox.Options className=" mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-													{categories.map((category) => (
+												<Listbox.Options
+													className=' mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'>
+													{categories.map((category, index) => (
 														<Listbox.Option
-															key={category?.id}
+															key={index}
 															className={({active}) =>
 																classNames(
 																	active
 																		? 'text-white bg-indigo-600'
 																		: 'text-gray-900',
-																	'cursor-default select-none relative py-2 pl-3 pr-9'
+																	'cursor-default select-none relative py-2 pl-3 pr-9',
 																)
 															}
 															value={category}
@@ -157,7 +179,7 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 																			selected
 																				? 'font-semibold'
 																				: 'font-normal',
-																			'block truncate'
+																			'block truncate',
 																		)}
 																	>
 																		{category?.name}
@@ -169,12 +191,12 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 																				active
 																					? 'text-white'
 																					: 'text-indigo-600',
-																				'absolute inset-y-0 right-0 flex items-center pr-4'
+																				'absolute inset-y-0 right-0 flex items-center pr-4',
 																			)}
 																		>
 																			<CheckIcon
-																				className="h-5 w-5"
-																				aria-hidden="true"
+																				className='h-5 w-5'
+																				aria-hidden='true'
 																			/>
 																		</span>
 																	) : null}
@@ -190,42 +212,22 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 							</Listbox>
 						</div>
 
-						<div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-							<label
-								htmlFor="meta"
-								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-							>
-								Meta desctiption
-							</label>
-							<div className="mt-1 sm:mt-0 sm:col-span-2">
-								<textarea
-									id="meta"
-									name="meta"
-									rows={3}
-									className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-									defaultValue={''}
-								/>
-								<p className="mt-2 text-sm text-gray-500">
-									Meta description, recommended for SEO
-								</p>
-							</div>
-						</div>
-
-						<div className="bg-white  sm:rounded-lg">
-							<div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-								<label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+						<div className='bg-white  sm:rounded-lg'>
+							<div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
+								<label className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'>
 									Delete your funnel
 								</label>
-								<div className="mt-2 max-w-xl text-sm text-gray-500">
+								<div className='mt-2 max-w-xl text-sm text-gray-500'>
 									<p>
 										Once you delete your funnel, you will lose all data
 										associated with it.
 									</p>
 								</div>
-								<div className="mt-5">
+								<div className='mt-5'>
 									<button
-										type="button"
-										className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm"
+										onClick={() => setDeleteConfirmationModalOpen(true)}
+										type='button'
+										className='inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm'
 									>
 										Delete funnel
 									</button>
@@ -234,30 +236,30 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 						</div>
 
 						<Switch.Group
-							as="div"
-							className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+							as='div'
+							className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'
 						>
 							<Switch.Label
-								as="span"
-								className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+								as='span'
+								className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
 								passive
 							>
 								Activate funnel
 							</Switch.Label>
-							<div className="mt-1 sm:mt-0 sm:col-span-2">
+							<div className='mt-1 sm:mt-0 sm:col-span-2'>
 								<Switch
 									checked={funnelState?.isActive}
-									onChange={() => setconfirmationModalOpen(true)}
+									onChange={() => setConfirmationModalOpen(true)}
 									className={classNames(
 										funnelState?.isActive ? 'bg-teal-500' : 'bg-gray-200',
-										'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none '
+										'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none ',
 									)}
 								>
 									<span
-										aria-hidden="true"
+										aria-hidden='true'
 										className={classNames(
 											funnelState?.isActive ? 'translate-x-5' : 'translate-x-0',
-											'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+											'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200',
 										)}
 									/>
 								</Switch>
@@ -267,18 +269,18 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 				</div>
 			</div>
 
-			<div className="pt-5">
-				<div className="flex justify-end">
+			<div className='pt-5'>
+				<div className='flex justify-end'>
 					<button
-						type="button"
-						className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						type='button'
+						className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 						onClick={() => setOpen(false)}
 					>
 						Cancel
 					</button>
 					<button
-						type="submit"
-						className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						type='submit'
+						className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 					>
 						Save
 					</button>
@@ -294,10 +296,20 @@ const GeneralTab: React.FC<IProps> = ({open, setOpen}) => {
 				text={`Are you sure you want to ${
 					funnelState?.isActive ? 'Deactivate' : 'Activate'
 				} this funnel?`}
-				buttonText="Yes, sure"
-				setOpen={() => setconfirmationModalOpen(false)}
+				buttonText='Yes, sure'
+				setOpen={() => setConfirmationModalOpen(false)}
 				action={handleToggleActivate}
 			/>
+			<ConfirmationModal
+				open={deleteConfirmationModalOpen}
+				variant='Warning'
+				title={`Delete ${funnelState?.title}`}
+				text={'Are you sure you want to delete this funnel?'}
+				buttonText='Yes, sure'
+				setOpen={() => setDeleteConfirmationModalOpen(false)}
+				action={handleDeleteFunnel}
+			/>
+
 		</form>
 	)
 }

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../funnel-admin/.idea/funnel-admin.iml" filepath="$PROJECT_DIR$/../funnel-admin/.idea/funnel-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../funnel-bundles/.idea/funnel-bundles.iml" filepath="$PROJECT_DIR$/../funnel-bundles/.idea/funnel-bundles.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/funnels-builder-router.iml" filepath="$PROJECT_DIR$/.idea/funnels-builder-router.iml" />
       <module fileurl="file://$PROJECT_DIR$/../funnels-manager/.idea/funnels-manager.iml" filepath="$PROJECT_DIR$/../funnels-manager/.idea/funnels-manager.iml" />
     </modules>
