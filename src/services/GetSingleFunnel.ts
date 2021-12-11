@@ -10,7 +10,20 @@ export const getSingleFunnel = async (
 		url: `${ApiConstants.MANAGER.GET_SINGLE_FUNNEL}?title=${title}`,
 	})
 }
+
 export declare module GetSingleFunnel {
+	export interface ILink {
+		title: string
+		href: string
+	}
+
+	export interface IMenu {
+		title: string
+		links: ILink[]
+		_id: string
+		updatedAt: Date
+		createdAt: Date
+	}
 	export interface Page {
 		_id: string
 		title: string
@@ -24,6 +37,7 @@ export declare module GetSingleFunnel {
 		pages: Page[]
 		_id: string
 		category: string
+		menus: IMenu[]
 		title: string
 		owner: string
 		contactEmail: string

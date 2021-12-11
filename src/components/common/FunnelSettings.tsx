@@ -3,7 +3,7 @@ import {Fragment, useState} from 'react'
 import {Dialog, Transition, Listbox} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/outline'
 import classNames from 'classnames'
-import {PublishTab, GeneralTab} from './SettingsTabs'
+import {PublishTab, GeneralTab, MenusTab} from './SettingsTabs'
 import {useParams, useHistory} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {AppState} from '../../reducers'
@@ -31,7 +31,6 @@ const FunnelsSettings = ({open, setOpen}) => {
 		}
 	}, [funnelTitle])
 
-
 	const [tabs, setTabs] = useState([
 		{
 			name: 'General',
@@ -43,8 +42,12 @@ const FunnelsSettings = ({open, setOpen}) => {
 			component: <PublishTab setOpen={setOpen} open={open} />,
 			current: false,
 		},
+		{
+			name: 'Menus',
+			component: <MenusTab open={open} setOpen={setOpen} />,
+			current: false,
+		},
 		{name: 'Analytics', component: <div>hello 3</div>, current: false},
-		{name: 'Menus', component: <div>hello 4</div>, current: false},
 	])
 
 	const handleToggleTabs = useCallback((index: number) => {

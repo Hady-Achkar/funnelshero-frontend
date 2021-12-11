@@ -9,6 +9,18 @@ export interface IPage {
 	publishedAt: Date
 }
 
+export interface ILink {
+	title: string
+	href: string
+}
+
+export interface IMenu {
+	title: string
+	links: ILink[]
+	_id: string
+	updatedAt: Date
+	createdAt: Date
+}
 export interface Publish {
 	pages: IPage[]
 }
@@ -18,10 +30,11 @@ export interface IFunnel {
 	favIcon: string
 	pages: IPage[]
 	_id: string
+	menus: IMenu[]
 	proDomain: string
 	category: string
 	title: string
-	isActive:boolean
+	isActive: boolean
 	contactEmail: string
 	createdAt: Date
 	updatedAt: Date
