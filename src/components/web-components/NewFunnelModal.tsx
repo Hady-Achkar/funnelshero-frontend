@@ -7,7 +7,7 @@ import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
 import {IAddFunnelPayload, startAddFunnel} from '../../actions'
 import {useDispatch} from 'react-redux'
-import {categories} from '../../constants'
+import { categories } from '../../constants'
 
 const NewFunnelModal = ({open, setOpen}) => {
 	const [newFunnelData, setNewFunnelData] = useState<IAddFunnelPayload>({
