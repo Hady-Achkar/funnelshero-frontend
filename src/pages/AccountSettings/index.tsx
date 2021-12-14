@@ -1,49 +1,15 @@
 import React, {Fragment, useCallback, useState} from 'react'
-import {
-	BellIcon,
-	BriefcaseIcon,
-	ChatIcon,
-	CogIcon,
-	DocumentSearchIcon,
-	HomeIcon,
-	MenuAlt2Icon,
-	QuestionMarkCircleIcon,
-	UsersIcon,
-	XIcon,
-} from '@heroicons/react/outline'
-import {SearchIcon} from '@heroicons/react/solid'
-import {GeneralTab, NotificationsTab, PlanTab, BillingTab} from './Tabs'
-import {
-	Disclosure,
-	Menu,
-	Switch,
-	Transition,
-	RadioGroup,
-} from '@headlessui/react'
+
+import {RadioGroup} from '@headlessui/react'
 import DashboardHeader from '../../components/web-components/DashboardHeader'
 import Footer from '../../components/common/Footer'
 import {Container} from '@material-ui/core'
+import {SecondaryFooter} from '../../components'
 
 const AccountSettings = () => {
-	const [tabs, setTabs] = useState([
-		{name: 'General', component: <GeneralTab />, current: true},
-		{name: 'Billing', component: <BillingTab />, current: false},
-		{name: 'Plan', component: <PlanTab />, current: false},
-		{name: 'Notification', component: <NotificationsTab />, current: false},
-	])
-
 	function classNames(...classes) {
 		return classes.filter(Boolean).join(' ')
 	}
-	const handleToggleTabs = useCallback((index: number) => {
-		setTabs((prevState) => [
-			...prevState.map((item, i) => {
-				return index === i
-					? {...item, current: true}
-					: {...item, current: false}
-			}),
-		])
-	}, [])
 
 	const plans = [
 		{
@@ -88,103 +54,101 @@ const AccountSettings = () => {
 							</div>
 							<div className="mt-5 md:mt-0 md:col-span-2">
 								<form action="#" method="POST">
-									<div className="bg-white py-6 px-4 sm:p-6">
-										<div className="grid grid-cols-4 gap-6">
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="first-name"
-													className="block text-sm font-medium text-gray-700"
-												>
-													First name
-												</label>
-												<input
-													type="text"
-													name="first-name"
-													id="first-name"
-													autoComplete="cc-given-name"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+									<div className="grid grid-cols-4 gap-6">
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="first-name"
+												className="block text-sm font-medium text-gray-700"
+											>
+												First name
+											</label>
+											<input
+												type="text"
+												name="first-name"
+												id="first-name"
+												autoComplete="cc-given-name"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
+										</div>
 
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="last-name"
-													className="block text-sm font-medium text-gray-700"
-												>
-													Last name
-												</label>
-												<input
-													type="text"
-													name="last-name"
-													id="last-name"
-													autoComplete="cc-family-name"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="last-name"
+												className="block text-sm font-medium text-gray-700"
+											>
+												Last name
+											</label>
+											<input
+												type="text"
+												name="last-name"
+												id="last-name"
+												autoComplete="cc-family-name"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
+										</div>
 
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="email-address"
-													className="block text-sm font-medium text-gray-700"
-												>
-													Email address
-												</label>
-												<input
-													type="text"
-													name="email-address"
-													id="email-address"
-													autoComplete="email"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="email-address"
+												className="block text-sm font-medium text-gray-700"
+											>
+												Email address
+											</label>
+											<input
+												type="text"
+												name="email-address"
+												id="email-address"
+												autoComplete="email"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
+										</div>
 
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="first-name"
-													className="block text-sm font-medium text-gray-700"
-												>
-													Billing address
-												</label>
-												<input
-													type="text"
-													name="first-name"
-													id="first-name"
-													autoComplete="cc-given-name"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="first-name"
+												className="block text-sm font-medium text-gray-700"
+											>
+												Billing address
+											</label>
+											<input
+												type="text"
+												name="first-name"
+												id="first-name"
+												autoComplete="cc-given-name"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
+										</div>
 
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="first-name"
-													className="block text-sm font-medium text-gray-700"
-												>
-													TAX (VAT number)
-												</label>
-												<input
-													type="text"
-													name="first-name"
-													id="first-name"
-													autoComplete="cc-given-name"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="first-name"
+												className="block text-sm font-medium text-gray-700"
+											>
+												TAX (VAT number)
+											</label>
+											<input
+												type="text"
+												name="first-name"
+												id="first-name"
+												autoComplete="cc-given-name"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
+										</div>
 
-											<div className="col-span-4 sm:col-span-2">
-												<label
-													htmlFor="postal-code"
-													className="block text-sm font-medium text-gray-700"
-												>
-													ZIP / Postal code
-												</label>
-												<input
-													type="text"
-													name="postal-code"
-													id="postal-code"
-													autoComplete="postal-code"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-												/>
-											</div>
+										<div className="col-span-4 sm:col-span-2">
+											<label
+												htmlFor="postal-code"
+												className="block text-sm font-medium text-gray-700"
+											>
+												ZIP / Postal code
+											</label>
+											<input
+												type="text"
+												name="postal-code"
+												id="postal-code"
+												autoComplete="postal-code"
+												className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
+											/>
 										</div>
 									</div>
 								</form>
@@ -453,7 +417,7 @@ const AccountSettings = () => {
 					</div>
 				</Container>
 			</div>
-			<Footer />
+			<SecondaryFooter />
 		</>
 	)
 }

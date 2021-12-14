@@ -10,6 +10,9 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import {AccordionComponent} from '../..'
+import {PlusSmIcon} from '@heroicons/react/solid'
+import AddMenuModal from './AddMenuModal'
 
 interface IProps {
 	open: boolean
@@ -19,12 +22,12 @@ interface IProps {
 type Params = {
 	funnelTitle: string
 }
-const MenusTab: React.FC<IProps> = (props) => {
-	const {open, setOpen} = props
+const MenusTab: React.FC<IProps> = () => {
 	const dispatch = useDispatch()
 	const {funnelTitle} = useParams<Params>()
 	const {funnels} = useSelector((state: AppState) => state.funnels)
 
+	const [modalOpen, setModalOpen] = useState<boolean>(false)
 	const [funnelState, setFunnelState] = useState<IFunnel>()
 
 	const history = useHistory()
@@ -61,124 +64,84 @@ const MenusTab: React.FC<IProps> = (props) => {
 
 	console.log(expanded)
 
-	const whatever = [1, 2, 3]
+	const whatever = [
+		{
+			title: 'Header Menu',
+			links: [
+				{
+					title: 'About us',
+					href: '/about',
+				},
+				{
+					title: 'contact us',
+					href: '/contact',
+				},
+				{
+					title: 'case-study',
+					href: '/case-study',
+				},
+			],
+		},
+		{
+			title: 'Footer Menu',
+			links: [
+				{
+					title: 'About us',
+					href: '/about',
+				},
+				{
+					title: 'contact us',
+					href: '/contact',
+				},
+				{
+					title: 'case-study',
+					href: '/case-study',
+				},
+			],
+		},
+	]
+	const [open, setOpen] = useState<boolean>(false)
 	return (
 		<div style={{minHeight: '70vh'}}>
-			<ul role="list" className="space-y-2 divide-y divide-gray-200">
-				{funnelState?.menus?.map((item, index) => {
-					return (
-						<li key={index} className="block">
-							<div className="px-4 py-4 sm:px-6 cursor-pointer hover:bg-gray-50">
-								<div
-									className="flex items-center justify-between "
-									onClick={() => handleChange(index)}
-								>
-									<p className="text-sm font-medium text-gray-600 truncate">
-										{item?.title}
-									</p>
-									{expanded !== index ? (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											className="h-5 w-5 text-gray-400"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fillRule="evenodd"
-												d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									) : (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											className="h-5 w-5"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fillRule="evenodd"
-												d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									)}
-								</div>
-							</div>
-							<div className={expanded === index ? 'block' : 'hidden'}>
-								{item?.links?.map((link, index) => {
-									return (
-										<>
-											<div className="mt-1 px-4">
-												<input
-													key={index}
-													value={link?.title}
-													className=" py-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm  border-gray-500 rounded-md"
-												/>
-											</div>
-										</>
-									)
-								})}
-								<div className="border-t divide-gray-200 py-4">
-									<p className="px-4 text-gray-700 font-medium">
-										Create a link
-									</p>
-									<div className="flex justify-start items-center bg-50 space-x-3 px-6 ">
-										<div className="mt-1">
-											<label
-												htmlFor="pages"
-												className="block text-sm font-medium text-gray-500"
-											>
-												Link title
-											</label>
-											<input
-												type="text"
-												name="title"
-												id="title"
-												className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-											/>
-										</div>
-										<div className="mt-1">
-											<label
-												htmlFor="pages"
-												className="block text-sm font-medium text-gray-500"
-											>
-												Page
-											</label>
-											<select
-												id="pages"
-												name="pages"
-												className="block w-full pl-3 pr-10  text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-												defaultValue="Canada"
-											>
-												{funnelState?.pages &&
-													funnelState?.pages.map((page) => {
-														return <option key={page?._id}>{page.title}</option>
-													})}
-											</select>
+			{whatever.map((item, index) => {
+				return (
+					<AccordionComponent
+						key={index}
+						title={item?.title}
+						body={item?.links.map((link, i) => {
+							return (
+								<React.Fragment key={i}>
+									<div className="flex justify-between py-4 px-2 border-b border-gray-200">
+										<div className="text-sm text-gray-500">{link?.title}</div>
+										<div className="inline-flex items-center shadow-sm px-4 py-1.5 border bg-gray-100 text-sm leading-5 font-medium rounded text-gray-500  ">
+											<span>{link?.href}</span>
 										</div>
 									</div>
-									<div className="mt-1">
-										<p className="px-6 py-4 text-sm font-medium text-gray-600 truncate">
-											Add
-										</p>
-									</div>
-								</div>
-							</div>
-						</li>
-					)
-				})}
-				<li className="block">
-					<div className="flex justify-end px-4 py-4 sm:px-6 bg-gray-50">
-						<button
-							type="button"
-							className="inline-flex items-center  px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-						>
-							Add a new menu
-						</button>
-					</div>
-				</li>
-			</ul>
+								</React.Fragment>
+							)
+						})}
+					/>
+				)
+			})}
+			<div className="relative max-w-md mx-auto">
+				<div className="absolute inset-0 flex items-center" aria-hidden="true">
+					<div className="w-full border-t border-gray-300" />
+				</div>
+				<div className="relative flex justify-center">
+					<button
+						onClick={() => setModalOpen(true)}
+						type="button"
+						className="inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 text-sm leading-5 font-medium rounded text-gray-700 bg-white hover:bg-gray-50 my-2"
+					>
+						<PlusSmIcon
+							className="-ml-1.5 mr-1 h-5 w-5 text-gray-400"
+							aria-hidden="true"
+						/>
+						<span>Create Menu</span>
+					</button>
+				</div>
+			</div>
+			<AddMenuModal open={modalOpen} setOpen={setModalOpen} />
 		</div>
 	)
 }
