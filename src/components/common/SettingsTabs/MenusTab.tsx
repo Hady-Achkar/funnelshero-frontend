@@ -131,7 +131,7 @@ const MenusTab: React.FC<IProps> = () => {
 					<button
 						onClick={() => setModalOpen(true)}
 						type="button"
-						className="inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						className="inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 text-sm leading-5 font-medium rounded text-gray-700 bg-white hover:bg-gray-50 my-2"
 					>
 						<PlusSmIcon
 							className="-ml-1.5 mr-1 h-5 w-5 text-gray-400"

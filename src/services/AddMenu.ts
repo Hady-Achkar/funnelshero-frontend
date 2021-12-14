@@ -1,27 +1,25 @@
 import {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
 import {ManagerAxios} from '../lib'
-
-export interface Link {
-	title: string
-	href: string
-}
+import {IFunnel, ILink} from '../types'
 
 export interface RootObject {
-	title: string
-	links: Link[]
+	status: 'Success' | 'Failure'
+	message: string
+	funnel: IFunnel
 }
 
 const addNewMenu = (
-	category: string,
-	title: string
+	title: string,
+	links: ILink[]
 ): Promise<AxiosResponse<RootObject>> => {
 	return ManagerAxios({
 		method: 'POST',
 		url: ApiConstants.MANAGER.ADD_MENU,
 		data: {
-			category,
 			title,
+			links,
 		},
 	})
 }
+export default addNewMenu

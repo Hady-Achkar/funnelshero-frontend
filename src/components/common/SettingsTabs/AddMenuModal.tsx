@@ -6,10 +6,11 @@ import {ExclamationIcon} from '@heroicons/react/outline'
 import {CheckIcon, PlusIcon, SelectorIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
 import {useDispatch, useSelector} from 'react-redux'
-import {IFunnel} from '../../../types'
+import {IFunnel, ILink, IMenu} from '../../../types'
 import {AppState} from '../../../reducers'
 import {useParams, useHistory} from 'react-router-dom'
 import FunnelsSettings from '../FunnelSettings'
+import {Handyman} from '@mui/icons-material'
 
 type Params = {
 	funnelTitle: string
@@ -38,6 +39,19 @@ const AddMenuModal = ({open, setOpen}) => {
 	}, [funnelTitle, funnels])
 
 	const [selected, setSelected] = useState(funnelState?.pages[3])
+	const [links, setLinks] = useState<ILink[]>()
+	const [menuTitle, setMenuTitle] = useState<string>()
+
+	const handleChange = (e: any) => {
+		console.log('Implement me')
+	}
+	const handleAddHref = (e: any) => {
+		console.log('Implement me')
+	}
+
+	const handleSubmit = (e: any) => {
+		console.log('implement me')
+	}
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog
@@ -76,7 +90,7 @@ const AddMenuModal = ({open, setOpen}) => {
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
 						<div className="h-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-							<form>
+							<form onSubmit={handleSubmit}>
 								<div className="my-2">
 									<label
 										htmlFor="name"
@@ -89,7 +103,7 @@ const AddMenuModal = ({open, setOpen}) => {
 											type="text"
 											name="name"
 											id="title"
-											// onChange={handleChange}
+											onChange={handleChange}
 											className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 											placeholder="Header"
 										/>
@@ -104,31 +118,33 @@ const AddMenuModal = ({open, setOpen}) => {
 									</legend>
 									<div className="mt-1 rounded-md shadow-sm -space-y-px">
 										<div>
-											<label htmlFor="postal-code" className="sr-only">
+											<label htmlFor="title" className="sr-only">
 												Link title
 											</label>
 											<input
 												type="text"
-												name="postal-code"
-												id="postal-code"
-												autoComplete="postal-code"
+												name="title"
+												id="title"
+												onChange={handleChange}
+												autoComplete="title"
 												className="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-t-md bg-transparent focus:z-10 sm:text-sm border-gray-300"
 												placeholder="Link title"
 											/>
 										</div>
 										<div>
-											<label htmlFor="country" className="sr-only">
+											<label htmlFor="href" className="sr-only">
 												Link to page
 											</label>
 											<select
-												id="country"
-												name="country"
-												autoComplete="country-name"
+												id="href"
+												name="href"
+												autoComplete="href-name"
 												className="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-b-md  focus:z-10 sm:text-sm border-gray-300"
 											>
-												<option>Page 1</option>
-												<option>Page 2</option>
-												<option>Page 3</option>
+												{funnelState?.pages.length > 0 &&
+													funnelState?.pages.map((page) => {
+														return <option key={page._id}>{page?.title}</option>
+													})}
 											</select>
 										</div>
 									</div>
