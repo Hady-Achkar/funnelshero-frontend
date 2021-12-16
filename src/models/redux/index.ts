@@ -1,3 +1,5 @@
 import {AuthActions} from './authTypes'
 import {FunnelActions} from './funnelTypes'
-export type AppActions = AuthActions | FunnelActions
+import {BundleActions} from './bundleTypes'
+
+export type AppActions = AuthActions | FunnelActions | BundleActions
