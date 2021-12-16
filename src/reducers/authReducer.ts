@@ -8,7 +8,7 @@ import {
 	ImagesAxios,
 	ManagerAxios,
 } from '../lib'
-import {UserType} from '../services/Login'
+import {UserType} from '../services'
 
 const initState: authState = {
 	isAuthenticated: false,
@@ -18,6 +18,7 @@ const initState: authState = {
 		email: '',
 		_id: '',
 		type: UserType.STANDARD,
+		stripeId: '',
 	},
 }
 const authReducer = (state: authState = initState, action: AuthActions) => {
