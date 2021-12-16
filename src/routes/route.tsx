@@ -7,7 +7,7 @@ import {
 	ManagerAxios,
 	IconAxios,
 	FileAxios,
-	ImagesAxios,
+	ImagesAxios, BundlesAxios,
 } from '../lib'
 
 export interface IRoutProps {
@@ -16,6 +16,7 @@ export interface IRoutProps {
 	exact: boolean
 	component: React.FC
 }
+
 const RouteWrapper: React.FC<IRoutProps> = (props) => {
 	const {isPrivate} = props
 	const state = useSelector((state: AppState) => state.auth)
@@ -33,10 +34,12 @@ const RouteWrapper: React.FC<IRoutProps> = (props) => {
 	ImagesAxios.defaults.headers.common['Accept'] = 'application/json'
 	AuthAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 	AuthAxios.defaults.headers.common['Accept'] = 'application/json'
+	BundlesAxios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+	BundlesAxios.defaults.headers.common['Accept'] = 'application/json'
 
 	if (!isAuthenticated) {
 		if (isPrivate) {
-			return <Redirect to="/sign-in" />
+			return <Redirect to='/sign-in' />
 		} else {
 			return <Route {...props} />
 		}
@@ -45,7 +48,7 @@ const RouteWrapper: React.FC<IRoutProps> = (props) => {
 			props.path === '/sign-in' ||
 			(props.path === '/sign-up' && isAuthenticated === true)
 		) {
-			return <Redirect to="/" />
+			return <Redirect to='/' />
 		}
 		return <Route {...props} />
 	}

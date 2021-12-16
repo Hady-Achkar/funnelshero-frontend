@@ -2,7 +2,7 @@ import {authState, AuthActions} from '../models/redux/authTypes'
 import storage from 'redux-persist/lib/storage'
 import {persistReducer} from 'redux-persist'
 import {
-	AuthAxios,
+	AuthAxios, BundlesAxios,
 	FileAxios,
 	IconAxios,
 	ImagesAxios,
@@ -42,7 +42,9 @@ const authReducer = (state: authState = initState, action: AuthActions) => {
 			ManagerAxios.defaults.headers.common['Authorization'] =
 				'Bearer ' + action?.user_info.token
 			ManagerAxios.defaults.headers.common['Accept'] = 'application/json'
-
+			BundlesAxios.defaults.headers.common['Authorization'] =
+				'Bearer ' + action?.user_info.token
+			BundlesAxios.defaults.headers.common['Accept'] = 'application/json'
 			return {
 				...state,
 				isAuthenticated: true,

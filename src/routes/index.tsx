@@ -5,7 +5,7 @@ import {
 	SigninPage,
 	DashboardPage,
 	FunnelPage,
-	AccountSettings,
+	AccountSettings, CheckoutPage, ProductPage,
 } from '../pages'
 import Route from './route'
 
@@ -15,6 +15,7 @@ export interface IRoutesConfiguration {
 	exact: boolean
 	component: React.FC
 }
+
 //TO-Do incase we need subroutes---> https://reactrouter.com/web/example/route-config
 const routesConfiguration: IRoutesConfiguration[] = [
 	{
@@ -47,6 +48,20 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		isPrivate: true,
 		component: AccountSettings,
 	},
+	{
+		path: '/checkout',
+		exact: true,
+		isPrivate: true,
+		component: CheckoutPage,
+	},
+	{
+		path: '/product',
+		exact: true,
+		isPrivate: true,
+		component: ProductPage,
+	},
+
+
 ]
 
 // incase we needed seperate store use context check this link https://react-redux.js.org/api/hooks#custom-context
