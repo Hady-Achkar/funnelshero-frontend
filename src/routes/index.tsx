@@ -7,6 +7,7 @@ import {
 	FunnelPage,
 	AccountSettings, CheckoutPage, ProductPage,
 } from '../pages'
+import Checkout from '../pages/Checkout'
 import Route from './route'
 
 export interface IRoutesConfiguration {
@@ -60,8 +61,6 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		isPrivate: true,
 		component: ProductPage,
 	},
-
-
 ]
 
 // incase we needed seperate store use context check this link https://react-redux.js.org/api/hooks#custom-context
