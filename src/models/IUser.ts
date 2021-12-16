@@ -6,4 +6,5 @@ export interface IUser {
 	email: string
 	_id: string
 	type: UserType
+	stripeId:string
 }

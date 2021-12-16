@@ -1,4 +1,9 @@
 export default {
+	BUNDLES: {
+		BASE_URL: 'https://bundles.funnelshero.com',
+		CONFIG_STRIPE: '/public/config',
+		GET_ALL_BUNDLES:'/public/'
+	},
 	FILES: {
 		UPLOAD_FILE: '/',
 		GET_FILES: '/files',

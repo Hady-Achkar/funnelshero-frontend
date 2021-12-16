@@ -4,7 +4,7 @@ import {ApiConstants} from '../constants'
 
 const login = async (
 	email: string,
-	password: string
+	password: string,
 ): Promise<AxiosResponse<Login.RootObject>> => {
 	return await AuthAxios({
 		method: 'POST',
@@ -19,7 +19,7 @@ const login = async (
 export const googleLogin = async (
 	fname: string,
 	lname: string,
-	email: string
+	email: string,
 ): Promise<AxiosResponse<Login.RootObject>> => {
 	return await AuthAxios({
 		method: 'POST',
@@ -33,6 +33,7 @@ export const googleLogin = async (
 }
 
 export default login
+
 export interface LoginPayload {
 	readonly email: string
 	readonly password: string
@@ -46,6 +47,7 @@ export declare module Login {
 		fullName: string
 		email: string
 		_id: string
+		stripeId: string
 		type: UserType
 		requestTime: Date
 	}
