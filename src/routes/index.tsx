@@ -7,6 +7,7 @@ import {
 	FunnelPage,
 	AccountSettings,
 } from '../pages'
+import Checkout from '../pages/Checkout'
 import Route from './route'
 
 export interface IRoutesConfiguration {
@@ -46,6 +47,12 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		exact: true,
 		isPrivate: true,
 		component: AccountSettings,
+	},
+	{
+		path: '/checkout',
+		exact: true,
+		isPrivate: true,
+		component: Checkout,
 	},
 ]
 
