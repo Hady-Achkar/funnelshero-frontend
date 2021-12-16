@@ -5,9 +5,10 @@ import {
 	SigninPage,
 	DashboardPage,
 	FunnelPage,
-	AccountSettings, CheckoutPage, ProductPage,
+	AccountSettings,
+	CheckoutPage,
+	BundlesPage,
 } from '../pages'
-import Checkout from '../pages/Checkout'
 import Route from './route'
 
 export interface IRoutesConfiguration {
@@ -56,10 +57,10 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		component: CheckoutPage,
 	},
 	{
-		path: '/product',
+		path: '/bundles',
 		exact: true,
 		isPrivate: true,
-		component: ProductPage,
+		component: BundlesPage,
 	},
 ]
 

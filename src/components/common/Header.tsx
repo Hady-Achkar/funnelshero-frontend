@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import ConfirmationModal from './ConfirmationModal'
 
 const navigation = [
-	{name: 'Pricing', href: '/pricing'},
+	{name: 'Pricing', href: '/bundles'},
 	{name: 'About', href: '/about'},
 	{name: 'Contact', href: '/contact'},
 	{name: 'Case Study', href: '/case-study'},
