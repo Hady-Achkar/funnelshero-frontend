@@ -20,15 +20,14 @@ export const startLogin = (payload: LoginPayload) => {
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		login(email, password)
 			.then((res) => {
-				const {token, fullName, email, _id, type} = res?.data
+				const {token, fullName, email, _id, type, stripeId} = res?.data
 				if (token) {
 					cookies.set('token', token, {path: '/'})
 					cookies.set('fullName', fullName, {path: '/'})
 					cookies.set('email', email, {path: '/'})
 					cookies.set('_id', _id, {path: '/'})
 					cookies.set('type', type, {path: '/'})
-					console.log('logged in')
-
+					cookies.set('stripeId', stripeId, {path: '/'})
 					dispatch(
 						loginAction({
 							token,
@@ -36,7 +35,8 @@ export const startLogin = (payload: LoginPayload) => {
 							email,
 							_id,
 							type,
-						})
+							stripeId,
+						}),
 					)
 				}
 			})
@@ -61,14 +61,14 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		googleLogin(fname, lname, email)
 			.then((res) => {
-				const {token, fullName, email, _id, type} = res?.data
+				const {token, fullName, email, _id, type, stripeId} = res?.data
 				if (token) {
 					cookies.set('token', token, {path: '/'})
 					cookies.set('fullName', fullName, {path: '/'})
 					cookies.set('email', email, {path: '/'})
 					cookies.set('_id', _id, {path: '/'})
 					cookies.set('type', type, {path: '/'})
-					console.log('logged in')
+					cookies.set('stripeId', stripeId, {path: '/'})
 
 					dispatch(
 						loginAction({
@@ -77,7 +77,8 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 							email,
 							_id,
 							type,
-						})
+							stripeId,
+						}),
 					)
 				}
 			})
