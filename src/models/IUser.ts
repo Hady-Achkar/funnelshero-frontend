@@ -6,5 +6,10 @@ export interface IUser {
 	email: string
 	_id: string
 	type: UserType
-	stripeId:string
+	stripeId: string
+	paymentMethods: any
+	subscriptions: any
+	inTrial: boolean
+	isTrialLegit: boolean
+	activeSubscription: string
 }
