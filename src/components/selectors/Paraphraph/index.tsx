@@ -14,6 +14,9 @@ import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
 import Underline from '@tiptap/extension-underline'
 import TextStyle from '@tiptap/extension-text-style'
+import Heading from '@tiptap/extension-heading'
+import FontFamily from '@tiptap/extension-font-family'
+
 import './styles.css'
 import {PaperClipIcon} from '@heroicons/react/solid'
 import Color from '@tiptap/extension-color'
@@ -57,6 +60,10 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 			Underline,
 			TextStyle,
 			Color,
+			Heading.configure({
+				levels: [1, 2, 3],
+			}),
+			FontFamily,
 		],
 		content: initTextData,
 	})
@@ -236,6 +243,101 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 								/>
 							</div>
 
+							<button
+								onClick={() =>
+									editor.chain().focus().toggleHeading({level: 1}).run()
+								}
+							>
+								H1
+							</button>
+							<button
+								onClick={() =>
+									editor.chain().focus().toggleHeading({level: 2}).run()
+								}
+							>
+								H2
+							</button>
+							<button
+								onClick={() =>
+									editor.chain().focus().toggleHeading({level: 3}).run()
+								}
+							>
+								H3
+							</button>
+
+							<div className="w-full">
+								<button
+									onClick={() =>
+										editor.chain().focus().setFontFamily('Inter').run()
+									}
+									className={
+										editor.isActive('textStyle', {fontFamily: 'Inter'})
+											? 'is-active'
+											: ''
+									}
+								>
+									Inter
+								</button>
+								<button
+									onClick={() =>
+										editor
+											.chain()
+											.focus()
+											.setFontFamily('Comic Sans MS, Comic Sans')
+											.run()
+									}
+									className={
+										editor.isActive('textStyle', {
+											fontFamily: 'Comic Sans MS, Comic Sans',
+										})
+											? 'is-active'
+											: ''
+									}
+								>
+									Comic Sans
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setFontFamily('serif').run()
+									}
+									className={
+										editor.isActive('textStyle', {fontFamily: 'serif'})
+											? 'is-active'
+											: ''
+									}
+								>
+									serif
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setFontFamily('monospace').run()
+									}
+									className={
+										editor.isActive('textStyle', {fontFamily: 'monospace'})
+											? 'is-active'
+											: ''
+									}
+								>
+									monospace
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setFontFamily('cursive').run()
+									}
+									className={
+										editor.isActive('textStyle', {fontFamily: 'cursive'})
+											? 'is-active'
+											: ''
+									}
+								>
+									cursive
+								</button>
+								<button
+									onClick={() => editor.chain().focus().unsetFontFamily().run()}
+								>
+									unsetFontFamily
+								</button>
+							</div>
 							<EditorContent
 								editor={editor}
 								onChangeCapture={() =>

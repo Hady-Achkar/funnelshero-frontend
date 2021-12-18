@@ -16,6 +16,26 @@
 	line-height: 1.1;
 }
 
+.ProseMirror h1 {
+	font-size: 32px;
+}
+
+.ProseMirror h2 {
+	font-size: 24px;
+}
+
+.ProseMirror h3 {
+	font-size: 16px;
+}
+
+.ProseMirror h4 {
+	font-size: 8px;
+}
+
+.ProseMirror h5 {
+	font-size: 4px;
+}
+
 .ProseMirror code {
 	background-color: rgba(97, 97, 97, 0.1);
 	color: #616161;
