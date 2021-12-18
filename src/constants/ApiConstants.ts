@@ -3,6 +3,7 @@ export default {
 		BASE_URL: 'https://bundles.funnelshero.com',
 		CONFIG_STRIPE: '/public/config',
 		GET_ALL_BUNDLES: '/public/',
+		ADD_PAYMENT_METHOD: '/payment',
 	},
 	FILES: {
 		UPLOAD_FILE: '/',
