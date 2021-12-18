@@ -1,10 +1,10 @@
 import {Dispatch} from 'redux'
-import {AppActions} from '../models/redux'
+import {AppActions} from '../models'
 import {AppState} from '../reducers'
 import Cookies from 'universal-cookie'
 import {IUser} from '../models/IUser'
 import login from '../services/Login'
-import {googleLogin, signup, SignupPayload} from '../services'
+import {AddNewPaymentMethod, addPaymentMethod, googleLogin, signup, SignupPayload} from '../services'
 import {LoginPayload} from '../services'
 
 const cookies = new Cookies()
@@ -14,6 +14,10 @@ export const loginAction = (user_info: IUser): AppActions => ({
 })
 export const logoutAction = (): AppActions => ({
 	type: 'LOGOUT',
+})
+export const addPaymentMethodAction = (paymentMethod: AddNewPaymentMethod.PaymentMethod): AppActions => ({
+	type: 'ADD_PAYMENT_METHOD',
+	paymentMethod,
 })
 export const startLogin = (payload: LoginPayload) => {
 	const {email, password} = payload
@@ -53,7 +57,7 @@ export const startLogin = (payload: LoginPayload) => {
 							inTrial,
 							isTrialLegit,
 							paymentMethods,
-						})
+						}),
 					)
 				}
 			})
@@ -74,6 +78,22 @@ interface GoogleLoginPayload {
 	priceId?: string
 }
 
+export const startAddPaymentMethod = (paymentResponse: string) => {
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		addPaymentMethod(paymentResponse)
+			.then((res) => {
+				const {paymentMethod} = res.data
+				dispatch(addPaymentMethodAction(paymentMethod))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
 export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 	const {fname, lname, email, priceId} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
@@ -113,7 +133,7 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 							activeSubscription,
 							paymentMethods,
 							subscriptions,
-						})
+						}),
 					)
 				}
 			})
@@ -165,7 +185,7 @@ export const startSignup = (payload: SignupPayload) => {
 							subscriptions,
 							inTrial,
 							paymentMethods,
-						})
+						}),
 					)
 				}
 			})
