@@ -16,7 +16,7 @@ import Underline from '@tiptap/extension-underline'
 import TextStyle from '@tiptap/extension-text-style'
 import Heading from '@tiptap/extension-heading'
 import FontFamily from '@tiptap/extension-font-family'
-
+import TextAlign from '@tiptap/extension-text-align'
 import './styles.css'
 import {PaperClipIcon} from '@heroicons/react/solid'
 import Color from '@tiptap/extension-color'
@@ -64,6 +64,9 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 				levels: [1, 2, 3],
 			}),
 			FontFamily,
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
 		],
 		content: initTextData,
 	})
@@ -336,6 +339,47 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 									onClick={() => editor.chain().focus().unsetFontFamily().run()}
 								>
 									unsetFontFamily
+								</button>
+
+								<button
+									onClick={() =>
+										editor.chain().focus().setTextAlign('left').run()
+									}
+									className={
+										editor.isActive({textAlign: 'left'}) ? 'is-active' : ''
+									}
+								>
+									left
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setTextAlign('center').run()
+									}
+									className={
+										editor.isActive({textAlign: 'center'}) ? 'is-active' : ''
+									}
+								>
+									center
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setTextAlign('right').run()
+									}
+									className={
+										editor.isActive({textAlign: 'right'}) ? 'is-active' : ''
+									}
+								>
+									right
+								</button>
+								<button
+									onClick={() =>
+										editor.chain().focus().setTextAlign('justify').run()
+									}
+									className={
+										editor.isActive({textAlign: 'justify'}) ? 'is-active' : ''
+									}
+								>
+									justify
 								</button>
 							</div>
 							<EditorContent
