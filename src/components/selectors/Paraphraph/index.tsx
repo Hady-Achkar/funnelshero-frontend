@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useEditor, useNode} from '@craftjs/core'
-import ParagraphSettings from './Paragraph.Settings'
-import {Editor, EditorState} from 'draft-js'
+import {EditorState} from 'draft-js'
 import 'draft-js/dist/Draft.css'
-import {useEditor as newUseEditor, EditorContent} from '@tiptap/react'
+import {EditorContent, useEditor as newUseEditor} from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Document from '@tiptap/extension-document'
 import Para from '@tiptap/extension-paragraph'
@@ -18,7 +17,7 @@ import Heading from '@tiptap/extension-heading'
 import FontFamily from '@tiptap/extension-font-family'
 import TextAlign from '@tiptap/extension-text-align'
 import './styles.css'
-import {PaperClipIcon} from '@heroicons/react/solid'
+import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import Color from '@tiptap/extension-color'
 import {ButtonsGroup} from '../../editor'
 import classnames from 'classnames'
@@ -28,7 +27,7 @@ import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight'
 import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify'
 import ClearIcon from '@mui/icons-material/Clear'
 import {Listbox, Transition} from '@headlessui/react'
-import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
+import {ChromePicker} from 'react-color'
 
 interface ParagraphProps {
 	initTextData?: string
@@ -184,21 +183,24 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 				break
 		}
 	}, [editor])
-	const colorRef = useRef<HTMLInputElement>()
-	const highlightRef = useRef<HTMLInputElement>()
+	const [hightLight, setHightLight] = useState<string>('#fff')
+	const [textColor, setTextColor] = useState<string>('#000')
+	const [activeHighLight, setActiveHighlight] = useState<boolean>(false)
+	const [activeColor, setActiveColor] = useState<boolean>(false)
+
 	const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
 		// @ts-ignore
 		switch (event.target.id) {
 			case 'highlight-color':
-				highlightRef.current.click()
+				setActiveHighlight(true)
 				break
 			case 'text-color':
-				colorRef.current.click()
+				setActiveColor(true)
 				break
 			default:
 				return
 		}
-	}, [highlightRef])
+	}, [setActiveHighlight, setActiveColor])
 	const handleChangeJustifyText = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
 		// @ts-ignore
 		editor.chain().focus().setTextAlign(event.target.name).run()
@@ -219,6 +221,7 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 		setFontSelected(event)
 		editor.chain().focus().setFontFamily(event.name).run()
 	}, [editor, setFontSelected])
+
 	if (!editor) {
 		return null
 	}
@@ -486,21 +489,49 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 										</Transition>
 									</div>
 								</Listbox>
-								<input
-									ref={highlightRef}
-									type='color'
-									hidden
-									id='tiz-1'
-									onChange={handleChangeHighlight}
+								{activeHighLight &&
+								<ChromePicker
+									color={hightLight}
+									onChange={(color: any) => {
+										setHightLight(color.hex)
+										editor.chain().focus().toggleHighlight({color: color.hex}).run()
+									}}
+									onChangeComplete={() => {
+										setActiveHighlight(false)
+									}
+									}
 								/>
+								}
+								{
+									activeColor &&
+									<ChromePicker
+										color={textColor}
+										onChange={(color: any) => {
+											setTextColor(color.hex)
+											editor.chain().focus().toggleHighlight({color: color.hex}).run()
+										}}
+										onChangeComplete={() => {
+											setActiveColor(false)
+										}
+										}
+									/>
+								}
 
-								<input
-									ref={colorRef}
-									type='color'
-									hidden
-									id='text-color-picker'
-									onChange={handleChangeColor}
-								/>
+								{/*<input*/}
+								{/*	ref={highlightRef}*/}
+								{/*	type='color'*/}
+								{/*	hidden*/}
+								{/*	id='tiz-1'*/}
+								{/*	onChange={handleChangeHighlight}*/}
+								{/*/>*/}
+
+								{/*<input*/}
+								{/*	ref={colorRef}*/}
+								{/*	type='color'*/}
+								{/*	hidden*/}
+								{/*	id='text-color-picker'*/}
+								{/*	onChange={handleChangeColor}*/}
+								{/*/>*/}
 							</div>
 
 
