@@ -1,4 +1,4 @@
-import {UserType} from '../services'
+import {AddNewPaymentMethod, UserType} from '../services'
 
 export interface IUser {
 	token: string
@@ -7,7 +7,7 @@ export interface IUser {
 	_id: string
 	type: UserType
 	stripeId: string
-	paymentMethods: any
+	paymentMethods: AddNewPaymentMethod.PaymentMethod[]
 	subscriptions: any
 	inTrial: boolean
 	isTrialLegit: boolean

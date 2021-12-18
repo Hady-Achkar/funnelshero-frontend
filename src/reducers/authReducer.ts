@@ -22,9 +22,9 @@ const initState: authState = {
 		stripeId: '',
 		activeSubscription: '',
 		isTrialLegit: true,
-		subscriptions: '',
+		subscriptions: [],
 		inTrial: false,
-		paymentMethods: '',
+		paymentMethods: [],
 	},
 }
 const authReducer = (state: authState = initState, action: AuthActions) => {
@@ -59,6 +59,14 @@ const authReducer = (state: authState = initState, action: AuthActions) => {
 			}
 		case 'LOGOUT':
 			return initState
+		case 'ADD_PAYMENT_METHOD':
+			return {
+				...state,
+				user: {
+					...state.user,
+					paymentMethods: [...state.user.paymentMethods, action.paymentMethod],
+				},
+			}
 		default:
 			return state
 	}
