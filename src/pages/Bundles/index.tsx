@@ -15,7 +15,7 @@ const BundlesPage = () => {
 	const handleSubscribe = useCallback(
 		(id: string) => {
 			if (!isAuthenticated) {
-				history.push('/sign-up')
+				history.push(`/sign-up/${id}`)
 			} else {
 				history.push('/profile')
 			}

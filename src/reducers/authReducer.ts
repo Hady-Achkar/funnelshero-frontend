@@ -2,7 +2,8 @@ import {authState, AuthActions} from '../models/redux/authTypes'
 import storage from 'redux-persist/lib/storage'
 import {persistReducer} from 'redux-persist'
 import {
-	AuthAxios, BundlesAxios,
+	AuthAxios,
+	BundlesAxios,
 	FileAxios,
 	IconAxios,
 	ImagesAxios,
@@ -19,6 +20,11 @@ const initState: authState = {
 		_id: '',
 		type: UserType.STANDARD,
 		stripeId: '',
+		activeSubscription: '',
+		isTrialLegit: true,
+		subscriptions: '',
+		inTrial: false,
+		paymentMethods: '',
 	},
 }
 const authReducer = (state: authState = initState, action: AuthActions) => {

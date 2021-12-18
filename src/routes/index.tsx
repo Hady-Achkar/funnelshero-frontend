@@ -8,6 +8,7 @@ import {
 	AccountSettings,
 	CheckoutPage,
 	BundlesPage,
+	SignupPage,
 } from '../pages'
 import Route from './route'
 
@@ -59,8 +60,14 @@ const routesConfiguration: IRoutesConfiguration[] = [
 	{
 		path: '/bundles',
 		exact: true,
-		isPrivate: true,
+		isPrivate: false,
 		component: BundlesPage,
+	},
+	{
+		path: '/sign-up/:planId',
+		exact: true,
+		isPrivate: false,
+		component: SignupPage,
 	},
 ]
 

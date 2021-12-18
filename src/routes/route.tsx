@@ -7,7 +7,8 @@ import {
 	ManagerAxios,
 	IconAxios,
 	FileAxios,
-	ImagesAxios, BundlesAxios,
+	ImagesAxios,
+	BundlesAxios,
 } from '../lib'
 
 export interface IRoutProps {
@@ -39,16 +40,16 @@ const RouteWrapper: React.FC<IRoutProps> = (props) => {
 
 	if (!isAuthenticated) {
 		if (isPrivate) {
-			return <Redirect to='/sign-in' />
+			return <Redirect to="/sign-in" />
 		} else {
 			return <Route {...props} />
 		}
 	} else {
 		if (
 			props.path === '/sign-in' ||
-			(props.path === '/sign-up' && isAuthenticated === true)
+			(props.path === '/sign-up/:planId' && isAuthenticated === true)
 		) {
-			return <Redirect to='/' />
+			return <Redirect to="/" />
 		}
 		return <Route {...props} />
 	}

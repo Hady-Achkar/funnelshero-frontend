@@ -2,7 +2,7 @@ export default {
 	BUNDLES: {
 		BASE_URL: 'https://bundles.funnelshero.com',
 		CONFIG_STRIPE: '/public/config',
-		GET_ALL_BUNDLES:'/public/'
+		GET_ALL_BUNDLES: '/public/',
 	},
 	FILES: {
 		UPLOAD_FILE: '/',
@@ -13,6 +13,7 @@ export default {
 		BASE_URL: 'https://auth.funnelshero.com',
 		LOGIN: '/sign-in',
 		GOOGLE_LOGIN: '/google',
+		SIGNUP: '/sign-up',
 	},
 	IMAGES: {
 		GET_RANDOM: '/',

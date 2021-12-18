@@ -1,11 +1,12 @@
 import {AuthAxios} from '../lib'
 import {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
+import {Signup} from './Signup'
 
 const login = async (
 	email: string,
-	password: string,
-): Promise<AxiosResponse<Login.RootObject>> => {
+	password: string
+): Promise<AxiosResponse<Signup.RootObject>> => {
 	return await AuthAxios({
 		method: 'POST',
 		url: ApiConstants.AUTH.LOGIN,
@@ -20,7 +21,8 @@ export const googleLogin = async (
 	fname: string,
 	lname: string,
 	email: string,
-): Promise<AxiosResponse<Login.RootObject>> => {
+	priceId: string
+): Promise<AxiosResponse<Signup.RootObject>> => {
 	return await AuthAxios({
 		method: 'POST',
 		url: ApiConstants.AUTH.GOOGLE_LOGIN,
@@ -28,6 +30,7 @@ export const googleLogin = async (
 			email,
 			lname,
 			fname,
+			priceId,
 		},
 	})
 }
