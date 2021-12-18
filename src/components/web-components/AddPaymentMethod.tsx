@@ -78,11 +78,11 @@ const AddPaymentMethod = ({open, setOpen}) => {
 			})
 			.then((res) => {
 				dispatch(startAddPaymentMethod(res?.paymentMethod?.id))
+				setOpen(false)
 			}).catch(err => {
 			console.log(err)
 		})
 	}, [paymentData])
-	console.log(paymentMethods)
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog
