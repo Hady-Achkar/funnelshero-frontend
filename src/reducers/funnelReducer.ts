@@ -78,6 +78,18 @@ const funnelState = (
 				funnels: updatedFunnels,
 				loading: false,
 			}
+		case 'ADD_MENU':
+			const updatedMenuFunnels = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: updatedMenuFunnels,
+				loading: false,
+			}
 		case 'LOAD':
 			return {
 				...state,
