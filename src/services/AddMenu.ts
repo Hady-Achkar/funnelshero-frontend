@@ -11,11 +11,12 @@ export interface RootObject {
 
 const addNewMenu = (
 	title: string,
-	links: ILink[]
+	links: ILink[],
+	funnelId: string,
 ): Promise<AxiosResponse<RootObject>> => {
 	return ManagerAxios({
 		method: 'POST',
-		url: ApiConstants.MANAGER.ADD_MENU,
+		url: `${ApiConstants.MANAGER.ADD_MENU}?funnelId=${funnelId}`,
 		data: {
 			title,
 			links,
