@@ -3,7 +3,21 @@ import {ThemeProvider} from '@material-ui/styles'
 import React, {useEffect, useRef} from 'react'
 import {createTheme} from '@material-ui/core/styles'
 
-import {Button, Container, Divider, HyperLink, Image, Paragraph, RenderNode, Text, Video, Viewport} from '../'
+import {
+	Button,
+	Container,
+	Divider,
+	HyperLink,
+	Image,
+	Paragraph,
+	RenderNode,
+	Text,
+	Video,
+	Viewport,
+	Quizz,
+	QuizzElement,
+	QuizContainer,
+} from '../'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
 
@@ -35,6 +49,9 @@ const Builder: React.FC<IProps> = (props) => {
 		HyperLink,
 		Divider,
 		Paragraph,
+		Quizz,
+		QuizzElement,
+		QuizContainer,
 	}
 
 	const dispatch = useDispatch()
@@ -46,7 +63,7 @@ const Builder: React.FC<IProps> = (props) => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className='h-full'>
+			<div className="h-full">
 				<Editor
 					resolver={contentElements}
 					enabled={true}
@@ -65,7 +82,7 @@ const Builder: React.FC<IProps> = (props) => {
 						handleChangePage={handleChangePage}
 						mainPage={mainPage}
 					>
-						<Frame data={mainPage?.data}/>
+						<Frame data={mainPage?.data} />
 					</Viewport>
 				</Editor>
 			</div>
