@@ -1,12 +1,38 @@
-import {useEditor, useNode} from '@craftjs/core'
-import {Container} from '@material-ui/core'
+import {useEditor, useNode, Element} from '@craftjs/core'
 import React from 'react'
 import ContentEditable from 'react-contenteditable'
+import Container from '../Container'
 import {ImageSettings} from './ImageSettings'
+import {ContainerSettings} from '../Container/ContainerSettings'
 
 export type ImageProps = {
 	src: string
 	alt?: string
+}
+
+export const ImageContainer = ({children, ...props}) => {
+	const {
+		connectors: {connect},
+	} = useNode()
+	return (
+		<div
+			title="only-buttons"
+			ref={connect}
+			className="w-full mt-5 grid grid-cols-2 gap-2 p-3 bg-gray-600"
+			{...props}
+		>
+			{children}
+		</div>
+	)
+}
+
+ImageContainer.craft = {
+	rules: {
+		canMoveIn: (nodes) => nodes.every((node) => node.data.type === Image),
+	},
+	related: {
+		ContainerSettings,
+	},
 }
 const Image = (props: Partial<ImageProps>) => {
 	const {src, alt} = props
@@ -19,17 +45,14 @@ const Image = (props: Partial<ImageProps>) => {
 	}))
 
 	return (
-		<Container
-			className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
-			innerRef={connect}
-		>
+		<div className="m-2" ref={connect}>
 			<img
-				className="object-cover pointer-events-none group-hover:opacity-75"
+				className="object-cover  group-hover:opacity-75 p-4"
 				src={src}
 				alt={alt}
-				style={{maxHeight: '100vh', width: '100%'}}
+				// style={{maxHeight: '100vh', width: '100%'}}
 			/>
-		</Container>
+		</div>
 	)
 }
 

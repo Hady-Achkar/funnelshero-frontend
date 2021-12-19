@@ -1,6 +1,7 @@
 import React from 'react'
 import {ContainerSettings} from './ContainerSettings'
 import Resizer from '../Resizer'
+import {useNode} from '@craftjs/core'
 
 export type ContainerProps = {
 	background: Record<'r' | 'g' | 'b' | 'a', number>
@@ -26,15 +27,15 @@ const defaultProps = {
 	flexDirection: 'column',
 	alignItems: 'flex-start',
 	justifyContent: 'flex-start',
-	fillSpace: 'no',
+	fillSpace: 'yes',
 	padding: ['0', '0', '0', '0'],
 	margin: ['0', '0', '0', '0'],
-	background: {r: 78, g: 78, b: 78, a: 0},
+	background: {r: 255, g: 255, b: 255, a: 1},
 	color: {r: 0, g: 0, b: 0, a: 1},
 	shadow: 0,
 	radius: 0,
-	width: '300px',
-	height: '300px',
+	width: '429',
+	height: 'auto',
 }
 
 const Container = (props: Partial<ContainerProps>) => {
@@ -54,14 +55,18 @@ const Container = (props: Partial<ContainerProps>) => {
 		shadow,
 		radius,
 		children,
+		width,
+		height,
 	} = props
+
+	const {
+		connectors: {connect},
+	} = useNode()
 	return (
-		<Resizer
-			className="h-full"
-			propKey={{width: 'width', height: 'height'}}
+		<div
+			ref={connect}
 			style={{
 				justifyContent,
-				flexDirection,
 				alignItems,
 				background: `rgba(${Object.values(background)})`,
 				color: `rgba(${Object.values(color)})`,
@@ -73,22 +78,21 @@ const Container = (props: Partial<ContainerProps>) => {
 						: `0px 3px 100px ${shadow}px rgba(0, 0, 0, 0.13)`,
 				borderRadius: `${radius}px`,
 				flex: fillSpace === 'yes' ? 1 : 'unset',
+				width,
+				height,
 			}}
 		>
 			{children}
-		</Resizer>
+		</div>
 	)
 }
 
 Container.craft = {
 	displayName: 'Container',
 	props: defaultProps,
-	// rules: {
-	// 	canDrag: () => true,
-	// 	canMoveIn: (incomingNode: any, self: any, helper) => {
-	// 		return helper(self.id).get().data.custom.displayName === 'App'
-	// 	},
-	// },
+	rules: {
+		canDrag: () => true,
+	},
 	related: {
 		toolbar: ContainerSettings,
 	},
