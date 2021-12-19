@@ -90,6 +90,18 @@ const funnelState = (
 				funnels: updatedMenuFunnels,
 				loading: false,
 			}
+		case 'DELETE_MENU':
+			const updatedDeletedFunnels = state.funnels.map((item) => {
+				if (item._id === action.funnel._id) {
+					return action.funnel
+				}
+				return item
+			})
+			return {
+				...state,
+				funnels: updatedDeletedFunnels,
+				loading: false,
+			}
 		case 'LOAD':
 			return {
 				...state,

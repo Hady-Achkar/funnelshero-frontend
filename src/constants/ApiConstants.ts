@@ -34,6 +34,7 @@ export default {
 		TOGGLE_ACTIVATE_FUNNEL: '/toggle',
 		DELETE_FUNNEL: '/funnel',
 		ADD_MENU: '/menu',
+		DELETE_MENU: '/menu',
 	},
 	ICONS: {
 		GET_RANDOM: '/',
