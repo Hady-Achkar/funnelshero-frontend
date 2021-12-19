@@ -13,7 +13,9 @@ import {
 	Image,
 	Divider,
 	Icon,
-	OptinForm, Paragraph,
+	OptinForm,
+	Paragraph,
+	Quizz,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -107,7 +109,13 @@ export const Toolbox = () => {
 					title="Paragraph"
 					Icon={TextFormat}
 					component={Paragraph}
+				/>
 
+				<ToolboxItem
+					isCanva={true}
+					title="Quiz"
+					Icon={TextFormat}
+					component={Quizz}
 				/>
 				{/* <ToolboxItem
 					isCanva={false}
