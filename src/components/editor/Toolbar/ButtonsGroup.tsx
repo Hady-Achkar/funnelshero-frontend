@@ -12,7 +12,7 @@ export interface ButtonGroupItemProps {
 	id?: string
 	onClick?: (args: any) => void
 	align: 'left' | 'middle' | 'right'
-	title: string
+	title?: string
 	name?: string
 	className?: string
 	disabled?: boolean
@@ -21,17 +21,19 @@ export interface ButtonGroupItemProps {
 const ButtonsGroup = (props: ButtonsGroupProps) => {
 	const {title, children} = props
 	return (
-		<div className='px-2 w-full'>
-			<Grid container direction='row' alignItems='center' spacing={3}>
-				<Grid item xs={4}>
-					<h5 className='text-sm text-light-gray-1 text-left font-medium text-dark-gray'>
-						{title}
-					</h5>
-				</Grid>
+		<div className="px-2 w-full">
+			<Grid container direction="row" alignItems="center" spacing={3}>
+				{title && (
+					<Grid item xs={4}>
+						<h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
+							{title}
+						</h5>
+					</Grid>
+				)}
 				<div style={{padding: '14px 14px 14px 14px'}}>
 					<Divider />
 					<Grid container spacing={1}>
-						<span className='relative z-0 inline-flex shadow-sm rounded-md'>
+						<span className="relative z-0 inline-flex shadow-sm rounded-md">
 							{children}
 						</span>
 					</Grid>
@@ -40,7 +42,7 @@ const ButtonsGroup = (props: ButtonsGroupProps) => {
 		</div>
 	)
 }
-const Item = function(props: ButtonGroupItemProps) {
+const Item = function (props: ButtonGroupItemProps) {
 	const {setProp} = useNode()
 	const handleClick = useCallback(
 		(event) => {
@@ -48,7 +50,7 @@ const Item = function(props: ButtonGroupItemProps) {
 				innerProps[event.target.name] = event.target.id
 			})
 		},
-		[setProp],
+		[setProp]
 	)
 	const {id, align, onClick, title, name, className, disabled = false} = props
 	const renderEdges = useCallback(() => {
@@ -65,7 +67,7 @@ const Item = function(props: ButtonGroupItemProps) {
 	}, [align])
 	return (
 		<button
-			type='button'
+			type="button"
 			id={id}
 			name={name}
 			onClick={onClick ? onClick : handleClick}
@@ -73,7 +75,7 @@ const Item = function(props: ButtonGroupItemProps) {
 			className={classname(
 				renderEdges(),
 				className,
-				'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500',
+				'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
 			)}
 		>
 			{title}
