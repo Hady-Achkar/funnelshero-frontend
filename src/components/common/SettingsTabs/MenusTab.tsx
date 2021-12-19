@@ -1,11 +1,13 @@
 import React, {SetStateAction, useCallback, useEffect, useState} from 'react'
 import {IFunnel} from '../../../types'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {useHistory, useParams} from 'react-router-dom'
 import {AppState} from '../../../reducers'
 import {AccordionComponent} from '../..'
 import {PlusSmIcon} from '@heroicons/react/solid'
 import AddMenuModal from './AddMenuModal'
+import {startDeleteMenu} from '../../../actions'
+import ConfirmationModal from '../ConfirmationModal'
 
 interface IProps {
 	open: boolean
@@ -18,11 +20,11 @@ type Params = {
 const MenusTab: React.FC<IProps> = () => {
 	const {funnelTitle} = useParams<Params>()
 	const {funnels} = useSelector((state: AppState) => state.funnels)
-
+	const history = useHistory()
 	const [modalOpen, setModalOpen] = useState<boolean>(false)
 	const [funnelState, setFunnelState] = useState<IFunnel>()
-
-	const history = useHistory()
+	const [activeMenu, setActiveMenu] = useState<string>()
+	const [confirmDeleteModalOpen, setConfirmDeleteModalOpen] = useState<boolean>(false)
 	const fetchFunnel = useCallback(() => {
 		const funnel = funnels.find((funnel) => funnel.title === funnelTitle)
 		if (!funnel) {
@@ -37,7 +39,11 @@ const MenusTab: React.FC<IProps> = () => {
 			fetchFunnel()
 		}
 	}, [funnelTitle, funnels])
-
+	const dispatch = useDispatch()
+	const handleDelete = useCallback(() => {
+		dispatch(startDeleteMenu(funnelState?._id, activeMenu))
+		setConfirmDeleteModalOpen(false)
+	}, [funnelState, funnels, funnelTitle])
 
 	return (
 		<div style={{minHeight: '70vh'}}>
@@ -46,19 +52,30 @@ const MenusTab: React.FC<IProps> = () => {
 					<AccordionComponent
 						key={index}
 						title={item?.title}
-						body={item?.links.map((link, i) => {
-							return (
-								<React.Fragment key={i}>
-									<div className='flex justify-between py-4 px-2 border-b border-gray-200'>
-										<div className='text-sm text-gray-500'>{link?.title}</div>
-										<div
-											className='inline-flex items-center shadow-sm px-4 py-1.5 border bg-gray-100 text-sm leading-5 font-medium rounded text-gray-500  '>
-											<span>{link?.href}</span>
-										</div>
-									</div>
-								</React.Fragment>
-							)
-						})}
+						body={
+							<React.Fragment>
+								{item?.links.map((link, i) => {
+									return (
+										<React.Fragment key={i}>
+											<div className='flex justify-between py-4 px-2 border-b border-gray-200'>
+												<div className='text-sm text-gray-500'>{link?.title}</div>
+												<div
+													className='inline-flex items-center shadow-sm px-4 py-1.5 border bg-gray-100 text-sm leading-5 font-medium rounded text-gray-500  '>
+													<span>{link?.href}</span>
+												</div>
+											</div>
+										</React.Fragment>
+									)
+								})}
+								<button onClick={() => {
+									setActiveMenu(item?._id)
+									setConfirmDeleteModalOpen(true)
+								}
+								}>
+									Delete
+								</button>
+							</React.Fragment>
+						}
 					/>
 				)
 			})}
@@ -81,6 +98,16 @@ const MenusTab: React.FC<IProps> = () => {
 				</div>
 			</div>
 			<AddMenuModal open={modalOpen} setOpen={setModalOpen} />
+			<ConfirmationModal
+				open={confirmDeleteModalOpen}
+				variant='Warning'
+				title='Delete Menu'
+				text='Are you sure you want to delete this menu?'
+				buttonText='Yes, sure'
+				setOpen={() => setConfirmDeleteModalOpen(false)}
+				action={handleDelete}
+			/>
+
 		</div>
 	)
 }
