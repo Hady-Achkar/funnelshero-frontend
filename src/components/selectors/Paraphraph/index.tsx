@@ -233,7 +233,7 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 						<>
 							<div className={selected ? 'block' : 'hidden'}>
 								<div
-									className='block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm'></div>
+									className='block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm'/>
 								<ButtonsGroup title=''>
 									<ButtonsGroup.Item
 										id='SMALL'

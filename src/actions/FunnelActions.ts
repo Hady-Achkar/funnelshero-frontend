@@ -4,7 +4,8 @@ import {AppState} from '../reducers'
 import {addSinglePage, getMyFunnels, publishPage, ToggleActivateFunnel, deleteFunnel} from '../services'
 import addNewFunnel from '../services/AddFunnel'
 import saveFunnel from '../services/EditPage'
-import {IFunnel} from '../types'
+import {IFunnel, ILink} from '../types'
+import addNewMenu from '../services/AddMenu'
 
 export interface IAddFunnelPayload {
 	category: string
@@ -23,9 +24,18 @@ export interface IEditPage {
 	pageId: string
 }
 
+export interface IAddMenu {
+	title: string
+	links: ILink[]
+}
+
 export const addNewFunnelAction = (payload: IFunnel): AppActions => ({
 	type: 'ADD_FUNNEL',
 	payload,
+})
+export const addNewMenuAction = (funnel: IFunnel): AppActions => ({
+	type: 'ADD_MENU',
+	funnel,
 })
 export const toggleActiveFunnelAction = (funnel: IFunnel): AppActions => ({
 	type: 'TOGGLE_ACTIVE_FUNNEL',
@@ -123,7 +133,22 @@ export const startDeleteFunnel = (funnelId: string) => {
 			})
 	}
 }
-
+export const startAddMenu = (menuData: IAddMenu, funnelId: string) => {
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		dispatch(loadState)
+		addNewMenu(menuData.title, menuData?.links, funnelId)
+			.then((res) => {
+				dispatch(addNewMenuAction(res?.data?.funnel))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
 export const startSavePageData = (payload: IEditPage) => {
 	const {data, funnelId, pageId, title} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
