@@ -6,6 +6,7 @@ import addNewFunnel from '../services/AddFunnel'
 import saveFunnel from '../services/EditPage'
 import {IFunnel, ILink} from '../types'
 import addNewMenu from '../services/AddMenu'
+import deleteMenu from '../services/deleteMenu'
 
 export interface IAddFunnelPayload {
 	category: string
@@ -63,6 +64,10 @@ export const publishPageAction = (funnel: IFunnel): AppActions => ({
 export const deleteFunnelAction = (funnelId: string): AppActions => ({
 	type: 'DELETE_FUNNEL',
 	funnelId,
+})
+export const deleteMenuAction = (funnel: IFunnel): AppActions => ({
+	type: 'DELETE_MENU',
+	funnel,
 })
 export const startAddFunnel = (payload: IAddFunnelPayload) => {
 	const {category, title} = payload
@@ -139,6 +144,22 @@ export const startAddMenu = (menuData: IAddMenu, funnelId: string) => {
 		addNewMenu(menuData.title, menuData?.links, funnelId)
 			.then((res) => {
 				dispatch(addNewMenuAction(res?.data?.funnel))
+			})
+			.catch((err) => {
+				if (err.response) {
+					console.log(err.response.data)
+				} else {
+					console.log(err)
+				}
+			})
+	}
+}
+export const startDeleteMenu = (funnelId: string, menuId: string) => {
+	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
+		dispatch(loadState)
+		deleteMenu(funnelId, menuId)
+			.then((res) => {
+				dispatch(deleteMenuAction(res?.data?.funnel))
 			})
 			.catch((err) => {
 				if (err.response) {

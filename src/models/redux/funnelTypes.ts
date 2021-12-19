@@ -10,6 +10,7 @@ export const PUBLISH_PAGE = 'PUBLISH_PAGE'
 export const TOGGLE_ACTIVE_FUNNEL = 'TOGGLE_ACTIVE_FUNNEL'
 export const DELETE_FUNNEL = 'DELETE_FUNNEL'
 export const ADD_MENU = 'ADD_MENU'
+export const DELETE_MENU = 'DELETE_MENU'
 
 export interface initializeMyFunnels {
 	type: typeof INITIALIZE_MY_FUNNELS
@@ -21,6 +22,12 @@ export interface addNewMenu {
 	type: typeof ADD_MENU
 	funnel: IFunnel
 }
+
+export interface deleteMenu {
+	type: typeof DELETE_MENU
+	funnel: IFunnel
+}
+
 
 export interface deleteFunnel {
 	type: typeof DELETE_FUNNEL
@@ -71,3 +78,4 @@ export type FunnelActions =
 	| toggleActiveFunnel
 	| deleteFunnel
 	| addNewMenu
+	| deleteMenu
