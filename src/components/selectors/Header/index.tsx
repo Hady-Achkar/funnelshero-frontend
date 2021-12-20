@@ -9,9 +9,11 @@ import {Disclosure, Menu, Transition} from '@headlessui/react'
 import classNames from 'classnames'
 interface HeaderProps {
 	links: ILink[]
+	background: string
+	color: string
 }
 const Header = (props: Partial<HeaderProps>) => {
-	const {links} = props
+	const {links, background, color} = props
 	const {
 		connectors: {connect},
 	} = useNode()
@@ -23,7 +25,10 @@ const Header = (props: Partial<HeaderProps>) => {
 	return (
 		<div
 			ref={connect}
-			className="max-w-7xl mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8 flex justify-between mt-2 shadow"
+			className="max-w-7xl sm:mx-2 lg:mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8 flex justify-between mb-2 shadow"
+			style={{
+				background: background,
+			}}
 		>
 			<div className="relative h-24 flex justify-between items-center">
 				<div className="relative z-10 px-2 flex lg:px-0">
@@ -39,6 +44,7 @@ const Header = (props: Partial<HeaderProps>) => {
 							'text-gray-700 hover:text-indigo-600 rounded-md py-2 px-3 inline-flex items-center text-sm font-medium',
 							enabled ? 'pointer-events-none' : 'pointer-events-auto'
 						)}
+						style={{color: color}}
 					>
 						{item?.title}
 					</Link>
@@ -52,6 +58,8 @@ Header.craft = {
 	displayName: 'Header',
 	props: {
 		links: [],
+		background: '#FFF',
+		color: 'e5e5e5',
 	},
 	related: {toolbar: HeaderSettings},
 }

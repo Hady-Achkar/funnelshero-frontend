@@ -57,10 +57,10 @@ const OptinForm = () => {
 	}
 
 	return (
-		<Container innerRef={connect}>
+		<div ref={connect}>
 			<div className="w-full">
-				<div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-					<form className="space-y-6" onSubmit={handleSubmit}>
+				<div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4">
+					<form className="space-y-6 px-4" onSubmit={handleSubmit}>
 						<div>
 							<label
 								htmlFor="fullname"
@@ -130,7 +130,7 @@ const OptinForm = () => {
 									placeholder="000-00-0000"
 								/>
 							</div>
-							<div className="mt-1 relative rounded-md shadow-sm">
+							<div className="mt-3 relative rounded-md shadow-sm">
 								<button
 									disabled={enabled || isDisabled}
 									type="submit"
@@ -147,7 +147,7 @@ const OptinForm = () => {
 					</form>
 				</div>
 			</div>
-		</Container>
+		</div>
 	)
 }
 

@@ -13,29 +13,30 @@ import {FetchStripeKey} from './services'
 
 const history = createBrowserHistory()
 const renderApp = () => {
-	FetchStripeKey().then(res => {
-		const {publicKey} = res.data
-		const stripePromise = loadStripe(publicKey)
-		ReactDOM.render(
-			<Provider store={store}>
-				<PersistGate persistor={persistor} loading={<Loading />}>
-					<Elements stripe={stripePromise}>
-						<Router history={history}>
-							<App />
-						</Router>
-					</Elements>
-				</PersistGate>
-			</Provider>,
-			document.getElementById('root'),
-		)
-	}).catch(err => {
-		if (err.response) {
-			console.log(err.reponse.data)
-		} else {
-			console.log(err)
-		}
-	})
-
+	FetchStripeKey()
+		.then((res) => {
+			const {publicKey} = res.data
+			const stripePromise = loadStripe(publicKey)
+			ReactDOM.render(
+				<Provider store={store}>
+					<PersistGate persistor={persistor} loading={<Loading />}>
+						<Elements stripe={stripePromise}>
+							<Router history={history}>
+								<App />
+							</Router>
+						</Elements>
+					</PersistGate>
+				</Provider>,
+				document.getElementById('root')
+			)
+		})
+		.catch((err) => {
+			if (err.response) {
+				console.log(err.reponse.data)
+			} else {
+				console.log(err)
+			}
+		})
 }
 
 renderApp()

@@ -19,13 +19,12 @@ const QuizzElement = (props: Partial<QuizzProps>) => {
 	}))
 
 	const {
-		actions: {setProp},
 		connectors: {connect},
 	} = useNode()
 
 	const history = useHistory()
 	return (
-		<div ref={connect} className="p-2 bg-gray-100">
+		<div ref={connect} className="p-2 ">
 			<div onClick={() => !enabled && history.push(href)}>
 				<Element is={Image} id="quizz_image" />
 			</div>
