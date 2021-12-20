@@ -17,6 +17,7 @@ import {
 	Paragraph,
 	Quizz,
 	HeaderComponent,
+	FooterComponent,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -36,7 +37,7 @@ const ToolboxDiv = styled.div<{enabled: boolean}>`
 	transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 	background-color: white;
 
-	${(props) => (!props.enabled ? `width: 0;` : '250px')}
+	${(props) => (!props.enabled ? `width: 0;` : '500px')}
 	${(props) => (!props.enabled ? `opacity: 0;` : '')}
 `
 
@@ -66,7 +67,7 @@ export const Toolbox = () => {
 	return (
 		<ToolboxDiv
 			enabled={enabled && enabled}
-			className="toolbox transition h-full flex flex-col bg-white"
+			className="toolbox transition overscroll-none h-full flex flex-col bg-white"
 		>
 			<div className="flex-1 flex flex-col min-h-0 overflow-y-scroll bg-indigo-600">
 				<ToolboxItem
@@ -130,6 +131,12 @@ export const Toolbox = () => {
 					title="Header"
 					Icon={BlurLinear}
 					component={HeaderComponent}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="footer"
+					Icon={BlurLinear}
+					component={FooterComponent}
 				/>
 			</div>
 		</ToolboxDiv>

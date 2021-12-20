@@ -48,36 +48,27 @@ const Viewport: React.FC<IProps> = (props) => {
 
 	return (
 		<div className="viewport">
-			<Header
-				data={data}
-				handleChangePage={handleChangePage}
-				mainPage={mainPage}
-			/>
 			<div
 				className={cx(['flex h-full overflow-hidden flex-row w-full fixed'])}
 			>
 				<Toolbox />
-				<div className="page-container flex flex-1 h-full flex-col bg-indigo-50">
+				<div className="page-container flex flex-1 h-full flex-col">
+					<Header
+						data={data}
+						handleChangePage={handleChangePage}
+						mainPage={mainPage}
+					/>
 					<div
 						className={cx([
 							'craftjs-renderer flex-1 h-full w-full transition pb-8 overflow-auto',
 							{
-								'bg-renderer-white': enabled,
+								'bg-renderer-gray': enabled,
 							},
 						])}
 						ref={(ref) => connectors.select(connectors.hover(ref, null), null)}
 					>
 						<div className="relative flex-col flex items-center pt-8">
 							{children}
-						</div>
-						<div
-							className={
-								'flex items-center justify-center w-full pt-6 text-xs text-light-gray-2'
-							}
-						>
-							<a href="https://www.netlify.com">
-								This site is powered by Funnelshero
-							</a>
 						</div>
 					</div>
 				</div>
