@@ -14,7 +14,7 @@ export const QuizContainer = ({children, ...props}) => {
 		<div
 			title="only-buttons"
 			ref={connect}
-			className="w-full mt-5 grid grid-cols-2 gap-2 p-3 bg-gray-600"
+			className="w-full mt-5 grid grid-cols-2 gap-2 "
 			{...props}
 		>
 			{children}
@@ -28,7 +28,6 @@ QuizContainer.craft = {
 		canMoveIn: (nodes) =>
 			nodes.every((node) => node.data.type === QuizzElement),
 	},
-	related: {ContainerSettings},
 }
 
 export const Quizz = (props: any) => {
@@ -38,7 +37,6 @@ export const Quizz = (props: any) => {
 	return (
 		<div ref={connect} className="w-full">
 			<Element id="quiz_title" is={Text} />
-
 			<Element canvas id="wow" is={QuizContainer}>
 				<QuizzElement />
 				<QuizzElement />

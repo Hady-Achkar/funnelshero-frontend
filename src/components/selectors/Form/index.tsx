@@ -6,8 +6,13 @@ import {Container} from '@material-ui/core'
 import {AddOptSubmits} from '../../../services'
 import submitOptinForm from '../../../services/SubmitOptinForm'
 import {AxiosError} from 'axios'
+import {useParams, useHistory} from 'react-router-dom'
 
 const OptinForm = () => {
+	const {funnelTitle} = useParams()
+
+	const history = useHistory()
+
 	const {
 		connectors: {connect},
 		setProp,
@@ -36,12 +41,9 @@ const OptinForm = () => {
 	}
 
 	const handleSubmit = (e: React.FormEvent) => {
-		console.log('banaan')
-
 		e.preventDefault()
-		console.log({...optData, funnelTitle: 'My First Funnel'})
 
-		submitOptinForm({...optData, funnelTitle: 'My First Funnel'})
+		submitOptinForm({...optData, funnelTitle: funnelTitle})
 			.then((res) => {
 				console.log(res)
 			})
@@ -80,7 +82,7 @@ const OptinForm = () => {
 									value={optData?.fullname}
 									onChange={handleFormChange}
 									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-									placeholder="you@example.com"
+									placeholder="Mr. Magic"
 								/>
 							</div>
 						</div>

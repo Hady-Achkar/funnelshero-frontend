@@ -25,11 +25,8 @@ const QuizzElement = (props: Partial<QuizzProps>) => {
 
 	const history = useHistory()
 	return (
-		<div ref={connect} className="p-8 bg-red-400">
-			<div
-				className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
-				onClick={() => !enabled && history.push(href)}
-			>
+		<div ref={connect} className="p-2 bg-gray-100">
+			<div onClick={() => !enabled && history.push(href)}>
 				<Element is={Image} id="quizz_image" />
 			</div>
 			<Element is={Text} id="text_element" />

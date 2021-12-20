@@ -16,6 +16,7 @@ import {
 	OptinForm,
 	Paragraph,
 	Quizz,
+	HeaderComponent,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -67,7 +68,7 @@ export const Toolbox = () => {
 			enabled={enabled && enabled}
 			className="toolbox transition h-full flex flex-col bg-white"
 		>
-			<div className="flex-1 flex flex-col min-h-0 overflow-y-auto bg-indigo-600">
+			<div className="flex-1 flex flex-col min-h-0 overflow-y-scroll bg-indigo-600">
 				<ToolboxItem
 					title="Container"
 					Icon={CropLandscape}
@@ -117,18 +118,19 @@ export const Toolbox = () => {
 					Icon={TextFormat}
 					component={Quizz}
 				/>
-				{/* <ToolboxItem
-					isCanva={false}
-					title="Icon"
-					Icon={InsertEmoticon}
-					component={Icon}
-				/>
+
 				<ToolboxItem
 					isCanva={false}
 					title="Form"
 					Icon={BlurLinear}
 					component={OptinForm}
-				/> */}
+				/>
+				<ToolboxItem
+					isCanva={false}
+					title="Header"
+					Icon={BlurLinear}
+					component={HeaderComponent}
+				/>
 			</div>
 		</ToolboxDiv>
 	)
