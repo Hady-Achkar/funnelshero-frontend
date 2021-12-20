@@ -47,7 +47,7 @@ const Image = (props: Partial<ImageProps>) => {
 	}))
 
 	return (
-		<div className="m-2" ref={connect}>
+		<div ref={connect} className="mt-2">
 			<img
 				className="object-cover  group-hover:opacity-75 p-4 aspect-h-10 aspect-w-10 rounded"
 				src={src}
@@ -64,6 +64,6 @@ Image.craft = {
 		src: 'https://images.unsplash.com/photo-1613685106114-63a60f4aa467?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=772&q=80',
 		text: 'This is a placeholder image',
 	},
-	related: {toolbar: ImageSettings},
+	related: {toolbar: ImageSettings, ContainerSettings},
 }
 export default Image

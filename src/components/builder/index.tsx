@@ -20,6 +20,8 @@ import {
 	OptinForm,
 	Reader,
 	HeaderComponent,
+	FooterComponent,
+	Icon,
 } from '../'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
@@ -59,6 +61,8 @@ const Builder: React.FC<IProps> = (props) => {
 		Reader,
 		Fragment,
 		HeaderComponent,
+		FooterComponent,
+		Icon,
 	}
 
 	const dispatch = useDispatch()
