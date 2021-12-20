@@ -1,5 +1,18 @@
 import React from 'react'
-import {Container, Text, Button, Video, HyperLink, Image} from '../selectors'
+import {
+	Container,
+	Text,
+	Button,
+	Video,
+	HyperLink,
+	Image,
+	Divider,
+	Paragraph,
+	Quizz,
+	QuizzElement,
+	QuizContainer,
+	OptinForm,
+} from '../selectors'
 const contentElements = {
 	Container,
 	Text,
@@ -7,6 +20,12 @@ const contentElements = {
 	Button,
 	Video,
 	HyperLink,
+	Divider,
+	Paragraph,
+	Quizz,
+	QuizzElement,
+	QuizContainer,
+	OptinForm,
 }
 
 function getNode(nodes, id) {

@@ -8,6 +8,8 @@ import {ContainerSettings} from '../Container/ContainerSettings'
 export type ImageProps = {
 	src: string
 	alt?: string
+	width?: string
+	height?: string
 }
 
 export const ImageContainer = ({children, ...props}) => {
@@ -35,7 +37,7 @@ ImageContainer.craft = {
 	},
 }
 const Image = (props: Partial<ImageProps>) => {
-	const {src, alt} = props
+	const {src, alt, width, height} = props
 	const {
 		connectors: {connect},
 		setProp,
@@ -47,10 +49,10 @@ const Image = (props: Partial<ImageProps>) => {
 	return (
 		<div className="m-2" ref={connect}>
 			<img
-				className="object-cover  group-hover:opacity-75 p-4"
+				className="object-cover  group-hover:opacity-75 p-4 aspect-h-10 aspect-w-10 rounded"
 				src={src}
 				alt={alt}
-				// style={{maxHeight: '100vh', width: '100%'}}
+				style={{maxHeight: '500px', width: width || '100%', height: height}}
 			/>
 		</div>
 	)

@@ -1,6 +1,6 @@
-import {Editor, Frame} from '@craftjs/core'
+import {Editor, Frame, Element} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
-import React, {useEffect, useRef} from 'react'
+import React, {Fragment, useEffect, useRef} from 'react'
 import {createTheme} from '@material-ui/core/styles'
 
 import {
@@ -17,6 +17,9 @@ import {
 	Quizz,
 	QuizzElement,
 	QuizContainer,
+	OptinForm,
+	Reader,
+	HeaderComponent,
 } from '../'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
@@ -52,6 +55,10 @@ const Builder: React.FC<IProps> = (props) => {
 		Quizz,
 		QuizzElement,
 		QuizContainer,
+		OptinForm,
+		Reader,
+		Fragment,
+		HeaderComponent,
 	}
 
 	const dispatch = useDispatch()
@@ -70,13 +77,6 @@ const Builder: React.FC<IProps> = (props) => {
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
 				>
-					{/* <Frame>
-						<Reader
-							json={
-								'{"ROOT":{"type":{"resolvedName":"Container"},"isCanvas":true,"props":{"flexDirection":"column","alignItems":"flex-start","justifyContent":"flex-start","fillSpace":"no","padding":["40","40","40","40"],"margin":["0","0","0","0"],"background":{"r":255,"g":255,"b":255,"a":1},"color":{"r":0,"g":0,"b":0,"a":1},"shadow":0,"radius":0,"width":"800px","height":"auto"},"displayName":"Container","custom":{"displayName":"App"},"hidden":false,"nodes":["j0SNzpQKie","kmgKpfiu_z","HlGtCoZx2t"],"linkedNodes":{}},"j0SNzpQKie":{"type":{"resolvedName":"Text"},"isCanvas":true,"props":{"fontSize":"14","textAlign":"left","fontWeight":"400","color":{"r":92,"g":90,"b":90,"a":1},"margin":[0,0,0,0],"shadow":0,"text":"Everything you see here, including the editor, itself is made of React components. Craft.js comes only with the building blocks for a page editor; it provides a drag-n-drop system and handles the way user components should be rendered, updated and moved, among other things. <br /> <br /> You control the way your editor looks and behave.","textDecoration":""},"displayName":"Text","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"kmgKpfiu_z":{"type":{"resolvedName":"Image"},"isCanvas":true,"props":{"src":"https://www.brucerichard.co.uk/app/uploads/2017/10/unsplash-image-3.jpeg","text":"This is a placeholder image","alt":"Everything you see here, including the editor, itself is made of React components. Craft.js comes only with the building blocks for a page editor; it provides a drag-n-drop system and handles the way user components should be rendered, updated and moved, among other things. <br /> <br /> You control the way your editor looks and behave."},"displayName":"Image","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"HlGtCoZx2t":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"background":{"r":255,"g":255,"b":255,"a":0.5},"color":{"r":255,"g":0,"b":0,"a":1},"buttonStyle":"full","text":"Change button text here","margin":["5","0","5","0"],"textComponent":{"fontSize":"15","textAlign":"center","fontWeight":"500","color":{"r":92,"g":90,"b":90,"a":1},"margin":[0,0,0,0],"shadow":0,"text":"Text","textDecoration":""}},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
-							}
-						/>
-					</Frame> */}
 					<Viewport
 						data={data}
 						handleChangePage={handleChangePage}
