@@ -1,11 +1,9 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
 import {Element, useEditor, useNode} from '@craftjs/core'
-import Container from '../../Container'
 import Image from '../../Image/index'
 import Text from '../../Text/index'
 import QuizzElementSettings from './QuizzElementSettings'
-import ContentEditable from 'react-contenteditable'
 
 interface QuizzProps {
 	href: string
