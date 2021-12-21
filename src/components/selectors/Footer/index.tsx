@@ -3,11 +3,35 @@ import React from 'react'
 import {ILink, IMenu} from '../../../types'
 import FooterSettings from './FooterSettings'
 import Icon from '../Icons/index'
+import Image from '../Image/index'
 interface FooterProps {
 	links: ILink[]
 	brand: string
 	facebook: string
 	instagram: string
+}
+
+export const IconsContainer = ({children, ...props}) => {
+	const {
+		connectors: {connect},
+	} = useNode()
+	return (
+		<div
+			title="only-buttons"
+			ref={connect}
+			{...props}
+			className="mt-8 flex justify-center space-x-6"
+		>
+			{children}
+		</div>
+	)
+}
+
+IconsContainer.craft = {
+	displayName: 'Icons space',
+	rules: {
+		canMoveIn: (nodes) => nodes.data.type === Icon || Image,
+	},
 }
 
 const FooterComponent = (props: Partial<FooterProps>) => {
@@ -35,13 +59,13 @@ const FooterComponent = (props: Partial<FooterProps>) => {
 								</div>
 							))}
 					</nav>
-					<div className="mt-8 flex justify-center space-x-6">
+					<Element canvas is={IconsContainer} id="icons_container">
 						<Element is={Icon} id="social_icon" />
 						<Element is={Icon} id="social_icon1" />
 						<Element is={Icon} id="social_icon2" />
 						<Element is={Icon} id="social_icon3" />
 						<Element is={Icon} id="social_icon4" />
-					</div>
+					</Element>
 					<p className="mt-8 text-center text-base text-gray-400">
 						&copy; {new Date().getFullYear()} {brand}, Inc. All rights reserved.
 					</p>

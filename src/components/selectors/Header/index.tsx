@@ -25,17 +25,20 @@ const Header = (props: Partial<HeaderProps>) => {
 	return (
 		<div
 			ref={connect}
-			className="max-w-7xl sm:mx-2 lg:mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8 flex justify-between mb-2 shadow"
+			className="w-full px-2  flex justify-between mb-2 shadow "
 			style={{
 				background: background,
 			}}
 		>
 			<div className="relative h-24 flex justify-between items-center">
-				<div className="relative z-10 px-2 flex lg:px-0">
-					<Element is={Image} id="logo" width="100px" height="100px" />
+				<div className="relative z-10 flex lg:px-0">
+					<Element is={Image} id="logo" width="70px" height="70px" />
 				</div>
 			</div>
-			<nav className="py-2 flex space-x-8" aria-label="Global">
+			<nav
+				className="py-2 flex space-x-3 justify-between flex-wrap"
+				aria-label="Global"
+			>
 				{links.map((item, index) => (
 					<Link
 						key={index}
