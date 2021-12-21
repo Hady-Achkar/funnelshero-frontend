@@ -4,7 +4,7 @@ import searchIcons from '../../../services/SearchIcons'
 import {getRandomIcons} from '../../../services'
 import {Image} from '../../../services/GetIcons'
 import {Grid} from '@material-ui/core'
-import {ToolbarSection, ButtonsGroup} from '../../editor'
+import {ToolbarSection, ButtonsGroup, ToolbarItem} from '../../editor'
 import Wrapper from '../../common/Wrapper'
 import {Search} from '@material-ui/icons'
 
@@ -74,6 +74,7 @@ const IconsSettings = () => {
 				<ButtonsGroup.Item title="L" id="LARGE" name="size" align="right" />
 			</ButtonsGroup>
 			<ToolbarSection full={true} title="Icons">
+				<ToolbarItem type="text" propKey="href" label="Link to" />
 				<Grid container className="mb-3">
 					<div className="relative rounded-md shadow-sm">
 						<div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
