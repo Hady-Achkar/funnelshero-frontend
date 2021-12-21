@@ -30,7 +30,7 @@ export const IconsContainer = ({children, ...props}) => {
 IconsContainer.craft = {
 	displayName: 'Icons space',
 	rules: {
-		canMoveIn: (nodes) => nodes.data.type === Icon || Image,
+		canMoveIn: (nodes) => nodes.data.type === Icon,
 	},
 }
 
@@ -52,7 +52,7 @@ const FooterComponent = (props: Partial<FooterProps>) => {
 								<div key={item.title} className="px-5 py-2">
 									<a
 										href={item.href}
-										className="text-base text-gray-500 hover:text-gray-900"
+										className="text-base text-gray-500 hover:text-gray-900 underline"
 									>
 										{item.title}
 									</a>

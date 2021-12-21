@@ -26,7 +26,7 @@ const QuizzElement = (props: Partial<QuizzProps>) => {
 	return (
 		<div ref={connect} className="p-2 ">
 			<div onClick={() => !enabled && history.push(href)}>
-				<Element is={Image} id="quizz_image" />
+				<Element is={Image} width="200px" id="quizz_image" />
 			</div>
 			<Element is={Text} id="text_element" />
 		</div>

@@ -29,13 +29,16 @@ import ClearIcon from '@mui/icons-material/Clear'
 import {Listbox, Transition} from '@headlessui/react'
 import {ChromePicker} from 'react-color'
 import {ButtonGroup} from '@material-ui/core'
+import ParagraphSettings from './ParagraphSettings'
 
-interface ParagraphProps {
-	initTextData?: string
+const defaultProps = {
+	padding: ['0', '0', '0', '0'],
+	margin: ['0', '0', '0', '0'],
+	initTextData: '',
 }
 
-const Paragraph = (props: Partial<ParagraphProps>) => {
-	const {initTextData} = props
+const Paragraph = (props: any) => {
+	const {initTextData, padding, margin} = props
 
 	const [text, setText] = useState('')
 	const {enabled, selected} = useEditor((state) => ({
@@ -543,12 +546,19 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 									onChange={handleChangeColor}
 								/> */}
 							</div>
-							<EditorContent
-								editor={editor}
-								onChangeCapture={() =>
-									setProp((props) => (props.initTextData = html))
-								}
-							/>
+							<div
+								style={{
+									padding: `${padding[0]}px ${padding[1]}px ${padding[2]}px ${padding[3]}px`,
+									margin: `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`,
+								}}
+							>
+								<EditorContent
+									editor={editor}
+									onChangeCapture={() =>
+										setProp((props) => (props.initTextData = html))
+									}
+								/>
+							</div>
 						</>
 					) : (
 						<div
@@ -564,8 +574,9 @@ const Paragraph = (props: Partial<ParagraphProps>) => {
 
 Paragraph.craft = {
 	displayName: 'Paragraph',
-	props: {
-		initTextData: null,
+	props: defaultProps,
+	related: {
+		toolbar: ParagraphSettings,
 	},
 }
 export default Paragraph

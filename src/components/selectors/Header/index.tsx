@@ -27,7 +27,7 @@ const Header = (props: Partial<HeaderProps>) => {
 			ref={connect}
 			className="w-full px-2  flex justify-between mb-2 shadow "
 			style={{
-				background: background,
+				background: `rgba(${Object.values(background)})`,
 			}}
 		>
 			<div className="relative h-24 flex justify-between items-center">
@@ -44,10 +44,14 @@ const Header = (props: Partial<HeaderProps>) => {
 						key={index}
 						href={item?.href}
 						className={classNames(
-							'text-gray-700 hover:text-indigo-600 rounded-md py-2 px-3 inline-flex items-center text-sm font-medium',
-							enabled ? 'pointer-events-none' : 'pointer-events-auto'
+							'text-gray-700 hover:text-indigo-600 rounded-md py-2 px-3 inline-flex items-center text-sm font-medium underline',
+							enabled
+								? 'pointer-events-none'
+								: 'pointer-events-auto hover:text-indigo-600'
 						)}
-						style={{color: color}}
+						style={{
+							color: `rgba(${Object.values(color)})`,
+						}}
 					>
 						{item?.title}
 					</Link>
@@ -61,8 +65,8 @@ Header.craft = {
 	displayName: 'Header',
 	props: {
 		links: [],
-		background: '#FFF',
-		color: 'e5e5e5',
+		background: {r: 255, g: 255, b: 255, a: 1},
+		color: {r: 0, g: 0, b: 0, a: 1},
 	},
 	related: {toolbar: HeaderSettings},
 }

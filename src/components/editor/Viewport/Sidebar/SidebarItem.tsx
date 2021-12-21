@@ -49,7 +49,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 			className="flex flex-col  bg-white  shadow-sm mt-2  py-3"
 		>
 			<HeaderDiv
-				className={`rounded  flex items-center px-2 ${
+				className={`rounded  flex items-center px-2  ${
 					visible ? 'shadow-sm' : ''
 				}`}
 			>

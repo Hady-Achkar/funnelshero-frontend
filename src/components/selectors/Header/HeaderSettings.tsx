@@ -2,7 +2,7 @@ import {useNode} from '@craftjs/core'
 import React, {useCallback, useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {useParams, useHistory} from 'react-router-dom'
-import {ToolbarSection} from '../..'
+import {ToolbarItem, ToolbarSection} from '../..'
 import {AppState} from '../../../reducers'
 import {IFunnel} from '../../../types'
 import ColorPicker from 'material-ui-color-picker'
@@ -50,7 +50,7 @@ const HeaderSettings = () => {
 					funnelState?.menus?.map((item, index) => {
 						return (
 							<div
-								className="bg-indigo-50 mb-4"
+								className="bg-indigo-50 mb-4 w-full hover:bg-indigo-100 text-indigo-900 py-2 px-2 rounded text-sm font-medium cursor-pointer"
 								key={index}
 								onClick={() => setProp((props) => (props.links = item?.links))}
 							>
@@ -59,29 +59,41 @@ const HeaderSettings = () => {
 						)
 					})}
 
-				<div className="w-full">
-					<ColorPicker
-						id="color-picker"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-						hidden
-						placeholder="Background color"
-						name="color"
-						color="primary"
-						value={bgColor}
-						onChange={handleBackgroundChange}
-					/>
-
-					<ColorPicker
-						id="color-picker"
-						className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-						hidden
-						placeholder="Text color"
-						name="color"
-						color="primary"
-						value={colorState}
-						onChange={handleTextColorChange}
-					/>
-				</div>
+				<div className="w-full"></div>
+			</ToolbarSection>
+			<ToolbarSection
+				title="Colors"
+				props={['background', 'color']}
+				summary={({background, color}: any) => {
+					return (
+						<div className="flex flex-row-reverse">
+							<div
+								style={{
+									background:
+										background && `rgba(${Object.values(background)})`,
+								}}
+								className="shadow-md flex-end w-6 h-6 text-center flex items-center rounded-full bg-black"
+							>
+								<p
+									style={{
+										color: color && `rgba(${Object.values(color)})`,
+									}}
+									className="text-white w-full text-center"
+								>
+									T
+								</p>
+							</div>
+						</div>
+					)
+				}}
+			>
+				<ToolbarItem
+					full={true}
+					propKey="background"
+					type="bg"
+					label="Background"
+				/>
+				<ToolbarItem full={true} type="color" label="Text" propKey="color" />
 			</ToolbarSection>
 		</div>
 	)

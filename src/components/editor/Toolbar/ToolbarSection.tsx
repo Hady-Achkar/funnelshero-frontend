@@ -30,7 +30,7 @@ const usePanelStyles = makeStyles((_) => ({
 
 const useSummaryStyles = makeStyles((_) => ({
 	root: {
-		'min-height': '36px',
+		'min-height': '40px',
 		padding: 0,
 		width: '100%',
 	},
@@ -51,8 +51,11 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 			}, {}),
 	}))
 	return (
-		<ExpansionPanel classes={panelClasses}>
-			<ExpansionPanelSummary classes={summaryClasses}>
+		<ExpansionPanel className="" classes={panelClasses}>
+			<ExpansionPanelSummary
+				className=" text-sm font-medium text-left text-indigo-900 bg-indigo-100 rounded-lg  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
+				classes={summaryClasses}
+			>
 				<div className="px-6 w-full">
 					<Grid container direction="row" alignItems="center" spacing={3}>
 						<Grid item xs={4}>
