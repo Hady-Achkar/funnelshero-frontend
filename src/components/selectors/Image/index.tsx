@@ -1,43 +1,21 @@
-import {useEditor, useNode, Element} from '@craftjs/core'
 import React from 'react'
-import ContentEditable from 'react-contenteditable'
-import Container from '../Container'
+import {useEditor, useNode, Element} from '@craftjs/core'
 import {ImageSettings} from './ImageSettings'
-import {ContainerSettings} from '../Container/ContainerSettings'
 
-export type ImageProps = {
-	src: string
-	alt?: string
-	width?: string
-	height?: string
+const defaultProps = {
+	padding: ['10', '10', '10', '10'],
+	margin: ['10', '10', '10', '10'],
+	background: {r: 255, g: 255, b: 255, a: 1},
+	color: {r: 0, g: 0, b: 0, a: 1},
+	shadow: 0,
+	radius: 0,
+	src: 'https://images.unsplash.com/photo-1613685106114-63a60f4aa467?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=772&q=80',
+	height: '400px',
+	width: '100%',
 }
 
-export const ImageContainer = ({children, ...props}) => {
-	const {
-		connectors: {connect},
-	} = useNode()
-	return (
-		<div
-			title="only-buttons"
-			ref={connect}
-			className="w-full mt-5 grid grid-cols-2 gap-2 p-3 bg-gray-600"
-			{...props}
-		>
-			{children}
-		</div>
-	)
-}
-
-ImageContainer.craft = {
-	rules: {
-		canMoveIn: (nodes) => nodes.every((node) => node.data.type === Image),
-	},
-	related: {
-		ContainerSettings,
-	},
-}
-const Image = (props: Partial<ImageProps>) => {
-	const {src, alt, width, height} = props
+const Image = (props: any) => {
+	const {src, alt, width, height, margin, shadow, radius, padding} = props
 	const {
 		connectors: {connect},
 		setProp,
@@ -47,12 +25,22 @@ const Image = (props: Partial<ImageProps>) => {
 	}))
 
 	return (
-		<div ref={connect} className="mt-2">
+		<div className="w-full flex justify-center" ref={connect}>
 			<img
-				className="object-cover  group-hover:opacity-75 p-4 aspect-h-10 aspect-w-10 rounded"
+				className="object-cover  group-hover:opacity-75  aspect-h-10 aspect-w-10 rounded text-center"
 				src={src}
 				alt={alt}
-				style={{maxHeight: '500px', width: width || '100%', height: height}}
+				style={{
+					padding: `${padding[0]}px ${padding[1]}px ${padding[2]}px ${padding[3]}px`,
+					margin: `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`,
+					width: width,
+					height: height,
+					borderRadius: `${radius}px`,
+					boxShadow:
+						shadow === 0
+							? 'none'
+							: `0px 3px 100px ${shadow}px rgba(0, 0, 0, 0.13)`,
+				}}
 			/>
 		</div>
 	)
@@ -60,10 +48,8 @@ const Image = (props: Partial<ImageProps>) => {
 
 Image.craft = {
 	displayName: 'Image',
-	props: {
-		src: 'https://images.unsplash.com/photo-1613685106114-63a60f4aa467?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=772&q=80',
-		text: 'This is a placeholder image',
-	},
-	related: {toolbar: ImageSettings, ContainerSettings},
+	props: defaultProps,
+	related: {toolbar: ImageSettings},
 }
+
 export default Image

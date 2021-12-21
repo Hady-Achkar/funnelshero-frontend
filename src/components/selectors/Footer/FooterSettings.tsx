@@ -39,7 +39,7 @@ const FooterSettings = () => {
 						return (
 							<div
 								key={item?._id}
-								className="w-full p-2 hover:bg-indigo-500"
+								className="bg-indigo-50 mb-4 w-full hover:bg-indigo-100 text-indigo-900 py-2 px-2 rounded text-sm font-medium cursor-pointer"
 								onClick={() => setProp((props) => (props.links = item?.links))}
 							>
 								{item?.title}
