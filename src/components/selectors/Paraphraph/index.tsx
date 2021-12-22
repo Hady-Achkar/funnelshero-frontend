@@ -231,6 +231,12 @@ const Paragraph = (props: any) => {
 		{name: 'serif'},
 		{name: 'monospace'},
 		{name: 'cursive'},
+		{name: 'monospace'},
+		{name: 'cursive'},
+		{name: 'monospace'},
+		{name: 'cursive'},
+		{name: 'monospace'},
+		{name: 'cursive'},
 	]
 	const [fontSelected, setFontSelected] = useState(fonts[0])
 	const handleUnsetFont = useCallback(() => {
@@ -250,230 +256,236 @@ const Paragraph = (props: any) => {
 			<React.Fragment>
 				<div className="flex justify-between items-center">
 					<ButtonsGroup title="">
-						<ButtonsGroup.Item
-							id="SMALL"
-							onClick={toggleStrike}
-							title="S"
-							align="middle"
-							name="size"
-							className={
-								editor.isActive('strike')
-									? 'bg-indigo-500 line-through'
-									: 'line-through'
-							}
-						/>
-						<ButtonsGroup.Item
-							id="MEDIUM"
-							onClick={toggleBold}
-							title="B"
-							align="middle"
-							name="size"
-							className={editor.isActive('bold') ? 'bg-indigo-500' : ''}
-						/>
-						<ButtonsGroup.Item
-							id="LARGE"
-							onClick={toggleItalic}
-							title="I"
-							align="middle"
-							name="size"
-							className={editor.isActive('italic') ? 'bg-indigo-500' : ''}
-						/>
-						<ButtonsGroup.Item
-							id="LARGE"
-							onClick={toggleUnderline}
-							title="U"
-							align="middle"
-							name="size"
-							className={editor.isActive('underline') ? 'is-active' : ''}
-						/>
-						<button
-							type="button"
-							onClick={setLink}
-							className={classnames(
-								renderEdges('middle'),
-								editor.isActive('link') ? 'is-active' : '',
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-3 w-3"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
+						<div className="grid  grid-cols-6">
+							<ButtonsGroup.Item
+								id="SMALL"
+								onClick={toggleStrike}
+								title="S"
+								align="left"
+								name="size"
+								className={
+									editor.isActive('strike')
+										? 'bg-indigo-500 line-through'
+										: 'line-through'
+								}
+							/>
+							<ButtonsGroup.Item
+								id="MEDIUM"
+								onClick={toggleBold}
+								title="B"
+								align="middle"
+								name="size"
+								className={editor.isActive('bold') ? 'bg-indigo-500' : ''}
+							/>
+							<ButtonsGroup.Item
+								id="LARGE"
+								onClick={toggleItalic}
+								title="I"
+								align="middle"
+								name="size"
+								className={editor.isActive('italic') ? 'bg-indigo-500' : ''}
+							/>
+							<ButtonsGroup.Item
+								id="LARGE"
+								onClick={toggleUnderline}
+								title="U"
+								align="middle"
+								name="size"
+								className={editor.isActive('underline') ? 'is-active' : ''}
+							/>
+							<button
+								type="button"
+								onClick={setLink}
+								className={classnames(
+									renderEdges('middle'),
+									editor.isActive('link') ? 'is-active' : '',
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-								/>
-							</svg>
-						</button>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-3 w-3"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+									/>
+								</svg>
+							</button>
 
-						<button
-							type="button"
-							onClick={unlink}
-							disabled={!editor.isActive('link')}
-							className={classnames(
-								renderEdges('right'),
-								editor.isActive('link') ? 'is-active' : '',
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-3 w-3 line-through"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
+							{/* <button
+								type="button"
+								onClick={unlink}
+								disabled={!editor.isActive('link')}
+								className={classnames(
+									renderEdges('middle'),
+									editor.isActive('link') ? 'is-active' : '',
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-								/>
-							</svg>
-						</button>
-						<ButtonsGroup.Item
-							id="1"
-							onClick={handleChangeHeading}
-							title="h1"
-							align="middle"
-							name="size"
-							className={editor.isActive('underline') ? 'is-active' : ''}
-						/>
-						<ButtonsGroup.Item
-							id="2"
-							onClick={handleChangeHeading}
-							title="h2"
-							align="middle"
-							name="size"
-							className={editor.isActive('underline') ? 'is-active' : ''}
-						/>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="h-3 w-3 line-through"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+									/>
+								</svg>
+							</button> */}
+							<ButtonsGroup.Item
+								id="1"
+								onClick={handleChangeHeading}
+								title="h1"
+								align="right"
+								name="size"
+								className={editor.isActive('underline') ? 'is-active' : ''}
+							/>
+							<ButtonsGroup.Item
+								id="2"
+								onClick={handleChangeHeading}
+								title="h2"
+								align="left"
+								name="size"
+								className={editor.isActive('underline') ? 'is-active' : ''}
+							/>
 
-						<ButtonsGroup.Item
-							id="3"
-							onClick={handleChangeHeading}
-							title="h3"
-							align="middle"
-							name="size"
-							className={editor.isActive('underline') ? 'is-active' : ''}
-						/>
-						<button
-							type="button"
-							onClick={handleChangeJustifyText}
-							name={'left'}
-							className={classnames(
-								renderEdges('middle'),
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<FormatAlignLeftIcon fontSize="small" />
-						</button>
-						<button
-							type="button"
-							onClick={handleChangeJustifyText}
-							name={'center'}
-							className={classnames(
-								renderEdges('middle'),
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<FormatAlignCenterIcon fontSize="small" />
-						</button>
-						<button
-							type="button"
-							onClick={handleChangeJustifyText}
-							name={'right'}
-							className={classnames(
-								renderEdges('middle'),
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<FormatAlignRightIcon fontSize="small" />
-						</button>
-						<button
-							type="button"
-							onClick={handleChangeJustifyText}
-							name={'justify'}
-							className={classnames(
-								renderEdges('middle'),
-								'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-							)}
-						>
-							<FormatAlignJustifyIcon fontSize="small" />
-						</button>
+							<ButtonsGroup.Item
+								id="3"
+								onClick={handleChangeHeading}
+								title="h3"
+								align="middle"
+								name="size"
+								className={editor.isActive('underline') ? 'is-active' : ''}
+							/>
+							<button
+								type="button"
+								onClick={handleChangeJustifyText}
+								name={'left'}
+								className={classnames(
+									renderEdges('middle'),
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
+							>
+								<FormatAlignLeftIcon fontSize="small" />
+							</button>
+							<button
+								type="button"
+								onClick={handleChangeJustifyText}
+								name={'center'}
+								className={classnames(
+									renderEdges('middle'),
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
+							>
+								<FormatAlignCenterIcon fontSize="small" />
+							</button>
+							<button
+								type="button"
+								onClick={handleChangeJustifyText}
+								name={'right'}
+								className={classnames(
+									renderEdges('middle'),
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
+							>
+								<FormatAlignRightIcon fontSize="small" />
+							</button>
+							<button
+								type="button"
+								onClick={handleChangeJustifyText}
+								name={'justify'}
+								className={classnames(
+									renderEdges('right'),
+									'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+								)}
+							>
+								<FormatAlignJustifyIcon fontSize="small" />
+							</button>
+						</div>
 					</ButtonsGroup>
 				</div>
 				<div className="px-1">
-					<Listbox value={fontSelected} onChange={handleChangeFont}>
-						{({open}) => (
-							<>
-								<div className="relative mt-1">
-									<Listbox.Button className="bg-white relative border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-										<span className="block truncate">{fontSelected.name}</span>
-										<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-											<SelectorIcon
-												className="w-5 h-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</span>
-									</Listbox.Button>
-									<Transition
-										show={open}
-										as={React.Fragment}
-										leave="transition ease-in duration-100"
-										leaveFrom="opacity-100"
-										leaveTo="opacity-0"
-									>
-										<Listbox.Options className="mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-											{fonts.map((font, index) => (
-												<Listbox.Option
-													key={index}
-													className={({active}) =>
-														classnames(
-															active
-																? 'text-white bg-indigo-600'
-																: 'text-gray-900',
-															'cursor-default select-none relative py-2 pl-3 pr-9'
-														)
-													}
-													value={font}
-												>
-													{({selected, active}) => (
-														<>
-															<span
-																className={`${
-																	selected ? 'font-medium' : 'font-normal'
-																} block truncate`}
-															>
-																{font.name}
-															</span>
-															{selected ? (
+					<div className="w-full">
+						<Listbox value={fontSelected} onChange={handleChangeFont}>
+							{({open}) => (
+								<>
+									<div className="relative mt-1 w-full">
+										<Listbox.Button className="bg-white relative border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+											<span className="block truncate">
+												{fontSelected.name}
+											</span>
+											<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+												<SelectorIcon
+													className="w-5 h-5 text-gray-400"
+													aria-hidden="true"
+												/>
+											</span>
+										</Listbox.Button>
+										<Transition
+											show={open}
+											as={React.Fragment}
+											leave="transition ease-in duration-100"
+											leaveFrom="opacity-100"
+											leaveTo="opacity-0"
+										>
+											<Listbox.Options className="mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+												{fonts.map((font, index) => (
+													<Listbox.Option
+														key={index}
+														className={({active}) =>
+															classnames(
+																active
+																	? 'text-white bg-indigo-600'
+																	: 'text-gray-900',
+																'cursor-default select-none relative py-2 pl-3 pr-9'
+															)
+														}
+														value={font}
+													>
+														{({selected, active}) => (
+															<>
 																<span
-																	className={classnames(
-																		active ? 'text-white' : 'text-indigo-600',
-																		'absolute inset-y-0 right-0 flex items-center pr-4'
-																	)}
+																	className={`${
+																		selected ? 'font-medium' : 'font-normal'
+																	} block truncate`}
 																>
-																	<CheckIcon
-																		className="w-5 h-5"
-																		aria-hidden="true"
-																	/>
+																	{font.name}
 																</span>
-															) : null}
-														</>
-													)}
-												</Listbox.Option>
-											))}
-										</Listbox.Options>
-									</Transition>
-								</div>
-							</>
-						)}
-					</Listbox>
+																{selected ? (
+																	<span
+																		className={classnames(
+																			active ? 'text-white' : 'text-indigo-600',
+																			'absolute inset-y-0 right-0 flex items-center pr-4'
+																		)}
+																	>
+																		<CheckIcon
+																			className="w-5 h-5"
+																			aria-hidden="true"
+																		/>
+																	</span>
+																) : null}
+															</>
+														)}
+													</Listbox.Option>
+												))}
+											</Listbox.Options>
+										</Transition>
+									</div>
+								</>
+							)}
+						</Listbox>
+					</div>
 				</div>
 			</React.Fragment>
 		)

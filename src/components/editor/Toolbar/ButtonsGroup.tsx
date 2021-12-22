@@ -33,7 +33,7 @@ const ButtonsGroup = (props: ButtonsGroupProps) => {
 				<div style={{padding: '14px 14px 14px 14px'}}>
 					<Divider />
 					<Grid container spacing={1}>
-						<span className="relative z-0 inline-flex shadow-sm rounded-md">
+						<span className="relative z-0 inline-flex  rounded-md">
 							{children}
 						</span>
 					</Grid>
