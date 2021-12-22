@@ -34,7 +34,9 @@ import ParagraphSettings from './ParagraphSettings'
 const defaultProps = {
 	padding: ['0', '0', '0', '0'],
 	margin: ['0', '0', '0', '0'],
-	initTextData: '',
+	initTextData: ` <p>
+	It’s 19871. You can’t turn on a radio, or go to a mall without hearing Olivia Newton-John’s hit song, Physical.
+</p>`,
 }
 
 const Paragraph = (props: any) => {
