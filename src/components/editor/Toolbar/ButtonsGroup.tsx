@@ -22,23 +22,14 @@ const ButtonsGroup = (props: ButtonsGroupProps) => {
 	const {title, children} = props
 	return (
 		<div className="px-2 w-full">
-			<Grid container direction="row" alignItems="center" spacing={3}>
-				{title && (
-					<Grid item xs={4}>
-						<h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
-							{title}
-						</h5>
-					</Grid>
-				)}
-				<div style={{padding: '14px 14px 14px 14px'}}>
-					<Divider />
-					<Grid container spacing={1}>
-						<span className="relative z-0 inline-flex  rounded-md">
-							{children}
-						</span>
-					</Grid>
-				</div>
-			</Grid>
+			{title && (
+				<h5 className="text-sm text-gray-600  font-medium text-dark-gray">
+					{title}
+				</h5>
+			)}
+			<div style={{padding: '14px 14px 14px 14px'}}>
+				<span className="relative z-0 inline-flex  rounded-md">{children}</span>
+			</div>
 		</div>
 	)
 }
@@ -75,7 +66,7 @@ const Item = function (props: ButtonGroupItemProps) {
 			className={classname(
 				renderEdges(),
 				className,
-				'relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
+				'relative inline-flex items-center px-4 py-2 border border-indigo-300 bg-white text-sm font-medium text-indigo-900 hover:bg-indigo-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
 			)}
 		>
 			{title}

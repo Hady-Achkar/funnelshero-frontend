@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNode} from '@craftjs/core'
-import {Grid, Slider, RadioGroup} from '@material-ui/core'
+import {Grid, Slider, RadioGroup, styled} from '@material-ui/core'
 import {withStyles} from '@material-ui/styles'
 import Uploader from './Uploader'
 import ToolbarTextInput from './ToolbarTextInput'
@@ -90,6 +90,45 @@ const ToolbarItem = ({
 	const value = Array.isArray(propValue) ? propValue[index] : propValue
 	const {handleUpload, isUploaded, uploadProgress} = useUpload()
 
+	const PrettoSlider = styled(Slider)({
+		color: '#52af77',
+		height: 8,
+		'& .MuiSlider-track': {
+			border: 'none',
+		},
+		'& .MuiSlider-thumb': {
+			height: 24,
+			width: 24,
+			backgroundColor: '#fff',
+			border: '2px solid currentColor',
+			'&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+				boxShadow: 'inherit',
+			},
+			'&:before': {
+				display: 'none',
+			},
+		},
+		'& .MuiSlider-valueLabel': {
+			lineHeight: 1.2,
+			fontSize: 12,
+			background: 'unset',
+			padding: 0,
+			width: 32,
+			height: 32,
+			borderRadius: '50% 50% 50% 0',
+			backgroundColor: '#52af77',
+			transformOrigin: 'bottom left',
+			transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+			'&:before': {display: 'none'},
+			'&.MuiSlider-valueLabelOpen': {
+				transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+			},
+			'& > *': {
+				transform: 'rotate(45deg)',
+			},
+		},
+	})
+
 	return (
 		<Grid item xs={full ? 12 : 6}>
 			<div className="mb-2">
@@ -111,9 +150,9 @@ const ToolbarItem = ({
 				) : type === 'slider' ? (
 					<>
 						{props.label ? (
-							<h4 className="text-sm text-light-gray-2">{props.label}</h4>
+							<h4 className="text-sm text-gray-700">{props.label}</h4>
 						) : null}
-						<SliderStyled
+						<Slider
 							value={parseInt(value) || 0}
 							onChange={
 								((_, value: number) => {
@@ -131,7 +170,7 @@ const ToolbarItem = ({
 				) : type === 'radio' ? (
 					<>
 						{props.label ? (
-							<h4 className="text-sm text-light-gray-2">{props.label}</h4>
+							<h4 className="text-sm text-gray-700">{props.label}</h4>
 						) : null}
 						<RadioGroup
 							value={value || 0}
