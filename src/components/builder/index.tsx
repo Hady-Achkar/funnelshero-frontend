@@ -24,6 +24,7 @@ import {
 	Icon,
 	IconsContainer,
 	TextContainer,
+	InputComponent,
 } from '../'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
@@ -67,6 +68,7 @@ const Builder: React.FC<IProps> = (props) => {
 		Icon,
 		IconsContainer,
 		TextContainer,
+		InputComponent,
 	}
 
 	const dispatch = useDispatch()

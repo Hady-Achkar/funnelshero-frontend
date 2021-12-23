@@ -1,13 +1,4 @@
-import React, {Fragment, useState} from 'react'
-import {Dialog, Popover, RadioGroup, Tab, Transition} from '@headlessui/react'
-import {
-	MenuIcon,
-	QuestionMarkCircleIcon,
-	SearchIcon,
-	ShoppingBagIcon,
-	XIcon,
-} from '@heroicons/react/outline'
-import {CheckCircleIcon, TrashIcon} from '@heroicons/react/solid'
+import React, {useState} from 'react'
 import DashboardHeader from '../../components/web-components/DashboardHeader'
 import {MainFooter} from '../../components'
 

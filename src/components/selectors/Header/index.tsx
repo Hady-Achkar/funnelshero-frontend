@@ -42,7 +42,7 @@ const Header = (props: Partial<HeaderProps>) => {
 				{links.map((item, index) => (
 					<Link
 						key={index}
-						href={item?.href}
+						to={item?.href}
 						className={classNames(
 							'text-gray-700 hover:text-indigo-600 rounded-md py-2 px-3 inline-flex items-center text-sm font-medium underline',
 							enabled

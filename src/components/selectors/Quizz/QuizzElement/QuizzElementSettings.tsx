@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import React, {Fragment, useCallback, useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {useParams, useHistory} from 'react-router-dom'
-import {ToolbarSection} from '../../..'
+import {ToolbarItem, ToolbarSection} from '../../..'
 import {AppState} from '../../../../reducers'
 import {IFunnel} from '../../../../types'
 const QuizzElementSettings = () => {
@@ -38,7 +38,7 @@ const QuizzElementSettings = () => {
 	return (
 		<div>
 			<ToolbarSection title="Navigation">
-				<Listbox
+				{/* <Listbox
 					value={selected}
 					onChange={(e) => {
 						setSelected(e)
@@ -115,7 +115,17 @@ const QuizzElementSettings = () => {
 							</div>
 						</>
 					)}
-				</Listbox>
+				</Listbox> */}
+
+				<ToolbarItem type="select" propKey="href" label="test">
+					{funnelState?.pages.map((item, index) => {
+						return (
+							<option value={item?.link} key={index}>
+								{item?.title}
+							</option>
+						)
+					})}
+				</ToolbarItem>
 			</ToolbarSection>
 		</div>
 	)

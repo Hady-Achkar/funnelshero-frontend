@@ -142,7 +142,6 @@ export const TextSettings = () => {
 					<ToolbarRadio value="underline" label="Underline" />
 					<ToolbarRadio value="line-through" label="strike" />
 				</ToolbarItem> */}
-				<SwitchTypeButton />
 			</ToolbarSection>
 
 			<ToolbarSection
