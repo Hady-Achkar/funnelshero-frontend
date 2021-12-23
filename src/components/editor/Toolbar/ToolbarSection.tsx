@@ -52,18 +52,15 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 	}))
 	return (
 		<ExpansionPanel className="" classes={panelClasses}>
-			<ExpansionPanelSummary
-				className=" text-sm font-medium text-left text-indigo-900 bg-indigo-100 rounded-lg  focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
-				classes={summaryClasses}
-			>
-				<div className="px-6 w-full">
+			<ExpansionPanelSummary className=" text-sm font-medium text-left text-indigo-900 bg-indigo-100 rounded-lg  ">
+				<div className="px-6 w-full bg-indigo-50 py-3 rounded">
 					<Grid container direction="row" alignItems="center" spacing={3}>
 						<Grid item xs={4}>
-							<p className=" text-left text-sm text-gray-700">{title}</p>
+							<p className=" text-left text-sm text-indigo-700">{title}</p>
 						</Grid>
 						{summary && props ? (
 							<Grid item xs={8}>
-								<h5 className="text-light-gray-2 text-sm text-right text-dark-blue">
+								<h5 className="text-indigo-900 text-sm text-right text-dark-blue">
 									{summary(
 										props.reduce((acc: any, key: any) => {
 											acc[key] = nodeProps[key]
@@ -77,7 +74,7 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 				</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails style={{padding: '0px 24px 20px'}}>
-				<Grid container spacing={1} className="divide-y divide-gray-200">
+				<Grid container spacing={1}>
 					{children}
 				</Grid>
 			</ExpansionPanelDetails>

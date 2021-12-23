@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {useEditor, useNode} from '@craftjs/core'
+import {useEditor, useNode, Element} from '@craftjs/core'
 import {Mail, Phone, Person} from '@material-ui/icons'
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable'
 import {Container} from '@material-ui/core'
@@ -8,6 +8,9 @@ import submitOptinForm from '../../../services/SubmitOptinForm'
 import {AxiosError} from 'axios'
 import {useParams, useHistory} from 'react-router-dom'
 import FormSettings from './FormSettings'
+import InputComponent from './InputComonent'
+import Button from '../Button'
+import Text from '../Text'
 
 const defaultProps = {
 	padding: ['0', '0', '0', '0'],
@@ -84,8 +87,8 @@ const OptinForm = (props: any) => {
 		>
 			<div className="w-full">
 				{/* <div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4"> */}
-				<form className="space-y-6 px-4" onSubmit={handleSubmit}>
-					<div>
+				<form className="space-y-6 px-4 py-2" onSubmit={handleSubmit}>
+					{/* <div>
 						<label
 							htmlFor="fullname"
 							className="block text-sm font-medium text-gray-700"
@@ -164,10 +167,15 @@ const OptinForm = (props: any) => {
 								/>
 							</button>
 						</div>
-					</div>
+					</div> */}
+					<Element is={Text} id="form_title" />
+					<Element is={InputComponent} id="input_component1" />
+					<Element is={InputComponent} id="input_component2" />
+					<Element is={InputComponent} id="input_component3" />
+					<Element is={Button} id="submit_button" />
 				</form>
+				{/* </div> */}
 			</div>
-			{/* </div> */}
 		</div>
 	)
 }
