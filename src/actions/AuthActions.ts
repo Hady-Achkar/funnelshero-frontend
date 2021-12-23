@@ -2,10 +2,9 @@ import {Dispatch} from 'redux'
 import {AppActions} from '../models'
 import {AppState} from '../reducers'
 import Cookies from 'universal-cookie'
-import {IUser} from '../models/IUser'
+import {IUser, UserState} from '../models/IUser'
 import login from '../services/Login'
-import {AddNewPaymentMethod, addPaymentMethod, googleLogin, signup, SignupPayload} from '../services'
-import {LoginPayload} from '../services'
+import {AddNewPaymentMethod, addPaymentMethod, googleLogin, LoginPayload, signup, SignupPayload} from '../services'
 
 const cookies = new Cookies()
 export const loginAction = (user_info: IUser): AppActions => ({
@@ -57,6 +56,7 @@ export const startLogin = (payload: LoginPayload) => {
 							inTrial,
 							isTrialLegit,
 							paymentMethods,
+							status: UserState.TRIAL_END,
 						}),
 					)
 				}
@@ -133,6 +133,7 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 							activeSubscription,
 							paymentMethods,
 							subscriptions,
+							status: UserState.TRIAL,
 						}),
 					)
 				}
@@ -148,7 +149,6 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 }
 
 export const startSignup = (payload: SignupPayload) => {
-	const {email, password, priceId, fname, lname} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		signup(payload)
 			.then((res) => {
@@ -185,6 +185,7 @@ export const startSignup = (payload: SignupPayload) => {
 							subscriptions,
 							inTrial,
 							paymentMethods,
+							status: UserState.TRIAL,
 						}),
 					)
 				}

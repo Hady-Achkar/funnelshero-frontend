@@ -4,6 +4,7 @@ export default {
 		CONFIG_STRIPE: '/public/config',
 		GET_ALL_BUNDLES: '/public/',
 		ADD_PAYMENT_METHOD: '/payment',
+		GET_CHECKOUT_DETAILS:'/checkout'
 	},
 	FILES: {
 		UPLOAD_FILE: '/',

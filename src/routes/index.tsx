@@ -52,7 +52,7 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		component: AccountSettings,
 	},
 	{
-		path: '/checkout',
+		path: '/checkout/:priceId',
 		exact: true,
 		isPrivate: true,
 		component: CheckoutPage,

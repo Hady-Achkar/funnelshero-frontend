@@ -1,5 +1,12 @@
 import {AddNewPaymentMethod, UserType} from '../services'
 
+export enum UserState {
+	TRIAL = 'TRIAL',
+	TRIAL_END = 'TRIAL_END',
+	BLOCKED = 'BLOCKED',
+	SUB_ACTIVE = 'SUB_ACTIVE'
+}
+
 export interface IUser {
 	token: string
 	fullName: string
@@ -12,4 +19,5 @@ export interface IUser {
 	inTrial: boolean
 	isTrialLegit: boolean
 	activeSubscription: string
+	status: UserState
 }

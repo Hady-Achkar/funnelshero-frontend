@@ -10,6 +10,7 @@ import {
 	ManagerAxios,
 } from '../lib'
 import {UserType} from '../services'
+import {UserState} from '../models/IUser'
 
 const initState: authState = {
 	isAuthenticated: false,
@@ -25,6 +26,7 @@ const initState: authState = {
 		subscriptions: [],
 		inTrial: false,
 		paymentMethods: [],
+		status: UserState.TRIAL,
 	},
 }
 const authReducer = (state: authState = initState, action: AuthActions) => {
