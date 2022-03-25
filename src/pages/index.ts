@@ -1,0 +1,8 @@
+export {default as HomePage} from './Home'
+export {default as SigninPage} from './Signin'
+export {default as DashboardPage} from './Dashboard'
+export {default as FunnelPage} from './Funnels'
+export {default as AccountSettings} from './AccountSettings'
+export {default as CheckoutPage} from './Checkout'
+export {default as BundlesPage} from './Bundles'
+export {default as SignupPage} from './Signup'

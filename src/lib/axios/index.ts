@@ -1,0 +1,5 @@
+export {default as AuthAxios} from './Auth'
+export {default as FilesAxios} from './files'
+export {default as ImagesAxios} from './images'
+export {default as ManagerAxios} from './manager'
+export {default as IconsAxios} from './icons'
