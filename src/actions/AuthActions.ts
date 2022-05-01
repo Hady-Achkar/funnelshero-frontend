@@ -4,7 +4,14 @@ import {AppState} from '../reducers'
 import Cookies from 'universal-cookie'
 import {IUser, UserState} from '../models/IUser'
 import login from '../services/Login'
-import {AddNewPaymentMethod, addPaymentMethod, googleLogin, LoginPayload, signup, SignupPayload} from '../services'
+import {
+	AddNewPaymentMethod,
+	addPaymentMethod,
+	googleLogin,
+	LoginPayload,
+	signup,
+	SignupPayload,
+} from '../services'
 
 const cookies = new Cookies()
 export const loginAction = (user_info: IUser): AppActions => ({
@@ -14,9 +21,16 @@ export const loginAction = (user_info: IUser): AppActions => ({
 export const logoutAction = (): AppActions => ({
 	type: 'LOGOUT',
 })
-export const addPaymentMethodAction = (paymentMethod: AddNewPaymentMethod.PaymentMethod): AppActions => ({
+export const addPaymentMethodAction = (
+	paymentMethod: AddNewPaymentMethod.PaymentMethod
+): AppActions => ({
 	type: 'ADD_PAYMENT_METHOD',
 	paymentMethod,
+})
+
+export const changeAccountStatus = (status: UserState) => ({
+	type: 'CHANGE_ACCOUNT_STATUS',
+	status,
 })
 export const startLogin = (payload: LoginPayload) => {
 	const {email, password} = payload
@@ -57,7 +71,7 @@ export const startLogin = (payload: LoginPayload) => {
 							isTrialLegit,
 							paymentMethods,
 							status: UserState.TRIAL_END,
-						}),
+						})
 					)
 				}
 			})
@@ -134,7 +148,7 @@ export const startGoogleLogin = (payload: GoogleLoginPayload) => {
 							paymentMethods,
 							subscriptions,
 							status: UserState.TRIAL,
-						}),
+						})
 					)
 				}
 			})
@@ -186,7 +200,7 @@ export const startSignup = (payload: SignupPayload) => {
 							inTrial,
 							paymentMethods,
 							status: UserState.TRIAL,
-						}),
+						})
 					)
 				}
 			})

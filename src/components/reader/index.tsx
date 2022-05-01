@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {
 	Container,
 	Text,
@@ -7,12 +7,17 @@ import {
 	HyperLink,
 	Image,
 	Divider,
-	Paragraph,
 	Quizz,
 	QuizzElement,
 	QuizContainer,
 	OptinForm,
-} from '../selectors'
+	InputComponent,
+	TextContainer,
+	IconsContainer,
+	Icon,
+	FooterComponent,
+	HeaderComponent,
+} from '../reader-components'
 const contentElements = {
 	Container,
 	Text,
@@ -21,11 +26,17 @@ const contentElements = {
 	Video,
 	HyperLink,
 	Divider,
-	Paragraph,
 	Quizz,
 	QuizzElement,
 	QuizContainer,
 	OptinForm,
+	Fragment,
+	HeaderComponent,
+	FooterComponent,
+	Icon,
+	IconsContainer,
+	TextContainer,
+	InputComponent,
 }
 
 function getNode(nodes, id) {

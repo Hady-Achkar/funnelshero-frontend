@@ -1,4 +1,4 @@
-import {AxiosResponse} from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
 import {ManagerAxios} from '../lib'
 import {IFunnel} from '../types'

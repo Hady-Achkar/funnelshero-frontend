@@ -1,7 +1,13 @@
 import {Dispatch} from 'redux'
 import {AppActions} from '../models'
 import {AppState} from '../reducers'
-import {addSinglePage, getMyFunnels, publishPage, ToggleActivateFunnel, deleteFunnel} from '../services'
+import {
+	addSinglePage,
+	getMyFunnels,
+	publishPage,
+	ToggleActivateFunnel,
+	deleteFunnel,
+} from '../services'
 import addNewFunnel from '../services/AddFunnel'
 import saveFunnel from '../services/EditPage'
 import {IFunnel, ILink} from '../types'
@@ -188,10 +194,10 @@ export const startSavePageData = (payload: IEditPage) => {
 			})
 	}
 }
-export const startPublishPage = (funnelId: string, pageId) => {
+export const startPublishPage = (funnelId: string, pageId, html) => {
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		dispatch(loadState)
-		publishPage(funnelId, pageId)
+		publishPage(funnelId, pageId, html)
 			.then((res) => {
 				const {funnel} = res?.data
 				dispatch(publishPageAction(funnel))

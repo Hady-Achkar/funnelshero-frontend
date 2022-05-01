@@ -1,6 +1,7 @@
 import {useEditor} from '@craftjs/core'
 import React, {useState} from 'react'
 import lz from 'lzutf8'
+import ReactDOMServer from 'react-dom/server'
 import {ChevronRightIcon, HomeIcon} from '@heroicons/react/solid'
 import {GetSingleFunnel} from '../../../services'
 import {useHistory} from 'react-router-dom'
@@ -9,6 +10,7 @@ import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../../types'
 import ConfirmationModal from '../../common/ConfirmationModal'
 import FunnelsSettings from '../../common/FunnelSettings'
+import {Reader} from '../..'
 interface IProps {
 	data: IFunnel
 	handleChangePage: (page: IPage) => void
@@ -58,8 +60,12 @@ export const Header: React.FC<IProps> = (props) => {
 	}
 	const [openConfirmPublish, setOpenConfirmPublish] = useState<boolean>(false)
 
+	const htmlData = ReactDOMServer.renderToStaticMarkup(
+		<Reader json={mainPage?.data} />
+	)
+
 	const handlePublishPage = () => {
-		dispatch(startPublishPage(data?._id, mainPage?._id))
+		dispatch(startPublishPage(data?._id, mainPage?._id, htmlData))
 		setOpenConfirmPublish(false)
 	}
 	const isPublished = Boolean(mainPage?.isPublished)

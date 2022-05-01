@@ -69,6 +69,14 @@ const authReducer = (state: authState = initState, action: AuthActions) => {
 					paymentMethods: [...state.user.paymentMethods, action.paymentMethod],
 				},
 			}
+		case 'CHANGE_ACCOUNT_STATUS':
+			return {
+				...state,
+				user: {
+					...state.user,
+					status: action.status,
+				},
+			}
 		default:
 			return state
 	}

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import {useSelector} from 'react-redux'
 import {
 	MainFooter,
 	MainHeader,
@@ -8,8 +9,23 @@ import {
 	Feature,
 	Hero,
 } from '../../components'
+import {UserState} from '../../models/IUser'
+import {AppState} from '../../reducers'
+import {useHistory} from 'react-router-dom'
 
 const Home = () => {
+	const {
+		isAuthenticated,
+		user: {status},
+	} = useSelector((state: AppState) => state.auth)
+
+	const history = useHistory()
+
+	useEffect(() => {
+		if (isAuthenticated && status !== UserState.SUB_ACTIVE) {
+			history.push('/bundles')
+		}
+	}, [isAuthenticated, status])
 	return (
 		<div>
 			<MainHeader />

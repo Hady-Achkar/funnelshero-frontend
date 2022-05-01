@@ -18,7 +18,6 @@ import {
 	QuizzElement,
 	QuizContainer,
 	OptinForm,
-	Reader,
 	HeaderComponent,
 	FooterComponent,
 	Icon,
@@ -28,6 +27,7 @@ import {
 } from '../'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
+import htmlCreator from 'html-creator'
 
 interface IProps {
 	data: IFunnel
@@ -61,7 +61,6 @@ const Builder: React.FC<IProps> = (props) => {
 		QuizzElement,
 		QuizContainer,
 		OptinForm,
-		Reader,
 		Fragment,
 		HeaderComponent,
 		FooterComponent,
@@ -77,6 +76,13 @@ const Builder: React.FC<IProps> = (props) => {
 		console.log(ref.current === mainPage._id)
 		ref.current = mainPage?._id
 	}, [mainPage])
+
+	console.log(mainPage)
+
+	// const html = new htmlCreator(mainPage?.data)
+	// console.log(html)
+
+	console.log(JSON.stringify(mainPage.data))
 
 	return (
 		<ThemeProvider theme={theme}>

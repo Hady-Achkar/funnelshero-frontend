@@ -4,7 +4,8 @@ export default {
 		CONFIG_STRIPE: '/public/config',
 		GET_ALL_BUNDLES: '/public/',
 		ADD_PAYMENT_METHOD: '/payment',
-		GET_CHECKOUT_DETAILS:'/checkout'
+		GET_CHECKOUT_DETAILS: '/checkout',
+		SUBSCRIBE: '/sub',
 	},
 	FILES: {
 		UPLOAD_FILE: '/',
@@ -36,6 +37,10 @@ export default {
 		DELETE_FUNNEL: '/funnel',
 		ADD_MENU: '/menu',
 		DELETE_MENU: '/menu',
+	},
+	SERVER: {
+		BASE_URL: 'https://funnelshero-website.com',
+		PUBLISH_PAGE: '/publish',
 	},
 	ICONS: {
 		GET_RANDOM: '/',
