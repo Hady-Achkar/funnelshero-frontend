@@ -73,16 +73,11 @@ const Builder: React.FC<IProps> = (props) => {
 	const dispatch = useDispatch()
 	const ref = useRef<string>()
 	useEffect(() => {
-		console.log(ref.current === mainPage._id)
 		ref.current = mainPage?._id
 	}, [mainPage])
 
-	console.log(mainPage)
-
 	// const html = new htmlCreator(mainPage?.data)
 	// console.log(html)
-
-	console.log(JSON.stringify(mainPage.data))
 
 	return (
 		<ThemeProvider theme={theme}>

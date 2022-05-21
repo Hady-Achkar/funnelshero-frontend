@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {ApiConstants} from '../constants'
 import {ManagerAxios} from '../lib'
+import ServerAxios from '../lib/axios/server'
 import {IFunnel} from '../types'
 
 export const publishPage = async (
@@ -8,7 +9,7 @@ export const publishPage = async (
 	pageId: string,
 	html: string
 ): Promise<AxiosResponse<PublishPage.RootObject>> => {
-	return axios({
+	return ServerAxios({
 		method: 'PUT',
 		url: ApiConstants.SERVER.PUBLISH_PAGE,
 		data: {

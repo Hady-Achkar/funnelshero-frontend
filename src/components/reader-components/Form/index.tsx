@@ -1,11 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {Mail, Phone, Person} from '@material-ui/icons'
-import ContentEditable, {ContentEditableEvent} from 'react-contenteditable'
-import {Container} from '@material-ui/core'
-import {AddOptSubmits} from '../../../services'
-import submitOptinForm from '../../../services/SubmitOptinForm'
-import {AxiosError} from 'axios'
-import {useParams, useHistory} from 'react-router-dom'
+
 import InputComponent from './InputComonent'
 import Button from '../Button'
 import Text from '../Text'
@@ -19,47 +13,8 @@ const defaultProps = {
 	radius: 0,
 }
 const OptinForm = (props: any) => {
-	const {funnelTitle} = useParams()
-
-	const history = useHistory()
-
-	const [text, setText] = useState<string>('Sign up')
-
-	const handleChange = useCallback(
-		(e: ContentEditableEvent) => {
-			setText(e.target.value)
-		},
-		[setText]
-	)
-
-	const [optData, setOptData] = useState<AddOptSubmits>()
-
-	const isDisabled: boolean = Boolean(
-		optData?.email === '' || optData?.fullname === '' || optData?.phone === ''
-	)
-
-	const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setOptData((prevState) => ({...prevState, [e.target.id]: e.target.value}))
-	}
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault()
-
-		submitOptinForm({...optData, funnelTitle: funnelTitle})
-			.then((res) => {
-				console.log(res)
-			})
-			.catch((err: AxiosError) => {
-				if (err.response) {
-					console.error(err.response.data.error)
-				} else {
-					console.error(err)
-				}
-			})
-	}
-
 	const {background, color, padding, margin, shadow, radius} = props
-
+	console.log(props.linkedNodes)
 	return (
 		<div
 			style={{
@@ -76,7 +31,7 @@ const OptinForm = (props: any) => {
 		>
 			<div className="w-full">
 				{/* <div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4"> */}
-				<form className="space-y-6 px-4 py-2" onSubmit={handleSubmit}>
+				<form className="space-y-6 px-4 py-2">
 					{/* <div>
 						<label
 							htmlFor="fullname"
@@ -157,13 +112,12 @@ const OptinForm = (props: any) => {
 							</button>
 						</div>
 					</div> */}
-					<Text />
-					<InputComponent />
-					<InputComponent />
-					<InputComponent />
-					<Button />
+					<div>{props.linkedComponents['form_title']}</div>
+					<div>{props.linkedComponents['input_component1']}</div>
+					<div>{props.linkedComponents['input_component2']}</div>
+					<div>{props.linkedComponents['input_component3']}</div>
+					<div>{props.linkedComponents['submit_button']}</div>
 				</form>
-				{/* </div> */}
 			</div>
 		</div>
 	)

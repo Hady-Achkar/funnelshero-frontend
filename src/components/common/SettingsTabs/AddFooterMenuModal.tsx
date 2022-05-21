@@ -40,7 +40,7 @@ const AddMenuModal = ({open, setOpen}) => {
 	}, [funnelTitle, funnels])
 
 	const [menuData, setMenuData] = useState({
-		title: '',
+		title: 'footer',
 		links: [],
 	})
 	const [linkPlaceHolder, setLinkPlaceHolder] = useState({
@@ -140,14 +140,14 @@ const AddMenuModal = ({open, setOpen}) => {
 										htmlFor="name"
 										className="block text-sm font-medium text-gray-700"
 									>
-										Menu title
+										Footer Menu
 									</label>
 									<div className="mt-1">
 										<input
 											type="text"
 											id="title"
-											value={menuData?.title}
-											onChange={handleChange}
+											value="footer"
+											readOnly
 											className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 											placeholder="Header"
 										/>

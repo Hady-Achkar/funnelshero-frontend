@@ -115,10 +115,11 @@ const Button = (props: Partial<ButtonProps>) => {
 		textAlign: 'center',
 	}
 	return (
-		<Container className="w-full m-2">
+		<div className="w-full m-2">
 			<button
 				type="button"
 				ref={connect}
+				onClick={() => console.log('Hello world')}
 				className={cx('w-full', mainClassNames, mainSize)}
 				style={buttonStyles}
 				{...otherProps}
@@ -133,10 +134,9 @@ const Button = (props: Partial<ButtonProps>) => {
 					}}
 					style={textStyles}
 					className={cx('w-full', mainTextSize)}
-					disabled={!enabled}
 				/>
 			</button>
-		</Container>
+		</div>
 	)
 }
 

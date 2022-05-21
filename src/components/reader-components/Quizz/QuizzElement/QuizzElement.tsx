@@ -7,16 +7,14 @@ interface QuizzProps {
 	href: string
 }
 
-const QuizzElement = (props: Partial<QuizzProps>) => {
+const QuizzElement = (props: any) => {
 	const {href} = props
 
 	const history = useHistory()
 	return (
 		<div className="p-2 ">
-			<div onClick={() => history.push(href)}>
-				<Image width="200px" />
-			</div>
-			<Text />
+			<div>{props.linkedComponents['quizz_image']}</div>
+			<div>{props.linkedComponents['text_element']}</div>
 		</div>
 	)
 }

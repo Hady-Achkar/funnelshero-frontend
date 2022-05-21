@@ -2,6 +2,7 @@ import {AxiosResponse} from 'axios'
 import {UserType} from '.'
 import {ApiConstants} from '../constants'
 import {AuthAxios} from '../lib'
+import {UserState} from '../models/IUser'
 
 export declare namespace Signup {
 	export interface AutomaticTax {
@@ -159,7 +160,7 @@ export declare namespace Signup {
 	}
 
 	export interface RootObject {
-		status: string
+		status: UserState
 		message: string
 		token: string
 		fullName: string

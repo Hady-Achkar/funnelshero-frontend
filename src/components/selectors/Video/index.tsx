@@ -32,15 +32,13 @@ const Video = (props: any) => {
 	const {videoId} = props
 
 	return (
-		<Container innerRef={connect}>
-			<YouTube
-				videoId={videoId}
-				opts={{
-					width: '100%',
-					height: '500px',
-				}}
-			/>
-		</Container>
+		<YoutubeDiv>
+			<iframe
+				width="100%"
+				height="375"
+				src={`https://www.youtube.com/embed/${videoId}`}
+			></iframe>
+		</YoutubeDiv>
 	)
 }
 

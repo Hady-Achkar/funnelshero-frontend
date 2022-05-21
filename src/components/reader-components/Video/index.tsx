@@ -19,16 +19,18 @@ const YoutubeDiv = styled.div<any>`
 const Video = (props: any) => {
 	const {videoId} = props
 
+	console.log(props)
+
 	return (
-		<Container>
-			<YouTube
-				videoId={videoId}
-				opts={{
-					width: '100%',
-					height: '500px',
-				}}
-			/>
-		</Container>
+		<div>
+			<iframe
+				width="966"
+				height="571"
+				src={`https://www.youtube.com/embed/${videoId}`}
+				title="YouTube video player"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			></iframe>
+		</div>
 	)
 }
 

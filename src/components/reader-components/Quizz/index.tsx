@@ -24,13 +24,6 @@ export const TextContainer = ({children, ...props}) => {
 	)
 }
 
-TextContainer.craft = {
-	displayName: 'Text-container',
-	rules: {
-		canMoveIn: (nodes) => nodes.every((node) => node.data.type === Text),
-	},
-}
-
 const defaultProps = {
 	padding: ['0', '0', '0', '0'],
 	margin: ['0', '0', '0', '0'],
@@ -42,6 +35,7 @@ const defaultProps = {
 
 export const Quizz = (props: any) => {
 	const {background, color, padding, margin, shadow, radius} = props
+
 	return (
 		<div
 			style={{
@@ -56,15 +50,8 @@ export const Quizz = (props: any) => {
 				borderRadius: `${radius}px`,
 			}}
 		>
-			<TextContainer>
-				<Text />
-			</TextContainer>
-			<QuizContainer>
-				<QuizzElement />
-				<QuizzElement />
-				<QuizzElement />
-				<QuizzElement />
-			</QuizContainer>
+			<div>{props.linkedNodes['text-container'].children}</div>
+			<div>{props.linkedNodes['wow'].children}</div>
 		</div>
 	)
 }

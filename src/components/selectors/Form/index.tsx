@@ -169,9 +169,19 @@ const OptinForm = (props: any) => {
 						</div>
 					</div> */}
 					<Element is={Text} id="form_title" />
-					<Element is={InputComponent} id="input_component1" />
-					<Element is={InputComponent} id="input_component2" />
-					<Element is={InputComponent} id="input_component3" />
+					<Element is={InputComponent} id="input_component1" name="name" />
+					<Element
+						is={InputComponent}
+						id="input_component2"
+						name="email"
+						type={'email'}
+					/>
+					<Element
+						is={InputComponent}
+						id="input_component3"
+						name="phone"
+						type={'tel'}
+					/>
 					<Element is={Button} id="submit_button" />
 				</form>
 				{/* </div> */}

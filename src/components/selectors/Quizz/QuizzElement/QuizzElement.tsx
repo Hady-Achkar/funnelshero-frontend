@@ -9,7 +9,7 @@ interface QuizzProps {
 	href: string
 }
 
-const QuizzElement = (props: Partial<QuizzProps>) => {
+const QuizzElement = (props: any) => {
 	const {href} = props
 
 	const {enabled} = useEditor((state) => ({
@@ -23,9 +23,7 @@ const QuizzElement = (props: Partial<QuizzProps>) => {
 	const history = useHistory()
 	return (
 		<div ref={connect} className="p-2 ">
-			<div onClick={() => !enabled && history.push(href)}>
-				<Element is={Image} width="200px" id="quizz_image" />
-			</div>
+			<Element is={Image} width="200px" id="quizz_image" />
 			<Element is={Text} id="text_element" />
 		</div>
 	)

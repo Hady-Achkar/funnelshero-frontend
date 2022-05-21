@@ -64,30 +64,30 @@ const Button = (props: Partial<ButtonProps>) => {
 		}
 	}, [size])
 	const buttonStyles = {
-		background:
-			variant === ButtonStyle.FILLED
-				? `rgba(${props.background.r}, ${props.background.g},${props.background.b},${props.background.a})`
-				: variant === ButtonStyle.LIGHT
-				? 'rgba(224, 231, 255, 1)'
-				: 'transparent',
-		color:
-			variant === ButtonStyle.FILLED
-				? `rgba(${props.color.r}, ${props.color.g},${props.color.b},${props.color.a})`
-				: 'rgba(0, 0, 0, 0.87)',
+		// background:
+		// 	variant === ButtonStyle.FILLED
+		// 		? `rgba(${props.background.r}, ${props.background.g},${props.background.b},${props.background.a})`
+		// 		: variant === ButtonStyle.LIGHT
+		// 		? 'rgba(224, 231, 255, 1)'
+		// 		: 'transparent',
+		// color:
+		// 	variant === ButtonStyle.FILLED
+		// 		? `rgba(${props.color.r}, ${props.color.g},${props.color.b},${props.color.a})`
+		// 		: 'rgba(0, 0, 0, 0.87)',
 	}
 	const textStyles = {
-		color:
-			variant === ButtonStyle.FILLED
-				? `rgba(${Object.values(color)})`
-				: props.color.r === 255 &&
-				  props.color.g === 255 &&
-				  props.color.b === 255
-				? 'rgba(0, 0, 0, 0.87)'
-				: `rgba(${Object.values(color)})`,
+		// color:
+		// 	variant === ButtonStyle.FILLED
+		// 		? `rgba(${Object.values(color)})`
+		// 		: props.color.r === 255 &&
+		// 		  props.color.g === 255 &&
+		// 		  props.color.b === 255
+		// 		? 'rgba(0, 0, 0, 0.87)'
+		// 		: `rgba(${Object.values(color)})`,
 		textAlign: 'center',
 	}
 	return (
-		<Container className="w-full m-2">
+		<div className="w-full m-2">
 			<button
 				type="button"
 				className={cx('w-full', mainClassNames, mainSize)}
@@ -96,7 +96,7 @@ const Button = (props: Partial<ButtonProps>) => {
 			>
 				<p className="w-full">{text}</p>
 			</button>
-		</Container>
+		</div>
 	)
 }
 

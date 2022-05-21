@@ -49,6 +49,7 @@ export const startLogin = (payload: LoginPayload) => {
 					subscriptions,
 					inTrial,
 					paymentMethods,
+					status,
 				} = res?.data
 				if (token) {
 					cookies.set('token', token, {path: '/'})
@@ -70,7 +71,10 @@ export const startLogin = (payload: LoginPayload) => {
 							inTrial,
 							isTrialLegit,
 							paymentMethods,
-							status: UserState.TRIAL_END,
+							status:
+								activeSubscription !== ''
+									? UserState.SUB_ACTIVE
+									: UserState.TRIAL_END,
 						})
 					)
 				}
@@ -178,6 +182,7 @@ export const startSignup = (payload: SignupPayload) => {
 					subscriptions,
 					inTrial,
 					paymentMethods,
+					status,
 				} = res?.data
 				if (token) {
 					cookies.set('token', token, {path: '/'})
@@ -199,7 +204,7 @@ export const startSignup = (payload: SignupPayload) => {
 							subscriptions,
 							inTrial,
 							paymentMethods,
-							status: UserState.TRIAL,
+							status,
 						})
 					)
 				}

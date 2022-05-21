@@ -64,6 +64,9 @@ export const Quizz = (props: any) => {
 	} = useNode()
 
 	const {background, color, padding, margin, shadow, radius} = props
+
+	props.linkedNodes && console.log(props.linkedNodes)
+
 	return (
 		<div
 			ref={connect}
@@ -83,10 +86,10 @@ export const Quizz = (props: any) => {
 				<Element id="quiz_title" is={Text} />
 			</Element>
 			<Element canvas id="wow" is={QuizContainer}>
-				<QuizzElement />
-				<QuizzElement />
-				<QuizzElement />
-				<QuizzElement />
+				<Element is={QuizzElement} id="element_1" />
+				<Element is={QuizzElement} id="element_2" />
+				<Element is={QuizzElement} id="element_3" />
+				<Element is={QuizzElement} id="element_4" />
 			</Element>
 		</div>
 	)

@@ -1,4 +1,6 @@
+//@ts-nocheck
 import React, {Fragment} from 'react'
+
 import {
 	Container,
 	Text,
@@ -18,6 +20,7 @@ import {
 	FooterComponent,
 	HeaderComponent,
 } from '../reader-components'
+
 const contentElements = {
 	Container,
 	Text,
@@ -39,6 +42,31 @@ const contentElements = {
 	InputComponent,
 }
 
+function createElementFromNode({
+	key,
+	id,
+	type,
+	childNodes,
+	linkedNodes,
+	linkedComponents,
+	children,
+	props,
+}) {
+	if (contentElements[type] === undefined) {
+		throw `Component "${type}" does not exist`
+	}
+	// eslint-disable-next-line react/no-children-prop
+	return React.createElement(contentElements[type], {
+		key,
+		id,
+		linkedNodes,
+		childNodes,
+		linkedComponents,
+		children,
+		...props,
+	})
+}
+
 function getNode(nodes, id) {
 	const node = nodes[id]
 	const childNodes = node.nodes
@@ -58,20 +86,14 @@ function getNode(nodes, id) {
 		props: node.props,
 		childNodes,
 		linkedNodes,
-		children: childNodes.map(
-			({id: key, type, childNodes, linkedNodes, children, props}) => {
-				if (contentElements[type] === undefined) {
-					throw `Component "${type}" does not exist`
-				}
-				// eslint-disable-next-line react/no-children-prop
-				return React.createElement(contentElements[type], {
-					key,
-					id: key,
-					linkedNodes,
-					children,
-					...props,
-				})
-			}
+		children: childNodes.map((node) =>
+			createElementFromNode({...node, key: node.id})
+		),
+		linkedComponents: Object.fromEntries(
+			Object.entries(linkedNodes).map(([linkId, node]) => [
+				linkId,
+				createElementFromNode({...node, key: linkId}),
+			])
 		),
 	}
 }

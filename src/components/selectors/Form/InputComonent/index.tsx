@@ -21,6 +21,7 @@ const InputComponent = (props) => {
 		label,
 		iconSrc,
 		disabled,
+		name,
 		type,
 		value,
 		id,
@@ -40,6 +41,7 @@ const InputComponent = (props) => {
 					</div>
 					<input
 						type={type}
+						name={name}
 						id={id}
 						value={value}
 						onChange={onChange}
