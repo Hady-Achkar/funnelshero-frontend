@@ -1,7 +1,10 @@
 import {useNode} from '@craftjs/core'
 import {Divider, Grid} from '@material-ui/core'
 import React, {useCallback} from 'react'
+import {useSelector} from 'react-redux'
+import {AppState} from '../../../reducers'
 import {ToolbarItem, ButtonsGroup} from '../../editor'
+import {useParams} from 'react-router-dom'
 export const ButtonSettings = () => {
 	const {
 		actions: {setProp},
@@ -14,6 +17,10 @@ export const ButtonSettings = () => {
 		},
 		[setProp]
 	)
+
+	const {funnels} = useSelector((state: AppState) => state.funnels)
+	const {funnelTitle} = useParams()
+	const mainFunnel = funnels.find((f) => f.title === funnelTitle)
 
 	return (
 		<React.Fragment>
@@ -38,6 +45,20 @@ export const ButtonSettings = () => {
 								type="color"
 								label="Text"
 							/>
+							<select
+								onChange={(e) =>
+									setProp((prop) => (prop.href = e.target.value))
+								}
+								name="href"
+							>
+								{mainFunnel?.pages.map((item) => {
+									return (
+										<option key={item?._id} value={item?.link}>
+											{item?.title}
+										</option>
+									)
+								})}
+							</select>
 						</Grid>
 					</div>
 				</Grid>

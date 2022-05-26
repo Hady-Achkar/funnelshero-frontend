@@ -19,6 +19,7 @@ import {
 	Icon,
 	FooterComponent,
 	HeaderComponent,
+	Paragraph,
 } from '../reader-components'
 
 const contentElements = {
@@ -40,6 +41,7 @@ const contentElements = {
 	IconsContainer,
 	TextContainer,
 	InputComponent,
+	Paragraph,
 }
 
 function createElementFromNode({

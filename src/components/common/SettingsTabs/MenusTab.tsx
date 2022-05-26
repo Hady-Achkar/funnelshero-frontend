@@ -49,10 +49,10 @@ const MenusTab: React.FC<IProps> = () => {
 	}
 
 	const isHeaderMenuFound = Boolean(
-		funnelState?.menus?.find((item) => item.title === 'header')
+		funnelState?.menus?.find((item) => item.title === 'Header')
 	)
 	const isFooterMenuFound = Boolean(
-		funnelState?.menus?.find((item) => item.title === 'footer')
+		funnelState?.menus?.find((item) => item.title === 'Footer')
 	)
 
 	console.log(activeMenu)

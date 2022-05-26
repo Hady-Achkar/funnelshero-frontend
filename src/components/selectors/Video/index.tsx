@@ -32,10 +32,11 @@ const Video = (props: any) => {
 	const {videoId} = props
 
 	return (
-		<YoutubeDiv>
+		<YoutubeDiv ref={connect}>
 			<iframe
 				width="100%"
 				height="375"
+				className="p-4"
 				src={`https://www.youtube.com/embed/${videoId}`}
 			></iframe>
 		</YoutubeDiv>

@@ -23,10 +23,11 @@ export type ButtonProps = {
 	textComponent?: any
 	variant?: ButtonStyle
 	size?: ButtonSize
+	href?: string
 }
 
 const Button = (props: Partial<ButtonProps>) => {
-	const {text, textComponent, color, variant, size, ...otherProps} = props
+	const {text, href, textComponent, color, variant, size, ...otherProps} = props
 	const mainClassNames = useMemo(() => {
 		switch (variant) {
 			case ButtonStyle.OUTLINED:
@@ -88,14 +89,14 @@ const Button = (props: Partial<ButtonProps>) => {
 	}
 	return (
 		<div className="w-full m-2">
-			<button
-				type="button"
+			<a
+				href={href}
 				className={cx('w-full', mainClassNames, mainSize)}
 				style={buttonStyles}
 				{...otherProps}
 			>
 				<p className="w-full">{text}</p>
-			</button>
+			</a>
 		</div>
 	)
 }

@@ -23,6 +23,7 @@ export type ButtonProps = {
 	color?: Record<'r' | 'g' | 'b' | 'a', number>
 	// margin?: any[]
 	text?: string
+	href?: string
 	textComponent?: any
 	variant?: ButtonStyle
 	size?: ButtonSize
@@ -54,7 +55,7 @@ const Button = (props: Partial<ButtonProps>) => {
 		enabled: state.options.enabled,
 	}))
 
-	const {text, textComponent, color, variant, size, ...otherProps} = props
+	const {text, textComponent, href, color, variant, size, ...otherProps} = props
 	const mainClassNames = useMemo(() => {
 		switch (variant) {
 			case ButtonStyle.OUTLINED:
@@ -114,12 +115,13 @@ const Button = (props: Partial<ButtonProps>) => {
 				: `rgba(${Object.values(color)})`,
 		textAlign: 'center',
 	}
+
+	console.log(props)
+
 	return (
 		<div className="w-full m-2">
-			<button
-				type="button"
+			<a
 				ref={connect}
-				onClick={() => console.log('Hello world')}
 				className={cx('w-full', mainClassNames, mainSize)}
 				style={buttonStyles}
 				{...otherProps}
@@ -135,7 +137,7 @@ const Button = (props: Partial<ButtonProps>) => {
 					style={textStyles}
 					className={cx('w-full', mainTextSize)}
 				/>
-			</button>
+			</a>
 		</div>
 	)
 }
@@ -148,6 +150,7 @@ Button.craft = {
 		text: 'Click me',
 		// margin: ['0', '0', '0', '0'],
 		variant: ButtonStyle.OUTLINED,
+		href: '#',
 		size: ButtonSize.LARGE,
 		textComponent: {
 			...Text.craft.props,

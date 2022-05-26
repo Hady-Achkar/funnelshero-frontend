@@ -22,10 +22,11 @@ const Video = (props: any) => {
 	console.log(props)
 
 	return (
-		<div>
+		<div className="max-w-2xl">
 			<iframe
-				width="966"
-				height="571"
+				width="100%"
+				height="375"
+				className="mx-auto"
 				src={`https://www.youtube.com/embed/${videoId}`}
 				title="YouTube video player"
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

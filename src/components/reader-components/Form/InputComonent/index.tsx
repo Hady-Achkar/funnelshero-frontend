@@ -31,7 +31,11 @@ const InputComponent = (props) => {
 				</label>
 				<div className="mt-1 relative rounded-md shadow-sm">
 					<div className="p-5 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-						<img src={iconSrc} alt="Funnelshero-Icon" className="small-icon" />
+						<img
+							src={iconSrc}
+							alt="Funnelshero-Icon"
+							style={{height: 'auto', width: '25px'}}
+						/>
 					</div>
 					<input
 						type={type}
