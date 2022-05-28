@@ -19,6 +19,7 @@ const InputComponent = (props) => {
 		type,
 		value,
 		id,
+		name,
 		onChange,
 		placeholder,
 		className,
@@ -40,6 +41,7 @@ const InputComponent = (props) => {
 					<input
 						type={type}
 						id={id}
+						name={name}
 						value={value}
 						onChange={onChange}
 						className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"

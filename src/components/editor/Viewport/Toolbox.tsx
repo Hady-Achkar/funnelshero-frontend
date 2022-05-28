@@ -18,6 +18,7 @@ import {
 	Quizz,
 	HeaderComponent,
 	FooterComponent,
+	CodeBlockComponent,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -32,6 +33,7 @@ import {
 } from '@material-ui/icons'
 import SmartButtonIcon from '@mui/icons-material/SmartButton'
 import ToolboxItem from './ToolboxItem'
+import {TerminalIcon} from '@heroicons/react/solid'
 
 const ToolboxDiv = styled.div<{enabled: boolean}>`
 	transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
@@ -128,6 +130,12 @@ export const Toolbox = () => {
 				/>
 				<ToolboxItem
 					isCanva={false}
+					title="Code Block"
+					Icon={TerminalIcon}
+					component={CodeBlockComponent}
+				/>
+				{/* <ToolboxItem
+					isCanva={false}
 					title="Header"
 					Icon={BlurLinear}
 					component={HeaderComponent}
@@ -137,7 +145,7 @@ export const Toolbox = () => {
 					title="footer"
 					Icon={BlurLinear}
 					component={FooterComponent}
-				/>
+				/> */}
 			</div>
 		</ToolboxDiv>
 	)

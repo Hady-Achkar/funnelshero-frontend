@@ -41,6 +41,12 @@ export const ButtonSettings = () => {
 							/>
 							<ToolbarItem
 								full={true}
+								propKey="text"
+								type="text"
+								label="Button Text"
+							/>
+							<ToolbarItem
+								full={true}
 								propKey="color"
 								type="color"
 								label="Text"

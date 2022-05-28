@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-
+import Cookies from 'universal-cookie'
 import InputComponent from './InputComonent'
 import Button from '../Button'
 import Text from '../Text'
@@ -13,8 +13,10 @@ const defaultProps = {
 	radius: 0,
 }
 const OptinForm = (props: any) => {
+	const cookies = new Cookies()
+	const emailAddress = cookies.get('email')
 	const {background, color, padding, margin, shadow, radius} = props
-	console.log(props.linkedNodes)
+	console.log(props.targetEmail)
 	return (
 		<div
 			style={{
@@ -30,9 +32,13 @@ const OptinForm = (props: any) => {
 			}}
 		>
 			<div className="w-full">
-				{/* <div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4"> */}
-				<form className="space-y-6 px-4 py-2">
-					{/* <div>
+				<div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4">
+					<form
+						className="space-y-6 px-4 py-2"
+						action={`https://manager.funnelshero.com/opt-form?targetEmail=${props.targetEmail}`}
+						method="POST"
+					>
+						{/* <div>
 						<label
 							htmlFor="fullname"
 							className="block text-sm font-medium text-gray-700"
@@ -112,12 +118,14 @@ const OptinForm = (props: any) => {
 							</button>
 						</div>
 					</div> */}
-					<div>{props.linkedComponents['form_title']}</div>
-					<div>{props.linkedComponents['input_component1']}</div>
-					<div>{props.linkedComponents['input_component2']}</div>
-					<div>{props.linkedComponents['input_component3']}</div>
-					<div>{props.linkedComponents['submit_button']}</div>
-				</form>
+						<div>{props.linkedComponents['form_title']}</div>
+						<div>{props.linkedComponents['input_component1']}</div>
+						<div>{props.linkedComponents['input_component2']}</div>
+						<div>{props.linkedComponents['input_component3']}</div>
+						{/* <div>{props.linkedComponents['submit_button']}</div> */}
+						<button type="submit">submit</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	)

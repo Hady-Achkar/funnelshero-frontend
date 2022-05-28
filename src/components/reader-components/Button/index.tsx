@@ -88,7 +88,7 @@ const Button = (props: Partial<ButtonProps>) => {
 		textAlign: 'center',
 	}
 	return (
-		<div className="w-full m-2">
+		<div className="w-full flex  justify-center ">
 			<a
 				href={href}
 				className={cx('w-full', mainClassNames, mainSize)}

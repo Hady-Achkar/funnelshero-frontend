@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useEditor, useNode, Element} from '@craftjs/core'
 import {Mail, Phone, Person} from '@material-ui/icons'
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable'
@@ -11,6 +11,8 @@ import FormSettings from './FormSettings'
 import InputComponent from './InputComonent'
 import Button from '../Button'
 import Text from '../Text'
+import {useSelector} from 'react-redux'
+import {AppState} from '../../../reducers'
 
 const defaultProps = {
 	padding: ['0', '0', '0', '0'],
@@ -19,6 +21,7 @@ const defaultProps = {
 	color: {r: 0, g: 0, b: 0, a: 1},
 	shadow: 0,
 	radius: 0,
+	targetEmail: '',
 }
 const OptinForm = (props: any) => {
 	const {funnelTitle} = useParams()
@@ -70,6 +73,11 @@ const OptinForm = (props: any) => {
 
 	const {background, color, padding, margin, shadow, radius} = props
 
+	const {user} = useSelector((state: AppState) => state.auth)
+
+	useEffect(() => {
+		setProp((props) => (props.targetEmail = user.email))
+	}, [setProp])
 	return (
 		<div
 			ref={connect}
@@ -87,7 +95,7 @@ const OptinForm = (props: any) => {
 		>
 			<div className="w-full">
 				{/* <div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4"> */}
-				<form className="space-y-6 px-4 py-2" onSubmit={handleSubmit}>
+				<form className="space-y-6 px-4 py-2">
 					{/* <div>
 						<label
 							htmlFor="fullname"

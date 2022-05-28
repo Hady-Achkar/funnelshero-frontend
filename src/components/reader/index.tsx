@@ -20,6 +20,7 @@ import {
 	FooterComponent,
 	HeaderComponent,
 	Paragraph,
+	CodeBlockComponent,
 } from '../reader-components'
 
 const contentElements = {
@@ -42,6 +43,7 @@ const contentElements = {
 	TextContainer,
 	InputComponent,
 	Paragraph,
+	CodeBlockComponent,
 }
 
 function createElementFromNode({
