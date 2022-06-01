@@ -1,0 +1,51 @@
+export default {
+	BUNDLES: {
+		BASE_URL: 'https://bundles.funnelshero.com',
+		CONFIG_STRIPE: '/public/config',
+		GET_ALL_BUNDLES: '/public/',
+		ADD_PAYMENT_METHOD: '/payment',
+		GET_CHECKOUT_DETAILS: '/checkout',
+		SUBSCRIBE: '/sub',
+	},
+	FILES: {
+		UPLOAD_FILE: '/',
+		GET_FILES: '/files',
+		BASE_URL: 'https://file.funnelshero.com',
+	},
+	AUTH: {
+		BASE_URL: 'https://auth.funnelshero.com',
+		LOGIN: '/sign-in',
+		GOOGLE_LOGIN: '/google',
+		SIGNUP: '/sign-up',
+	},
+	IMAGES: {
+		GET_RANDOM: '/',
+		SEARCH: '/search',
+		BASE_URL: 'https://unsplash.funnelshero.com',
+	},
+	MANAGER: {
+		GET_SINGLE_FUNNEL: '/get-funnel',
+		GET_SINGLE_PAGE: '/get-page',
+		SUBMIT_OPTIN_FORM: '/opt-form',
+		BASE_URL: 'https://manager.funnelshero.com',
+		MY_FUNNELS: '/my-funnels',
+		NEW_FUNNEL: '/new-funnel',
+		ADD_PAGE: '/new-page',
+		EDIT_PAGE: '/page',
+		PUBLISH_PAGE: '/publish',
+		TOGGLE_ACTIVATE_FUNNEL: '/toggle',
+		DELETE_FUNNEL: '/funnel',
+		ADD_MENU: '/menu',
+		DELETE_MENU: '/menu',
+		DELETE_PAGE: '/page',
+	},
+	SERVER: {
+		BASE_URL: 'https://funnelshero-website.com',
+		PUBLISH_PAGE: '/publish',
+	},
+	ICONS: {
+		GET_RANDOM: '/',
+		SEARCH: '/search',
+		BASE_URL: 'https://icons.funnelshero.com',
+	},
+}
