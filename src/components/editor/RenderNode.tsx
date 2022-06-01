@@ -97,6 +97,18 @@ const RenderNode = ({render}) => {
 	//   };
 	// }, [scroll]);
 
+	useEffect(() => {
+		document
+			.querySelector('.craftjs-renderer')
+			.addEventListener('scroll', scroll)
+
+		return () => {
+			document
+				.querySelector('.craftjs-renderer')
+				.removeEventListener('scroll', scroll)
+		}
+	}, [scroll])
+
 	return (
 		<>
 			{isHover

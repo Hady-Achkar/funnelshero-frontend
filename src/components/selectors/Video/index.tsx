@@ -29,7 +29,22 @@ const Video = (props: any) => {
 		selected: node.events.selected,
 	}))
 
-	const {videoId} = props
+	const {videoId, type} = props
+
+	const handleVideoLink = (videoLink: string) => {
+		if (type === 'youtube') {
+			const regExp =
+				/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+			const match = videoLink.match(regExp)
+			return match && match[7].length == 11 ? match[7] : false
+		}
+		if (type === 'vimeo') {
+			const match = /vimeo.*\/(\d+)/i.exec(videoLink)
+			if (match) {
+				return match[1]
+			}
+		}
+	}
 
 	return (
 		<YoutubeDiv ref={connect}>
@@ -37,7 +52,11 @@ const Video = (props: any) => {
 				width="100%"
 				height="375"
 				className="p-4"
-				src={`https://www.youtube.com/embed/${videoId}`}
+				src={
+					type === 'youtube'
+						? `https://www.youtube.com/embed/${handleVideoLink(videoId)}`
+						: `https://player.vimeo.com/video/${handleVideoLink(videoId)}`
+				}
 			></iframe>
 		</YoutubeDiv>
 	)
@@ -47,6 +66,7 @@ Video.craft = {
 	displayName: 'Video',
 	props: {
 		videoId: 'BHACKCNDMW8',
+		type: 'youtube',
 	},
 	related: {
 		toolbar: VideoSettings,
