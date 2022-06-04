@@ -118,13 +118,10 @@ const Button = (props: Partial<ButtonProps>) => {
 		textAlign: 'center',
 	}
 
-	console.log(props)
-
 	return (
-		<div className="w-full flex  justify-center ">
+		<div ref={connect} className="w-full flex justify-center ">
 			<button
-				type={type}
-				ref={connect}
+				type={enabled ? 'button' : type}
 				className={cx(mainClassNames, mainSize, 'text-center mx-auto')}
 				style={buttonStyles}
 				{...otherProps}
@@ -145,7 +142,7 @@ Button.craft = {
 		type: 'button',
 		variant: ButtonStyle.FILLED,
 		href: '#',
-		size: ButtonSize.LARGE,
+		size: ButtonSize.SMALL,
 		textComponent: {
 			...Text.craft.props,
 			textAlign: 'center',

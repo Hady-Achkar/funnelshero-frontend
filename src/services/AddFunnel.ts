@@ -11,7 +11,8 @@ interface RootObject {
 
 const addNewFunnel = (
 	category: string,
-	title: string
+	title: string,
+	image: any
 ): Promise<AxiosResponse<RootObject>> => {
 	return ManagerAxios({
 		method: 'POST',
@@ -19,6 +20,7 @@ const addNewFunnel = (
 		data: {
 			category,
 			title,
+			image,
 		},
 	})
 }

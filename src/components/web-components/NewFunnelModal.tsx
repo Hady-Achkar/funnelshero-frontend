@@ -7,12 +7,13 @@ import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
 import {IAddFunnelPayload, startAddFunnel} from '../../actions'
 import {useDispatch} from 'react-redux'
-import { categories } from '../../constants'
+import {categories} from '../../constants'
 
 const NewFunnelModal = ({open, setOpen}) => {
 	const [newFunnelData, setNewFunnelData] = useState<IAddFunnelPayload>({
 		category: categories[0].name,
 		title: '',
+		image: null,
 	})
 	const cancelButtonRef = useRef(null)
 	const dispatch = useDispatch()
@@ -32,58 +33,57 @@ const NewFunnelModal = ({open, setOpen}) => {
 	return (
 		<Transition.Root show={open} as={Fragment}>
 			<Dialog
-				as='div'
-				className='fixed z-10 inset-0 overflow-y-auto'
+				as="div"
+				className="fixed z-10 inset-0 overflow-y-auto"
 				initialFocus={cancelButtonRef}
 				onClose={setOpen}
 			>
-				<div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+				<div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 					<Transition.Child
 						as={Fragment}
-						enter='ease-out duration-300'
-						enterFrom='opacity-0'
-						enterTo='opacity-100'
-						leave='ease-in duration-200'
-						leaveFrom='opacity-100'
-						leaveTo='opacity-0'
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
 					>
-						<Dialog.Overlay className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
+						<Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 					</Transition.Child>
 
 					{/* This element is to trick the browser into centering the modal contents. */}
 					<span
-						className='hidden sm:inline-block sm:align-middle sm:h-screen'
-						aria-hidden='true'
+						className="hidden sm:inline-block sm:align-middle sm:h-screen"
+						aria-hidden="true"
 					>
 						&#8203;
 					</span>
 					<Transition.Child
 						as={Fragment}
-						enter='ease-out duration-300'
-						enterFrom='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
-						enterTo='opacity-100 translate-y-0 sm:scale-100'
-						leave='ease-in duration-200'
-						leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-						leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+						enter="ease-out duration-300"
+						enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+						enterTo="opacity-100 translate-y-0 sm:scale-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
-						<div
-							className='h-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6'>
+						<div className="h-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
 							<form onSubmit={handleSubmit}>
-								<div className='my-2'>
+								<div className="my-2">
 									<label
-										htmlFor='name'
-										className='block text-sm font-medium text-gray-700'
+										htmlFor="name"
+										className="block text-sm font-medium text-gray-700"
 									>
 										Funnel name
 									</label>
-									<div className='mt-1'>
+									<div className="mt-1">
 										<input
-											type='text'
-											name='name'
-											id='title'
+											type="text"
+											name="name"
+											id="title"
 											onChange={handleChange}
-											className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
-											placeholder='The awesome funnel!'
+											className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+											placeholder="The awesome funnel!"
 										/>
 									</div>
 								</div>
@@ -100,19 +100,18 @@ const NewFunnelModal = ({open, setOpen}) => {
 								>
 									{({open}) => (
 										<>
-											<Listbox.Label className='block text-sm font-medium text-gray-700'>
+											<Listbox.Label className="block text-sm font-medium text-gray-700">
 												Category
 											</Listbox.Label>
-											<div className='mt-1 relative'>
-												<Listbox.Button
-													className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
-													<span className='block truncate'>
+											<div className="mt-1 relative">
+												<Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+													<span className="block truncate">
 														{selected.name}
 													</span>
-													<span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
+													<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 														<SelectorIcon
-															className='h-5 w-5 text-gray-400'
-															aria-hidden='true'
+															className="h-5 w-5 text-gray-400"
+															aria-hidden="true"
 														/>
 													</span>
 												</Listbox.Button>
@@ -120,12 +119,11 @@ const NewFunnelModal = ({open, setOpen}) => {
 												<Transition
 													show={open}
 													as={Fragment}
-													leave='transition ease-in duration-100'
-													leaveFrom='opacity-100'
-													leaveTo='opacity-0'
+													leave="transition ease-in duration-100"
+													leaveFrom="opacity-100"
+													leaveTo="opacity-0"
 												>
-													<Listbox.Options
-														className=' mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'>
+													<Listbox.Options className=" mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
 														{categories.map((person) => (
 															<Listbox.Option
 																key={person.id}
@@ -134,7 +132,7 @@ const NewFunnelModal = ({open, setOpen}) => {
 																		active
 																			? 'text-white bg-indigo-600'
 																			: 'text-gray-900',
-																		'cursor-default select-none relative py-2 pl-3 pr-9',
+																		'cursor-default select-none relative py-2 pl-3 pr-9'
 																	)
 																}
 																value={person}
@@ -146,7 +144,7 @@ const NewFunnelModal = ({open, setOpen}) => {
 																				selected
 																					? 'font-semibold'
 																					: 'font-normal',
-																				'block truncate',
+																				'block truncate'
 																			)}
 																		>
 																			{person.name}
@@ -158,12 +156,12 @@ const NewFunnelModal = ({open, setOpen}) => {
 																					active
 																						? 'text-white'
 																						: 'text-indigo-600',
-																					'absolute inset-y-0 right-0 flex items-center pr-4',
+																					'absolute inset-y-0 right-0 flex items-center pr-4'
 																				)}
 																			>
 																				<CheckIcon
-																					className='h-5 w-5'
-																					aria-hidden='true'
+																					className="h-5 w-5"
+																					aria-hidden="true"
 																				/>
 																			</span>
 																		) : null}
@@ -177,18 +175,36 @@ const NewFunnelModal = ({open, setOpen}) => {
 										</>
 									)}
 								</Listbox>
-								<div className='pt-5'>
-									<div className='flex justify-end'>
+								<div className="my-2">
+									<label
+										htmlFor="name"
+										className="block text-sm font-medium text-gray-700"
+									>
+										Funnel Logo Link
+									</label>
+									<div className="mt-1">
+										<input
+											type="text"
+											name="image"
+											id="image"
+											onChange={handleChange}
+											className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+											placeholder="The awesome funnel!"
+										/>
+									</div>
+								</div>
+								<div className="pt-5">
+									<div className="flex justify-end">
 										<button
-											type='button'
-											className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+											type="button"
+											className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 											onClick={() => setOpen(false)}
 										>
 											Cancel
 										</button>
 										<button
-											type='submit'
-											className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+											type="submit"
+											className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 										>
 											Save
 										</button>

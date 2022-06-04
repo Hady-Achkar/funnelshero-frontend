@@ -5,13 +5,14 @@ import draftToHtml from 'draftjs-to-html'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import htmlToDraft from 'html-to-draftjs'
 import {useNode} from '@craftjs/core'
+import ParagraphSettings from './ParagraphSettings'
 
 const Paragraph = (props) => {
 	const {
 		connectors: {connect},
 		setProp,
 	} = useNode()
-	const data = '<p>Hello world</p>'
+	const data = props.html
 
 	const contentBlock = htmlToDraft(data)
 	const contentState = ContentState.createFromBlockArray(
@@ -43,7 +44,10 @@ const Paragraph = (props) => {
 }
 Paragraph.craft = {
 	displayName: 'Paragraph',
-	props: {html: '<p>Hello world</p>'},
+	props: {html: '<p>Hello world</p>', language: 'english'},
+	related: {
+		toolbar: ParagraphSettings,
+	},
 }
 
 export default Paragraph

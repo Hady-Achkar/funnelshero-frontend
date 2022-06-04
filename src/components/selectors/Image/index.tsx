@@ -27,7 +27,7 @@ const Image = (props: any) => {
 	return (
 		<div className="w-full flex justify-center" ref={connect}>
 			<img
-				className="object-cover  group-hover:opacity-75  aspect-h-10 aspect-w-10 rounded text-center"
+				className="object-cover group-hover:opacity-75 rounded text-center"
 				src={src}
 				alt={alt}
 				style={{

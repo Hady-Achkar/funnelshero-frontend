@@ -146,6 +146,21 @@ export const ImageSettings = () => {
 					label="Shadow"
 				/>
 			</ToolbarSection>
+			<ToolbarSection
+				title="Dimensions"
+				props={['width', 'height']}
+				summary={({width, height}: any) => {
+					return `${width || ''}px x ${height || ''}px`
+				}}
+			>
+				<ToolbarItem
+					full={true}
+					propKey="height"
+					type="slider"
+					label="Height"
+				/>
+				<ToolbarItem full={true} propKey="width" type="slider" label="Width" />
+			</ToolbarSection>
 		</React.Fragment>
 	)
 }

@@ -177,45 +177,47 @@ const OptinForm = (props: any) => {
 						</div>
 					</div> */}
 					<Element is={Text} id="form_title" text="Get in touch" />
-					<Element
-						is={InputComponent}
-						id="input_component1"
-						placeholder="Name"
-						label="Name"
-						name="name"
-						iconSrc={
-							'https://cdn-icons.flaticon.com/png/128/1144/premium/1144760.png'
-						}
-					/>
-					<Element
-						is={InputComponent}
-						id="input_component2"
-						placeholder="Email Address"
-						name="email"
-						label="Email Address"
-						type={'email'}
-						iconSrc={
-							'https://cdn-icons.flaticon.com/png/128/542/premium/542638.png?token=exp=1653993263~hmac=07b92684d83797c33717ab9e9d8e3fc6'
-						}
-					/>
-					<Element
-						is={InputComponent}
-						id="input_component3"
-						label="Phone Number"
-						placeholder="Telephone Number"
-						name="phone"
-						type={'tel'}
-						iconSrc={
-							'https://cdn-icons.flaticon.com/png/128/1959/premium/1959251.png?token=exp=1653993293~hmac=accbfd6745279201654fa1e056b733cf'
-						}
-					/>
-					<Element
-						is={Button}
-						id="submit_button"
-						text="Send"
-						type="submit"
-						size={ButtonSize.SMALL}
-					/>
+					<div className="w-2/3 mx-auto space-y-3">
+						<Element
+							is={InputComponent}
+							id="input_component1"
+							placeholder="Name"
+							label="Name"
+							name="name"
+							iconSrc={
+								'https://cdn-icons.flaticon.com/png/128/1144/premium/1144760.png'
+							}
+						/>
+						<Element
+							is={InputComponent}
+							id="input_component2"
+							placeholder="Email Address"
+							name="email"
+							label="Email Address"
+							type={'email'}
+							iconSrc={
+								'https://cdn-icons.flaticon.com/png/128/542/premium/542638.png?token=exp=1653993263~hmac=07b92684d83797c33717ab9e9d8e3fc6'
+							}
+						/>
+						<Element
+							is={InputComponent}
+							id="input_component3"
+							label="Phone Number"
+							placeholder="Telephone Number"
+							name="phone"
+							type={'tel'}
+							iconSrc={
+								'https://cdn-icons.flaticon.com/png/128/1959/premium/1959251.png?token=exp=1653993293~hmac=accbfd6745279201654fa1e056b733cf'
+							}
+						/>
+						<Element
+							is={Button}
+							id="submit_button"
+							text="Send"
+							type="submit"
+							size={ButtonSize.SMALL}
+						/>
+					</div>
 				</form>
 				{/* </div> */}
 			</div>

@@ -12,7 +12,10 @@ const QuizzElement = (props: any) => {
 
 	const history = useHistory()
 	return (
-		<div className="col-span-1">
+		<div
+			className="col-span-1 p-3 rounded-lg"
+			style={{backgroundColor: '#f5f5f5'}}
+		>
 			<a href={href}>
 				<div>{props.linkedComponents['quizz_image']}</div>
 				<div>{props.linkedComponents['text_element']}</div>

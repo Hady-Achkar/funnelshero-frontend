@@ -51,11 +51,6 @@ const MenusTab: React.FC<IProps> = () => {
 	const isHeaderMenuFound = Boolean(
 		funnelState?.menus?.find((item) => item.title === 'Header')
 	)
-	const isFooterMenuFound = Boolean(
-		funnelState?.menus?.find((item) => item.title === 'Footer')
-	)
-
-	console.log(activeMenu)
 
 	return (
 		<div style={{minHeight: '70vh'}}>
@@ -119,32 +114,7 @@ const MenusTab: React.FC<IProps> = () => {
 				</div>
 			)}
 
-			{!isFooterMenuFound && (
-				<div className="relative max-w-md mx-auto">
-					<div
-						className="absolute inset-0 flex items-center"
-						aria-hidden="true"
-					>
-						<div className="w-full border-t border-gray-300" />
-					</div>
-					<div className="relative flex justify-center">
-						<button
-							onClick={() => setFooterMenuOpen(true)}
-							type="button"
-							className="inline-flex items-center shadow-sm px-4 py-1.5 border border-gray-300 text-sm leading-5 font-medium rounded text-gray-700 bg-white hover:bg-gray-50 my-2"
-						>
-							<PlusSmIcon
-								className="-ml-1.5 mr-1 h-5 w-5 text-gray-400"
-								aria-hidden="true"
-							/>
-							<span>Create Footer Menu</span>
-						</button>
-					</div>
-				</div>
-			)}
-
 			<AddHeaderMenuModal open={headeMenuOpen} setOpen={setHeadeMenuOpen} />
-			<AddFooterMenuModal open={footerMenuOpen} setOpen={setFooterMenuOpen} />
 			<ConfirmationModal
 				open={confirmDeleteModalOpen}
 				variant="Warning"

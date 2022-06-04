@@ -18,6 +18,7 @@ import deleteMenu from '../services/deleteMenu'
 export interface IAddFunnelPayload {
 	category: string
 	title: string
+	image: any
 }
 
 export interface IAddPage {
@@ -82,10 +83,10 @@ export const deleteMenuAction = (funnel: IFunnel): AppActions => ({
 	funnel,
 })
 export const startAddFunnel = (payload: IAddFunnelPayload) => {
-	const {category, title} = payload
+	const {category, title, image} = payload
 	return (dispatch: Dispatch<AppActions> | any, _: () => AppState) => {
 		dispatch(loadState)
-		addNewFunnel(category, title)
+		addNewFunnel(category, title, image)
 			.then((res) => {
 				const {funnel} = res?.data
 				dispatch(addNewFunnelAction(funnel))

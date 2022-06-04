@@ -24,7 +24,6 @@ const useUpload = () => {
 			.then(({data}) => {
 				setIsUploaded(true)
 				setUploadProgress('0')
-				console.log(data)
 
 				return data.file
 			})

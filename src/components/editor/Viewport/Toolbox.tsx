@@ -74,12 +74,6 @@ export const Toolbox = () => {
 		>
 			<div className="flex-1 flex flex-col min-h-0 overflow-y-scroll bg-indigo-600">
 				<ToolboxItem
-					title="Container"
-					Icon={CropLandscape}
-					component={Container}
-					isCanva={true}
-				/>
-				<ToolboxItem
 					isCanva={false}
 					title="Image"
 					Icon={CropOriginal}

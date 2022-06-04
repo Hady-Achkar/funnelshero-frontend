@@ -17,7 +17,6 @@ const OptinForm = (props: any) => {
 	const cookies = new Cookies()
 	const emailAddress = cookies.get('email')
 	const {background, color, padding, margin, shadow, radius} = props
-	console.log(props.targetEmail)
 	return (
 		<ComponentLayout>
 			<div
