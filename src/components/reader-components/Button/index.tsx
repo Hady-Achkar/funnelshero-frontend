@@ -105,14 +105,16 @@ const Button = (props: Partial<ButtonProps>) => {
 						<p className="w-full text-center">{text}</p>
 					</a>
 				) : (
-					<button
-						type={'submit'}
-						className={cx('w-full', mainClassNames, mainSize)}
-						style={buttonStyles}
-						{...otherProps}
-					>
-						<p className="w-full text-center">{text}</p>
-					</button>
+					<a href={href} className="w-full text-center">
+						<button
+							type={'submit'}
+							className={cx('w-full', mainClassNames, mainSize)}
+							style={buttonStyles}
+							{...otherProps}
+						>
+							{text}
+						</button>
+					</a>
 				)}
 			</div>
 		</ComponentLayout>

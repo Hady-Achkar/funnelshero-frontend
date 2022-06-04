@@ -40,7 +40,7 @@ const AddMenuModal = ({open, setOpen}) => {
 	}, [funnelTitle, funnels])
 
 	const [menuData, setMenuData] = useState({
-		title: 'header',
+		title: 'Header',
 		links: [],
 	})
 	const [linkPlaceHolder, setLinkPlaceHolder] = useState({

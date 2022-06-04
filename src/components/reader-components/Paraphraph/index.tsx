@@ -6,7 +6,10 @@ import {ComponentLayout} from '../..'
 const Paragraph = (props) => {
 	return (
 		<ComponentLayout>
-			<div dangerouslySetInnerHTML={{__html: props.html}} />
+			<div
+				dir={props.language === 'arabic' ? 'rtl text-right' : 'ltr text-left'}
+				dangerouslySetInnerHTML={{__html: props.html}}
+			/>
 		</ComponentLayout>
 	)
 }

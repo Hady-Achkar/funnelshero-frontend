@@ -15,7 +15,7 @@ export const QuizContainer = ({children, ...props}) => {
 		<div
 			title="only-buttons"
 			ref={connect}
-			className="w-full my-5 grid grid-cols-2 gap-6 "
+			className="w-full my-5 grid grid-cols-2 gap-6"
 			{...props}
 		>
 			{children}
@@ -64,8 +64,6 @@ export const Quizz = (props: any) => {
 	} = useNode()
 
 	const {background, color, padding, margin, shadow, radius} = props
-
-	props.linkedNodes && console.log(props.linkedNodes)
 
 	return (
 		<div

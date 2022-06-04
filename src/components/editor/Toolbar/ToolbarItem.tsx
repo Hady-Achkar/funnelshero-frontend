@@ -155,6 +155,8 @@ const ToolbarItem = ({
 						) : null}
 						<Slider
 							value={parseInt(value) || 0}
+							min={0}
+							max={1000}
 							onChange={
 								((_, value: number) => {
 									setProp((props: any) => {

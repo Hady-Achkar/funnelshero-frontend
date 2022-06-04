@@ -20,8 +20,6 @@ const YoutubeDiv = styled.div<any>`
 const Video = (props: any) => {
 	const {videoId} = props
 
-	console.log(props)
-
 	return (
 		<ComponentLayout>
 			<iframe

@@ -38,6 +38,7 @@ const InputComponent = (props) => {
 						type={type}
 						id={id}
 						name={name}
+						required
 						value={value}
 						onChange={onChange}
 						className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"

@@ -1,6 +1,6 @@
 import {useNode} from '@craftjs/core'
 import {Divider, Grid} from '@material-ui/core'
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {AppState} from '../../../reducers'
 import {ToolbarItem, ButtonsGroup, ToolbarDropdown} from '../../editor'
@@ -21,6 +21,7 @@ export const ButtonSettings = () => {
 	const {funnels} = useSelector((state: AppState) => state.funnels)
 	const {funnelTitle} = useParams()
 	const mainFunnel = funnels.find((f) => f.title === funnelTitle)
+	const [checked, setChecked] = useState(false)
 
 	return (
 		<React.Fragment>
@@ -60,17 +61,36 @@ export const ButtonSettings = () => {
 				<h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
 					Go to
 				</h5>
-				<div className="px-2">
-					<ToolbarItem full={true} type="select" propKey="href">
-						{mainFunnel?.pages.map((item) => {
-							return (
-								<option key={item?._id} value={item?.link}>
-									{item?.title}
-								</option>
-							)
-						})}
-					</ToolbarItem>
+				<div className="relative flex items-start">
+					<div className="flex items-center h-5">
+						<input
+							onChange={(e) => setChecked(e.target.checked)}
+							checked={checked}
+							type="checkbox"
+							className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+						/>
+					</div>
+					<div className="ml-3 text-sm">
+						<label htmlFor="link" className="font-medium text-gray-700">
+							External Link
+						</label>
+					</div>
 				</div>
+				{checked ? (
+					<ToolbarItem type="text" propKey="href" full={true} />
+				) : (
+					<div>
+						<ToolbarItem full={true} type="select" propKey="href">
+							{mainFunnel?.pages.map((item) => {
+								return (
+									<option key={item?._id} value={item?.link}>
+										{item?.title}
+									</option>
+								)
+							})}
+						</ToolbarItem>
+					</div>
+				)}
 			</div>
 			<ButtonsGroup title="Size">
 				<ButtonsGroup.Item

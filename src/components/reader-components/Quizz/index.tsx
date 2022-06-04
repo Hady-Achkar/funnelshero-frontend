@@ -54,7 +54,7 @@ export const Quizz = (props: any) => {
 			>
 				<div>{props.linkedNodes['text-container'].children}</div>
 
-				<div className="grid grid-cols-2 gap-2">
+				<div className="w-full my-5 grid grid-cols-2 gap-6">
 					{props.linkedNodes['wow'].children}
 				</div>
 			</div>

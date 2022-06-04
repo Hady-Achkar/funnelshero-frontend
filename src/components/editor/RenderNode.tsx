@@ -1,6 +1,7 @@
 //@ts-nocheck
 import {useNode, useEditor} from '@craftjs/core'
 import {ROOT_NODE} from '@craftjs/utils'
+import {TrashIcon, DuplicateIcon} from '@heroicons/react/solid'
 import {ArrowCircleUp} from '@mui/icons-material'
 import React, {useEffect, useRef, useCallback} from 'react'
 import ReactDOM from 'react-dom'
@@ -97,17 +98,17 @@ const RenderNode = ({render}) => {
 	//   };
 	// }, [scroll]);
 
-	useEffect(() => {
-		document
-			.querySelector('.craftjs-renderer')
-			.addEventListener('scroll', scroll)
+	// useEffect(() => {
+	// 	document
+	// 		.querySelector('.craftjs-renderer')
+	// 		.addEventListener('scroll', scroll)
 
-		return () => {
-			document
-				.querySelector('.craftjs-renderer')
-				.removeEventListener('scroll', scroll)
-		}
-	}, [scroll])
+	// 	return () => {
+	// 		document
+	// 			.querySelector('.craftjs-renderer')
+	// 			.removeEventListener('scroll', scroll)
+	// 	}
+	// }, [scroll])
 
 	return (
 		<>
@@ -166,28 +167,44 @@ const RenderNode = ({render}) => {
 							)}
 							{deletable ? (
 								<Btn
-									className="cursor-pointer"
+									className="cursor-pointer mr-2"
 									onMouseDown={(e: React.MouseEvent) => {
 										e.stopPropagation()
 										actions.delete(id)
 									}}
 								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-6 w-6"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-										/>
-									</svg>
+									<TrashIcon />
 								</Btn>
 							) : null}
+
+							{id !== ROOT_NODE && (
+								<Btn
+									className="cursor-pointer"
+									onMouseDown={(e: React.MouseEvent) => {
+										const {
+											id: nodeId,
+											data: {type, props, parent: parentId},
+											dom,
+										} = query.node(id).get()
+										e.stopPropagation()
+										const prevIndex = query
+											.getSerializedNodes()
+											.ROOT.nodes.indexOf(nodeId)
+										actions.add(
+											query.createNode(
+												React.createElement(type, {
+													...props,
+													marginBottom: '24px',
+												})
+											),
+											parentId,
+											prevIndex + 1
+										)
+									}}
+								>
+									<DuplicateIcon />
+								</Btn>
+							)}
 						</IndicatorDiv>,
 						document.querySelector('.page-container')
 				  )

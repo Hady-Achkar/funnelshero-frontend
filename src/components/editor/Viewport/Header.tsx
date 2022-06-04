@@ -1,5 +1,5 @@
 import {useEditor} from '@craftjs/core'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import lz from 'lzutf8'
 import ReactDOMServer from 'react-dom/server'
 import {
@@ -9,7 +9,7 @@ import {
 	RewindIcon,
 } from '@heroicons/react/outline'
 import {GetSingleFunnel} from '../../../services'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Prompt} from 'react-router-dom'
 import {startSavePageData, startPublishPage} from '../../../actions'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../../types'
@@ -70,6 +70,8 @@ export const Header: React.FC<IProps> = (props) => {
 	const htmlData = ReactDOMServer.renderToStaticMarkup(
 		<Reader json={mainPage?.data} />
 	)
+
+	const [blocking, setBlocking] = useState(false)
 
 	const handlePublishPage = () => {
 		dispatch(startPublishPage(data?._id, mainPage?._id, htmlData))
