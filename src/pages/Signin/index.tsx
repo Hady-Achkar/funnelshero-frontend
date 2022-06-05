@@ -30,9 +30,7 @@ const Signin = () => {
 		dispatch(startLogin(userData))
 	}
 
-	const handleGoogleFailure = (result) => {
-		alert(result)
-	}
+	const handleGoogleFailure = (result) => {}
 
 	const handleGoogleLogin = (googleData: GoogleLoginResponse) => {
 		const {givenName, familyName, email} = googleData.profileObj
