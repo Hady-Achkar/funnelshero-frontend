@@ -36,7 +36,7 @@ const OptinForm = (props: any) => {
 					<div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4">
 						<form
 							className="space-y-6 px-4 py-2"
-							action={`https://manager.funnelshero.com/opt-form?targetEmail=${props.targetEmail}`}
+							action={`https://manager.funnelshero.com/opt-form?targetEmail=${props.targetEmail}?funnelId=${props.funnelId}`}
 							method="POST"
 						>
 							{/* <div>

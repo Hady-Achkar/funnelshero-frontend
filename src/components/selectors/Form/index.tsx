@@ -22,6 +22,7 @@ const defaultProps = {
 	shadow: 0,
 	radius: 0,
 	targetEmail: '',
+	funnelId: '',
 }
 const OptinForm = (props: any) => {
 	const {funnelTitle} = useParams()
@@ -74,9 +75,13 @@ const OptinForm = (props: any) => {
 	const {background, color, padding, margin, shadow, radius} = props
 
 	const {user} = useSelector((state: AppState) => state.auth)
+	const {funnels} = useSelector((state: AppState) => state.funnels)
+
+	const funnelId = funnels.find((f) => f.title === funnelTitle)._id
 
 	useEffect(() => {
 		setProp((props) => (props.targetEmail = user.email))
+		setProp((props) => (props.funnelId = funnelId))
 	}, [setProp])
 	return (
 		<div

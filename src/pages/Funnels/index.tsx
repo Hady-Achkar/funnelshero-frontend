@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {AppState} from '../../reducers'
 import {IFunnel, IPage} from '../../types'
+import {useEditor} from '@craftjs/core'
 type Params = {
 	funnelTitle: string
 }
@@ -27,6 +28,7 @@ const Funnel = () => {
 		return () => fetchFunnel()
 	}, [funnelTitle, funnels])
 	const handleChangePage = (page) => {
+		window.confirm('Are you sure you want to change the page?')
 		ref.current = page?._id
 		const index = funnel?.pages.indexOf(page)
 		setPrevPage(index)
