@@ -137,7 +137,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 										</svg>
 									</div>
 									<div className="w-full">
-										<p className="text-sm font-medium flex items-center text-gray-900 truncate">
+										<p className="text-sm capitalize font-medium flex items-center text-gray-900 truncate">
 											{page.title} Page
 										</p>
 										<div>

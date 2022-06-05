@@ -141,7 +141,7 @@ Button.craft = {
 		// margin: ['0', '0', '0', '0'],
 		type: 'button',
 		variant: ButtonStyle.FILLED,
-		href: '#',
+		href: '',
 		size: ButtonSize.SMALL,
 		textComponent: {
 			...Text.craft.props,

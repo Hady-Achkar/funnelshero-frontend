@@ -35,7 +35,7 @@ const NewFunnelModal: React.FC<IProps> = (props) => {
 	const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewPageData((prevState) => ({
 			...prevState,
-			[e.target.id]: e.target.value,
+			[e.target.id]: e.target.value.toLowerCase(),
 		}))
 	}, [])
 

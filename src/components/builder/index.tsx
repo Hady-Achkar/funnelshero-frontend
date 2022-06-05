@@ -1,4 +1,4 @@
-import {Editor, Frame, Element, useEditor} from '@craftjs/core'
+import {Editor, Frame} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {createTheme} from '@material-ui/core/styles'
@@ -109,18 +109,13 @@ const Builder: React.FC<IProps> = (props) => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<Prompt message={'Are you sure you want to leave this page?'} />
 			<div className="h-full">
 				<Editor
 					resolver={contentElements}
 					enabled={true}
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
-					onNodesChange={(nodes) => {
-						const serialized = nodes.serialize()
-						const compressed = lz.encodeBase64(lz.compress(serialized))
-						const deCompressed = lz.decompress(lz.decodeBase64(compressed))
-						saveFunnel(mainPage?.title, deCompressed, data?._id, mainPage?._id)
-					}}
 				>
 					<Viewport
 						data={data}
