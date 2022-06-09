@@ -36,8 +36,9 @@ const Btn = styled.a`
 
 const RenderNode = ({render}) => {
 	const {id} = useNode()
-	const {actions, query} = useEditor((state) => ({
+	const {enabled, actions, query} = useEditor((state) => ({
 		isHover: state.events.hovered,
+		enabled: state.options.enabled,
 	}))
 
 	const {
@@ -62,7 +63,7 @@ const RenderNode = ({render}) => {
 
 	useEffect(() => {
 		if (dom) {
-			if (isHover) dom.classList.add('component-selected')
+			if (isHover && enabled) dom.classList.add('component-selected')
 			else dom.classList.remove('component-selected')
 		}
 	}, [dom, isHover])
@@ -112,7 +113,7 @@ const RenderNode = ({render}) => {
 
 	return (
 		<>
-			{isHover
+			{isHover && enabled
 				? ReactDOM.createPortal(
 						<IndicatorDiv
 							ref={currentRef}

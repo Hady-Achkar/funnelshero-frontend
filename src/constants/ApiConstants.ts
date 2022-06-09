@@ -26,6 +26,7 @@ export default {
 	MANAGER: {
 		GET_SINGLE_FUNNEL: '/get-funnel',
 		GET_SINGLE_PAGE: '/get-page',
+		GET_SUBMITS: '/submits',
 		SUBMIT_OPTIN_FORM: '/opt-form',
 		BASE_URL: 'https://manager.funnelshero.com',
 		MY_FUNNELS: '/my-funnels',
