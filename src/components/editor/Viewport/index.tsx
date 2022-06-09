@@ -62,7 +62,7 @@ const Viewport: React.FC<IProps> = (props) => {
 						className={cx([
 							'craftjs-renderer flex-1 h-full transition pb-8 overflow-auto',
 							{
-								'bg-renderer-gray': enabled,
+								'bg-gray-50': enabled,
 							},
 						])}
 						ref={(ref) => connectors.select(connectors.hover(ref, null), null)}

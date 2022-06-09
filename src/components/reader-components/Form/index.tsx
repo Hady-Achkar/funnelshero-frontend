@@ -36,89 +36,9 @@ const OptinForm = (props: any) => {
 					<div className="bg-white py-8 shadow sm:rounded-lg mt-4 mb-4">
 						<form
 							className="space-y-6 px-4 py-2"
-							action={`https://manager.funnelshero.com/opt-form?targetEmail=${props.targetEmail}?funnelId=${props.funnelId}`}
+							action={`https://manager.funnelshero.com/opt-form?targetEmail=${props.targetEmail}&funnelId=${props.funnelId}`}
 							method="POST"
 						>
-							{/* <div>
-						<label
-							htmlFor="fullname"
-							className="block text-sm font-medium text-gray-700"
-						>
-							Fullname
-						</label>
-						<div className="mt-1 relative rounded-md shadow-sm">
-							<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-								<Person className="h-5 w-5 text-gray-400" aria-hidden="true" />
-							</div>
-							<input
-								disabled={enabled}
-								type="text"
-								id="fullname"
-								value={optData?.fullname}
-								onChange={handleFormChange}
-								className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-								placeholder="Mr. Magic"
-							/>
-						</div>
-					</div>
-					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-gray-700"
-						>
-							Email Address
-						</label>
-						<div className="mt-1 relative rounded-md shadow-sm">
-							<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-								<Mail className="h-5 w-5 text-gray-400" aria-hidden="true" />
-							</div>
-							<input
-								disabled={enabled}
-								type="email"
-								value={optData?.email}
-								onChange={handleFormChange}
-								name="email"
-								id="email"
-								className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-								placeholder="you@example.com"
-							/>
-						</div>
-					</div>
-					<div>
-						<label
-							htmlFor="phone"
-							className="block text-sm font-medium text-gray-700"
-						>
-							Phone number
-						</label>
-						<div className="mt-1 relative rounded-md shadow-sm">
-							<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-								<Phone className="h-5 w-5 text-gray-400" aria-hidden="true" />
-							</div>
-							<input
-								disabled={enabled}
-								type="text"
-								value={optData?.phone}
-								onChange={handleFormChange}
-								id="phone"
-								className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10  sm:text-sm border-gray-300 rounded-md"
-								placeholder="000-00-0000"
-							/>
-						</div>
-						<div className="mt-3 relative rounded-md shadow-sm">
-							<button
-								disabled={enabled || isDisabled}
-								type="submit"
-								className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-							>
-								<ContentEditable
-									html={text}
-									onChange={handleChange}
-									disabled={!enabled}
-								/>
-							</button>
-						</div>
-					</div> */}
 							<div>{props.linkedComponents['form_title']}</div>
 							<div>{props.linkedComponents['input_component1']}</div>
 							<div>{props.linkedComponents['input_component2']}</div>

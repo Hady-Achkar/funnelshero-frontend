@@ -8,6 +8,7 @@ import {useParams, useHistory} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import {AppState} from '../../reducers'
 import {IFunnel} from '../../types'
+import AnalysisTab from './SettingsTabs/AnalysisTab'
 
 const FunnelsSettings = ({open, setOpen}) => {
 	const {funnelTitle} = useParams()
@@ -47,7 +48,11 @@ const FunnelsSettings = ({open, setOpen}) => {
 			component: <MenusTab open={open} setOpen={setOpen} />,
 			current: false,
 		},
-		{name: 'Analytics', component: <div>hello 3</div>, current: false},
+		{
+			name: 'Analytics',
+			component: <AnalysisTab open={open} setOpen={setOpen} />,
+			current: false,
+		},
 	])
 
 	const handleToggleTabs = useCallback((index: number) => {

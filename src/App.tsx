@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import Routes from './routes'
 import './index.css'
@@ -6,9 +6,20 @@ import 'tailwindcss/tailwind.css'
 import {ManagerAxios, FileAxios, IconAxios, AuthAxios, ImagesAxios} from './lib'
 import {useDispatch} from 'react-redux'
 import {logoutAction, startInitializeBundles} from './actions'
+import {useLocation} from 'react-router-dom'
+import ReactGA from 'react-ga4'
 
 const App: React.FC = () => {
 	const history = useHistory()
+
+	useEffect(() => {
+		ReactGA.initialize('G-LYLC6FLSPC')
+		ReactGA.send({
+			hitType: 'pageview',
+			page: window.location.pathname + window.location.search,
+		})
+	})
+
 	const dispatch = useDispatch()
 	dispatch(startInitializeBundles())
 	ManagerAxios.interceptors.response.use(
@@ -27,7 +38,7 @@ const App: React.FC = () => {
 				history.push('/sign-in')
 			}
 			return Promise.reject(err)
-		},
+		}
 	)
 	FileAxios.interceptors.response.use(
 		(response) => {
@@ -45,7 +56,7 @@ const App: React.FC = () => {
 				history.push('/sign-in')
 			}
 			return Promise.reject(err)
-		},
+		}
 	)
 
 	IconAxios.interceptors.response.use(
@@ -64,7 +75,7 @@ const App: React.FC = () => {
 				history.push('/sign-in')
 			}
 			return Promise.reject(err)
-		},
+		}
 	)
 	AuthAxios.interceptors.response.use(
 		(response) => {
@@ -82,7 +93,7 @@ const App: React.FC = () => {
 				history.push('/sign-in')
 			}
 			return Promise.reject(err)
-		},
+		}
 	)
 	ImagesAxios.interceptors.response.use(
 		(response) => {
@@ -100,7 +111,7 @@ const App: React.FC = () => {
 				history.push('/sign-in')
 			}
 			return Promise.reject(err)
-		},
+		}
 	)
 
 	return <Routes />

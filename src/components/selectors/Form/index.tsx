@@ -80,9 +80,13 @@ const OptinForm = (props: any) => {
 	const funnelId = funnels.find((f) => f.title === funnelTitle)._id
 
 	useEffect(() => {
-		setProp((props) => (props.targetEmail = user.email))
-		setProp((props) => (props.funnelId = funnelId))
-	}, [setProp])
+		if (props.targetEmail) {
+			setProp((props) => (props.targetEmail = user.email))
+		}
+		if (props.funnelId) {
+			setProp((props) => (props.funnelId = funnelId))
+		}
+	}, [])
 	return (
 		<div
 			ref={connect}

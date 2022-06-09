@@ -22,11 +22,7 @@ const QuizzElement = (props: any) => {
 
 	const history = useHistory()
 	return (
-		<div
-			style={{backgroundColor: '#f5f5f5'}}
-			ref={connect}
-			className="p-3 rounded-lg"
-		>
+		<div ref={connect} className="p-1 rounded-lg bg-indigo-50">
 			<Element
 				is={Image}
 				width="100%"

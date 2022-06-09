@@ -109,7 +109,6 @@ const Builder: React.FC<IProps> = (props) => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Prompt message={'Are you sure you want to leave this page?'} />
 			<div className="h-full">
 				<Editor
 					resolver={contentElements}
