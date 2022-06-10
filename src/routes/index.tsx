@@ -9,6 +9,8 @@ import {
 	CheckoutPage,
 	BundlesPage,
 	SignupPage,
+	TermsPage,
+	PrivacyPage,
 } from '../pages'
 import Route from './route'
 
@@ -68,6 +70,18 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		exact: true,
 		isPrivate: false,
 		component: SignupPage,
+	},
+	{
+		path: '/terms',
+		exact: true,
+		isPrivate: false,
+		component: TermsPage,
+	},
+	{
+		path: '/privacy',
+		exact: true,
+		isPrivate: false,
+		component: PrivacyPage,
 	},
 ]
 

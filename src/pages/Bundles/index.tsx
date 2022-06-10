@@ -32,7 +32,7 @@ const BundlesPage = () => {
 	return (
 		<div>
 			<Header />
-			<div className="bg-indigo-700">
+			<div className="bg-gray-900">
 				<div className="pt-12 sm:pt-16 lg:pt-24">
 					<div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
 						<div className="max-w-3xl mx-auto space-y-2 lg:max-w-none">
@@ -43,15 +43,16 @@ const BundlesPage = () => {
 								The right price for you, whoever you are
 							</p>
 							<p className="text-xl text-gray-300">
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum
-								sequi unde repudiandae natus.
+								Choose a plan and start your 14-day free trial. Generate
+								appointments and leads or source talent online - completely free
+								& without a risk.
 							</p>
 						</div>
 					</div>
 				</div>
-				<div className="mt-8 pb-12 bg-indigo-50 sm:mt-12 sm:pb-16 lg:mt-16 lg:pb-24">
+				<div className="mt-8 pb-12 bg-white sm:mt-12 sm:pb-16 lg:mt-16 lg:pb-24">
 					<div className="relative">
-						<div className="absolute inset-0 h-3/4 bg-indigo-700" />
+						<div className="absolute inset-0 h-3/4 bg-gray-900" />
 						<div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 							<div className="max-w-md mx-auto space-y-4 lg:max-w-5xl lg:grid lg:grid-cols-2 lg:gap-5 lg:space-y-0">
 								{bundles.map((bundle) => (
@@ -90,15 +91,13 @@ const BundlesPage = () => {
 														</li>
 													))}
 											</ul>
-											<div className="rounded-md shadow">
-												<button
-													onClick={() => handleSubscribe(bundle?.id)}
-													className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700"
-													aria-describedby="tier-standard"
-												>
-													Start trial
-												</button>
-											</div>
+											<button
+												onClick={() => handleSubscribe(bundle?.id)}
+												className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700"
+												aria-describedby="tier-standard"
+											>
+												Start trial
+											</button>
 										</div>
 									</div>
 								))}
