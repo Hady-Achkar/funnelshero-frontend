@@ -112,6 +112,12 @@ const Home = () => {
 		},
 		// More questions...
 	]
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			if (status === UserState.SUB_ACTIVE) history.push('/dashboard')
+		}
+	})
 	return (
 		<div>
 			<MainHeader />

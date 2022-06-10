@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react'
 import {startGoogleLogin, startLogin} from '../../actions'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {LoginPayload} from '../../services'
 import {useDispatch} from 'react-redux'
 import FacebookSvg from '../../assets/icons/facebook-svgrepo-com.svg'
@@ -25,9 +25,11 @@ const Signin = () => {
 	})
 
 	const dispatch = useDispatch()
+	const history = useHistory()
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
 		dispatch(startLogin(userData))
+		history.push('/dashboard')
 	}
 
 	const handleGoogleFailure = (result) => {}
@@ -104,21 +106,6 @@ const Signin = () => {
 						</div>
 
 						<div className="flex items-center justify-between">
-							<div className="flex items-center">
-								<input
-									id="remember-me"
-									name="remember-me"
-									type="checkbox"
-									className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-								/>
-								<label
-									htmlFor="remember-me"
-									className="ml-2 block text-sm text-gray-900"
-								>
-									Remember me
-								</label>
-							</div>
-
 							<div className="text-sm">
 								<Link
 									to="/forgot-password"
