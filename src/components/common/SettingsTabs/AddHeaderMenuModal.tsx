@@ -163,9 +163,21 @@ const AddMenuModal = ({open, setOpen}) => {
 									<div className="mt-1 rounded-md shadow-sm -space-y-px">
 										{menuData.links.map((item, index) => {
 											return (
-												<div key={index} className={'flex'}>
-													<p>{item?.title}</p>
-													<p>{item?.href}</p>
+												<div key={index}>
+													<div className="flex justify-between">
+														<div>
+															<p>{item?.title}</p>
+														</div>
+														<div>
+															<p>
+																to{' '}
+																<span className="p-2 text-xs bg-gray-100 rounded-lg">
+																	{funnelState.baseDomain}
+																	{item?.href}
+																</span>
+															</p>
+														</div>
+													</div>
 													<button onClick={() => handleDeleteLink(index)}>
 														Delete
 													</button>

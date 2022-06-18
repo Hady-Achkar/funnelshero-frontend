@@ -126,7 +126,7 @@ export const TextSettings = () => {
 					<ButtonsGroup.Item
 						onClick={handleChange}
 						id="line-through"
-						align="right"
+						align="middle"
 						title="Strike"
 						name="textDecoration"
 					/>

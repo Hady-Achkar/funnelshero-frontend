@@ -1,6 +1,6 @@
 import {useNode} from '@craftjs/core'
 import {Divider, Grid} from '@material-ui/core'
-import React, {useCallback, useState} from 'react'
+import React, {Fragment, useCallback, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {AppState} from '../../../reducers'
 import {ToolbarItem, ButtonsGroup, ToolbarDropdown} from '../../editor'
@@ -58,7 +58,7 @@ export const ButtonSettings = () => {
 			</div>
 
 			<div className="px-2 w-full">
-				<h5 className="text-sm text-light-gray-1 text-left font-medium text-dark-gray">
+				<h5 className="text-sm text-light-gray-1 py-1 text-left font-medium text-dark-gray">
 					Go to
 				</h5>
 				<div className="relative flex items-start">
@@ -76,21 +76,29 @@ export const ButtonSettings = () => {
 						</label>
 					</div>
 				</div>
-				{checked ? (
-					<ToolbarItem type="text" propKey="href" full={true} />
-				) : (
-					<div>
-						<ToolbarItem full={true} type="select" propKey="href">
-							{mainFunnel?.pages.map((item) => {
-								return (
-									<option key={item?._id} value={item?.link}>
-										{item?.title}
-									</option>
-								)
-							})}
-						</ToolbarItem>
-					</div>
-				)}
+				<div className="py-2">
+					{checked ? (
+						<Fragment>
+							<label className="text-gray-500 text-xs">
+								make sure to include the full link ex:https://www.google.com
+								<br />
+							</label>
+							<ToolbarItem type="text" propKey="href" full={true} />
+						</Fragment>
+					) : (
+						<div>
+							<ToolbarItem full={true} type="select" propKey="href">
+								{mainFunnel?.pages.map((item) => {
+									return (
+										<option key={item?._id} value={item?.link}>
+											{item?.title}
+										</option>
+									)
+								})}
+							</ToolbarItem>
+						</div>
+					)}
+				</div>
 			</div>
 			<ButtonsGroup title="Size">
 				<ButtonsGroup.Item

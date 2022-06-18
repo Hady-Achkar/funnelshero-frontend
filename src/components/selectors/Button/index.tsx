@@ -119,7 +119,7 @@ const Button = (props: Partial<ButtonProps>) => {
 	}
 
 	return (
-		<div ref={connect} className="w-full flex justify-center ">
+		<div ref={connect} className="w-full flex justify-center my-5">
 			<button
 				type={enabled ? 'button' : type}
 				className={cx(mainClassNames, mainSize, 'text-center mx-auto')}

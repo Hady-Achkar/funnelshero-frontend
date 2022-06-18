@@ -8,6 +8,8 @@ import {Menu, Transition, Popover} from '@headlessui/react'
 import {ChevronDownIcon, MenuIcon, XIcon} from '@heroicons/react/solid'
 import classNames from 'classnames'
 import ConfirmationModal from './ConfirmationModal'
+import {useLocation} from 'react-router-dom'
+import {NewFunnelModal} from '..'
 
 const navigation = [
 	{name: 'Home', href: '/'},
@@ -17,6 +19,9 @@ const navigation = [
 
 const Header = () => {
 	const [open, setOpen] = useState<boolean>(false)
+
+	const [newFunnelOpen, setNewFunnelOpen] = useState(false)
+	const location = useLocation()
 
 	const {
 		isAuthenticated,
@@ -143,6 +148,16 @@ const Header = () => {
 										</Menu.Items>
 									</Transition>
 								</Menu>
+								{location.pathname === '/dashboard' && (
+									<span className="inline-flex rounded-md shadow">
+										<button
+											onClick={() => setNewFunnelOpen(true)}
+											className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
+										>
+											New Funnel
+										</button>
+									</span>
+								)}
 							</div>
 						) : (
 							<div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 space-x-2">
@@ -247,6 +262,7 @@ const Header = () => {
 				setOpen={() => setOpen(false)}
 				action={handleLogout}
 			/>
+			<NewFunnelModal open={newFunnelOpen} setOpen={setNewFunnelOpen} />
 		</header>
 	)
 }

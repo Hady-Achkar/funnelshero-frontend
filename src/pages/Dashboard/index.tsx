@@ -9,6 +9,8 @@ import {IFunnel} from '../../types'
 import DashboardHeader from '../../components/web-components/DashboardHeader'
 import ConfirmationModal from '../../components/common/ConfirmationModal'
 import {PlusIcon} from '@heroicons/react/solid'
+import Header from '../../components/common/Header'
+import Footer from '../../components/common/Footer'
 
 const Dashboard: React.FC = () => {
 	const {funnels, loading} = useSelector((state: AppState) => state.funnels)
@@ -36,7 +38,7 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<React.Fragment>
-			<DashboardHeader />
+			<Header />
 			<Wrapper loading={loading}>
 				<div className="bg-white  py-9" style={{minHeight: '95vh'}}>
 					<Container>
@@ -215,6 +217,7 @@ const Dashboard: React.FC = () => {
 					</Container>
 				</div>
 				<NewFunnelModal open={modalOpen} setOpen={setModalOpen} />
+				<Footer />
 			</Wrapper>
 		</React.Fragment>
 	)
