@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import {ApiConstants} from '../constants'
-import {FileAxios} from '../lib'
+import {ManagerAxios} from '../lib'
 
 const useUpload = () => {
 	const [uploadProgress, setUploadProgress] = useState<string>('0')
-	const [isUploaded, setIsUploaded] = useState<boolean>(true)
+	const [isUploaded, setIsUploaded] = useState<boolean>(false)
 	const [error, setError] = useState<string>()
 	const handleUpload = (event) => {
 		setUploadProgress('0')
 		setIsUploaded(false)
 		const formData = new FormData()
 		formData.append('file', event.target.files[0])
-		return FileAxios.post(
-			`${ApiConstants.FILES.UPLOAD_FILE}?type=thumbnail`,
+		return ManagerAxios.post(
+			`${ApiConstants.MANAGER.UPLOAD_FILE}?type=image`,
 			formData,
 			{
 				onUploadProgress: (progress) =>
