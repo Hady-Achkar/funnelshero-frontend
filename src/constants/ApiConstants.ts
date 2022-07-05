@@ -39,6 +39,7 @@ export default {
 		ADD_MENU: '/menu',
 		DELETE_MENU: '/menu',
 		DELETE_PAGE: '/page',
+		UPLOAD_FILE: '/upload',
 	},
 	SERVER: {
 		BASE_URL: 'https://funnelshero-website.com',

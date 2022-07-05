@@ -140,8 +140,7 @@ const Dashboard: React.FC = () => {
 																	viewBox="0 0 24 24"
 																	stroke="currentColor"
 																	onClick={() => {
-																		setActiveModalOpen(true)
-																		setMainFunnel(item)
+																		history.push(`/settings/${item._id}`)
 																	}}
 																>
 																	<path

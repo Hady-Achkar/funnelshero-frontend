@@ -6,7 +6,6 @@ import 'tailwindcss/tailwind.css'
 import {ManagerAxios, FileAxios, IconAxios, AuthAxios, ImagesAxios} from './lib'
 import {useDispatch} from 'react-redux'
 import {logoutAction, startInitializeBundles} from './actions'
-import {useLocation} from 'react-router-dom'
 import ReactGA from 'react-ga4'
 
 const App: React.FC = () => {
@@ -30,8 +29,10 @@ const App: React.FC = () => {
 			if (err.response.status === 500) {
 				if (err.response.data.error === 'jwt expired') {
 					dispatch(logoutAction())
+					history.push('/sign-in')
+				} else {
+					history.push('/500')
 				}
-				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {
@@ -48,8 +49,10 @@ const App: React.FC = () => {
 			if (err.response.status === 500) {
 				if (err.response.data.error === 'jwt expired') {
 					dispatch(logoutAction())
+					history.push('/sign-in')
+				} else {
+					history.push('/500')
 				}
-				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {
@@ -67,8 +70,10 @@ const App: React.FC = () => {
 			if (err.response.status === 500) {
 				if (err.response.data.error === 'jwt expired') {
 					dispatch(logoutAction())
+					history.push('/sign-in')
+				} else {
+					history.push('/500')
 				}
-				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {
@@ -85,8 +90,10 @@ const App: React.FC = () => {
 			if (err.response.status === 500) {
 				if (err.response.data.error === 'jwt expired') {
 					dispatch(logoutAction())
+					history.push('/sign-in')
+				} else {
+					history.push('/500')
 				}
-				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {
@@ -103,8 +110,10 @@ const App: React.FC = () => {
 			if (err.response.status === 500) {
 				if (err.response.data.error === 'jwt expired') {
 					dispatch(logoutAction())
+					history.push('/sign-in')
+				} else {
+					history.push('/500')
 				}
-				history.push('/500')
 			} else if (err.response.status === 400 || err.response.status === 404) {
 				history.push('/404')
 			} else {

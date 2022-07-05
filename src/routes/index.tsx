@@ -11,6 +11,7 @@ import {
 	SignupPage,
 	TermsPage,
 	PrivacyPage,
+	FunnelSettings,
 } from '../pages'
 import Route from './route'
 
@@ -58,6 +59,12 @@ const routesConfiguration: IRoutesConfiguration[] = [
 		exact: true,
 		isPrivate: true,
 		component: CheckoutPage,
+	},
+	{
+		path: '/settings/:funnelId',
+		exact: true,
+		isPrivate: true,
+		component: FunnelSettings,
 	},
 	{
 		path: '/bundles',
