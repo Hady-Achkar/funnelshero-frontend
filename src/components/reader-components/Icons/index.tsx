@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react'
 import classNames from 'classnames'
+import ComponentLayout from '../../common/ComponentLayout'
 
 export enum IconSize {
 	SMALL = 'SMALL',
@@ -13,7 +14,19 @@ export type IconProps = {
 	href: string
 }
 
-const Icons = (props: Partial<IconProps>) => {
+export const IconsWrapper = ({children, ...props}) => {
+	return (
+		<div
+			title="Icons Container"
+			className="w-full my-5 flex justify-around items-center"
+			{...props}
+		>
+			{children}
+		</div>
+	)
+}
+
+export const Icons = (props: any) => {
 	const {src, size, href} = props
 
 	const sizer = useCallback(() => {
@@ -30,12 +43,18 @@ const Icons = (props: Partial<IconProps>) => {
 	}, [size])
 
 	return (
-		<div>
-			<a href={href} className={'pointer-events-auto'}>
+		<ComponentLayout>
+			<a href={href}>
 				<img src={src} alt="Funnelshero-Icon" className={classNames(sizer())} />
 			</a>
-		</div>
+		</ComponentLayout>
 	)
 }
 
-export default Icons
+export const IconObject = (props) => {
+	return (
+		<IconsWrapper>
+			<div>{props.linkedComponents['icon_wrapper'].children}</div>
+		</IconsWrapper>
+	)
+}

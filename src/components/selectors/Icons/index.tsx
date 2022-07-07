@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react'
-import {useEditor, useNode} from '@craftjs/core'
+import {Element, useEditor, useNode} from '@craftjs/core'
 import IconsSettings from './IconsSettings'
 import classNames from 'classnames'
 
@@ -15,7 +15,30 @@ export type IconProps = {
 	href: string
 }
 
-const Icons = (props: Partial<IconProps>) => {
+export const IconsWrapper = ({children, ...props}) => {
+	const {
+		connectors: {connect},
+	} = useNode()
+	return (
+		<div
+			title="Icons Container"
+			ref={connect}
+			className="w-full my-5 flex justify-around items-center"
+			{...props}
+		>
+			{children}
+		</div>
+	)
+}
+
+IconsWrapper.craft = {
+	displayName: 'Icons Container',
+	rules: {
+		canMoveIn: (nodes) => nodes.every((node) => node.data.type === Icons),
+	},
+}
+
+export const Icons = (props: Partial<IconProps>) => {
 	const {
 		connectors: {connect},
 	} = useNode()
@@ -50,6 +73,21 @@ const Icons = (props: Partial<IconProps>) => {
 	)
 }
 
+export const IconObject = () => {
+	return (
+		<Element canvas id="icon_wrapper" is={IconsWrapper}>
+			<Element is={Icons} id="icon_1" />
+			<Element is={Icons} id="icon_2" />
+			<Element is={Icons} id="icon_3" />
+			<Element is={Icons} id="icon_4" />
+		</Element>
+	)
+}
+
+IconObject.craft = {
+	displayName: 'Icon Container',
+}
+
 Icons.craft = {
 	displayName: 'Icon',
 	props: {
@@ -59,5 +97,3 @@ Icons.craft = {
 	},
 	related: {toolbar: IconsSettings},
 }
-
-export default Icons

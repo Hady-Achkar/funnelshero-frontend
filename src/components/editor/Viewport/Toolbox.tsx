@@ -6,19 +6,15 @@ import ButtonSvg from '../../../public/icons/toolbox/button.svg'
 
 import {
 	Button,
-	Container,
 	Text,
 	Video,
-	HyperLink,
 	Image,
 	Divider,
-	Icon,
 	OptinForm,
 	Paragraph,
 	Quizz,
-	HeaderComponent,
-	FooterComponent,
 	CodeBlockComponent,
+	IconObject,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -109,14 +105,12 @@ export const Toolbox = () => {
 					Icon={TextFormat}
 					component={Paragraph}
 				/>
-
 				<ToolboxItem
 					isCanva={true}
 					title="Quiz"
 					Icon={TextFormat}
 					component={Quizz}
 				/>
-
 				<ToolboxItem
 					isCanva={false}
 					title="Form"
@@ -128,6 +122,12 @@ export const Toolbox = () => {
 					title="Code Block"
 					Icon={CodeOutlined}
 					component={CodeBlockComponent}
+				/>
+				<ToolboxItem
+					isCanva={true}
+					title="Icons"
+					Icon={CodeOutlined}
+					component={IconObject}
 				/>
 				{/* <ToolboxItem
 					isCanva={false}

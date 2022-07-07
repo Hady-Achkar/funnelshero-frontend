@@ -1,6 +1,7 @@
 import React from 'react'
 import {Element, useNode} from '@craftjs/core'
-import Icons, {IconSize} from '../../Icons'
+import {IconSize} from '../../Icons'
+import {Icons} from '../../../selectors'
 import InputSettings from './InputSettings'
 
 const defaultProps = {

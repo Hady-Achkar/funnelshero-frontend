@@ -2,7 +2,7 @@ import {useNode, Element} from '@craftjs/core'
 import React from 'react'
 import {ILink, IMenu} from '../../../types'
 import FooterSettings from './FooterSettings'
-import Icon from '../Icons/index'
+import {Icons} from '../../selectors'
 import Image from '../Image/index'
 interface FooterProps {
 	links: ILink[]
@@ -30,7 +30,7 @@ export const IconsContainer = ({children, ...props}) => {
 IconsContainer.craft = {
 	displayName: 'Icons space',
 	rules: {
-		canMoveIn: (nodes) => nodes.data.type === Icon,
+		canMoveIn: (nodes) => nodes.data.type === Icons,
 	},
 }
 
@@ -60,11 +60,11 @@ const FooterComponent = (props: Partial<FooterProps>) => {
 							))}
 					</nav>
 					<Element canvas is={IconsContainer} id="icons_container">
-						<Element is={Icon} id="social_icon" />
-						<Element is={Icon} id="social_icon1" />
-						<Element is={Icon} id="social_icon2" />
-						<Element is={Icon} id="social_icon3" />
-						<Element is={Icon} id="social_icon4" />
+						<Element is={Icons} id="social_Icons" />
+						<Element is={Icons} id="social_Icons1" />
+						<Element is={Icons} id="social_Icons2" />
+						<Element is={Icons} id="social_Icons3" />
+						<Element is={Icons} id="social_Icons4" />
 					</Element>
 					<p className="mt-8 text-center text-base text-gray-400">
 						&copy; {new Date().getFullYear()} {brand}, Inc. All rights reserved.

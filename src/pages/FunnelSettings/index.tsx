@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import Header from '../../components/common/Header'
 import Footer from '../../components/common/Footer'
 import {
@@ -11,6 +11,8 @@ import {
 import {AppState} from '../../reducers'
 import {categories} from '../../constants'
 import {useCopyToClipboard} from '../../hooks'
+import {editFunnel} from '../../services'
+import {startInitializeMyFunnels} from '../../actions'
 
 const Index = () => {
 	const {funnels} = useSelector((state: AppState) => state.funnels)
@@ -24,6 +26,32 @@ const Index = () => {
 	]
 
 	const [value, copy] = useCopyToClipboard()
+
+	const [formData, setFormData] = useState({
+		funnelId: _funnel._id,
+		proDomain: _funnel.proDomain,
+		contactEmail: _funnel.contactEmail,
+		category: _funnel.category,
+	})
+
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		setFormData({...formData, [e.target.id]: e.target.value})
+	}
+
+	const dispatch = useDispatch()
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault()
+		editFunnel(formData)
+			.then((res) => {
+				console.log(res.data)
+				dispatch(startInitializeMyFunnels)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
 	return (
 		<>
 			<Header />
@@ -52,7 +80,7 @@ const Index = () => {
 					{/* Payment details */}
 					<div className="space-y-6 sm:px-6 lg:px-0">
 						<section aria-labelledby="payment-details-heading">
-							<form action="#" method="POST">
+							<form onSubmit={handleSubmit}>
 								<div className="shadow sm:rounded-md sm:overflow-hidden">
 									<div className="bg-white py-6 px-4 sm:p-6">
 										<div>
@@ -97,7 +125,8 @@ const Index = () => {
 												<select
 													name="category"
 													id="category"
-													value={_funnel.category}
+													onChange={handleChange}
+													value={formData.category}
 													autoComplete="cc-family-name"
 													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm"
 												>
@@ -122,14 +151,20 @@ const Index = () => {
 												>
 													Domain
 												</label>
-												<input
-													type="text"
-													placeholder="mydomain.com"
-													name="proDomain"
-													id="proDomain"
-													autoComplete="email"
-													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm"
-												/>
+												<div className="mt-1 flex rounded-md shadow-sm">
+													<span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+														https://
+													</span>
+													<input
+														type="text"
+														name="proDomain"
+														id="proDomain"
+														className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300"
+														placeholder="domain.com"
+														onChange={handleChange}
+														value={formData.proDomain}
+													/>
+												</div>
 											</div>
 
 											<div className="col-span-4 sm:col-span-2">
@@ -143,6 +178,8 @@ const Index = () => {
 													type="text"
 													placeholder="mydomain.com"
 													name="contactEmail"
+													value={formData.contactEmail}
+													onChange={handleChange}
 													id="contactEmail"
 													className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none sm:text-sm"
 												/>
@@ -207,6 +244,7 @@ const Index = () => {
 										</button>
 									</div>
 								</div>
+								<pre>{JSON.stringify(formData)}</pre>
 							</form>
 						</section>
 					</div>
