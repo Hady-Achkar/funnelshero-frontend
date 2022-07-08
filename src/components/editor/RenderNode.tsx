@@ -178,7 +178,7 @@ const RenderNode = ({render}) => {
 								</Btn>
 							) : null}
 
-							{id !== ROOT_NODE && (
+							{deletable && id !== ROOT_NODE && (
 								<Btn
 									className="cursor-pointer"
 									onMouseDown={(e: React.MouseEvent) => {

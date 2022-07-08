@@ -1,5 +1,4 @@
 import React from 'react'
-import Icons, {IconSize} from '../../Icons'
 
 const defaultProps = {
 	label: 'form label',

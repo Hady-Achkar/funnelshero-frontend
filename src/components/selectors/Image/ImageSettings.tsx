@@ -23,7 +23,6 @@ export const ImageSettings = () => {
 	const [images, setImages] = useState<GetRandomImages.Image[]>([])
 	const [myImages, setMyImages] = useState<File[]>([])
 	const [storage, setStorage] = useState<number>(0)
-
 	const [loading, setLoading] = useState<boolean>(true)
 	const [selfImagesLoading, setSelfImagesLoading] = useState<boolean>(true)
 
@@ -96,58 +95,24 @@ export const ImageSettings = () => {
 		actions: {setProp},
 	} = useNode()
 
-	// Upload FUnctions
-
 	const {handleUpload, uploadProgress, isUploaded} = useUpload()
 
-	console.log(isUploaded)
-
 	const fileInputRef = useRef<HTMLInputElement>()
-	const handleOpenUpload = useCallback(() => {
+	const handleOpenUpload = () => {
 		fileInputRef.current?.click()
-	}, [])
-	const handleStartUpload = useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			handleUpload(event)?.then((file) => {
-				setProp((prop) => (prop.src = file.value))
-			})
-		},
-		[handleUpload]
-	)
-	// Upload
-
-	//  <div className="col-span-3">
-	//                 <label className="block text-sm font-medium text-gray-700">Photo</label>
-	//                 <div className="mt-1 w-full flex items-center">
-	//                             <span
-	//                                 className="inline-block bg-gray-100 rounded-md overflow-hidden">
-	//                                     <img src={profileData?.image}
-	//                                          alt={`Dropshero-admin-${profileData?.fullName}`}
-	//                                          className={'w-16 h-16 object-cover'}/>
-	//                                  </span>
-	//                     <button
-	//                         onClick={handleOpenUpload}
-	//                         type="button"
-	//                         className="ml-5 bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-	//                     >
-	//                         Change
-	//                     </button>
-	//                     {/*@ts-ignore*/}
-	//                     <input type={'file'} ref={fileInputRef} hidden id={'image'}
-	//                            onChange={handleStartUpload}/>
-	//                     {!isUploaded && parseInt(uploadProgress) > 0 &&
-	//                         <div className="w-full bg-gray-200 h-1 mx-8">
-	//                             <div className="bg-blue-600 h-1 " style={{width: uploadProgress}}/>
-	//                         </div>}
-	//                 </div>
-	//             </div>
+	}
+	const handleStartUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+		handleUpload(event)?.then((file) => {
+			setProp((props) => props.src === file.value)
+			console.log(file)
+		})
+	}
 
 	return (
 		<React.Fragment>
 			<ToolbarSection title="Source">
 				<ToolbarItem full={true} propKey="src" type="text" label="Image URL" />
-
-				<div>
+				{/* <div>
 					<button
 						onClick={handleOpenUpload}
 						type="button"
@@ -155,7 +120,7 @@ export const ImageSettings = () => {
 					>
 						Change
 					</button>
-					{/*@ts-ignore*/}
+					@ts-ignore
 					<input
 						type={'file'}
 						ref={fileInputRef}
@@ -171,8 +136,9 @@ export const ImageSettings = () => {
 							/>
 						</div>
 					)}
-				</div>
+				</div> */}
 
+				<ToolbarItem type="file" propKey="src" full />
 				<Grid container className="mb-3">
 					<div className="relative rounded-md shadow-sm w-full">
 						<div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
@@ -205,7 +171,6 @@ export const ImageSettings = () => {
 					</ImageList>
 				</Wrapper>
 			</ToolbarSection>
-
 			<ToolbarSection title="Decoration" props={['radius', 'shadow']}>
 				<ToolbarItem
 					full={true}

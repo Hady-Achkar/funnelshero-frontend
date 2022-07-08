@@ -1,6 +1,6 @@
 import React from 'react'
 import {ILink, IMenu} from '../../../types'
-import Icon from '../Icons/index'
+import {Icons as Icon} from '../Icons/index'
 interface FooterProps {
 	links: ILink[]
 	brand: string
