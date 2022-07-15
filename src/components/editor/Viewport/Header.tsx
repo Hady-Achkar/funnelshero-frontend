@@ -19,6 +19,7 @@ import {Reader} from '../..'
 import {Tooltip} from '@material-ui/core'
 import {FirstPage, LastPage} from '@mui/icons-material'
 interface IProps {
+	
 	data: IFunnel
 	handleChangePage: (page: IPage) => void
 	mainPage: IPage
