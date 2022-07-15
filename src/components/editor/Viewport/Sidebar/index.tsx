@@ -18,11 +18,12 @@ import {useDispatch} from 'react-redux'
 import {startInitializeMyFunnels} from '../../../../actions'
 
 export const SidebarDiv = styled.div<{enabled: boolean}>`
-	width: 400px;
+	/* width: 400px; */
+	width: auto;
 	opacity: ${(props) => (props.enabled ? 1 : 0)};
 	background: #fff;
 	margin-right: ${(props) => (props.enabled ? 0 : -400)}px;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 `
 interface IProps {
 	data: IFunnel
@@ -54,12 +55,13 @@ export const Sidebar: React.FC<IProps> = (props) => {
 	}, [])
 
 	return (
-		<SidebarDiv enabled={enabled} className="sidebar transition bg-white w-2">
+		<SidebarDiv enabled={enabled} className="sidebar transition bg-gray-100 w-2">
 			<div className="flex flex-col h-full">
 				<SidebarItem
 					icon={CustomizeIcon}
 					title="Design"
-					height={!pagesVisible ? 'full' : '40%'}
+					height={!pagesVisible ? 'full' : '42%'}
+					// height={!pagesVisible ? 'full' : '40%'}
 					visible={toolbarVisible}
 					onChange={(val) => setToolbarVisible(val)}
 				>

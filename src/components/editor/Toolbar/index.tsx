@@ -14,7 +14,7 @@ const Toolbar = () => {
 	}))
 
 	return (
-		<div className="py-1 h-full bg-white">
+		<div className="py-1 h-full bg-gray-100">
 			{active && related.toolbar && React.createElement(related.toolbar)}
 			{!active && (
 				<div
