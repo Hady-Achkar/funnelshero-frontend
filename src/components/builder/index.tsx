@@ -91,6 +91,7 @@ const Builder: React.FC<IProps> = (props) => {
 					enabled={true}
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
+					onNodesChange={(nodes) => {}}
 				>
 					<Viewport
 						data={data}

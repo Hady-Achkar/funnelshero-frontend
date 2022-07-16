@@ -1,6 +1,7 @@
 import React from 'react'
-import {useNode} from '@craftjs/core'
+import {Element, useNode} from '@craftjs/core'
 import CheckboxItemSettings from './CheckboxItemSettings'
+import {Text} from '../../../selectors'
 
 const CheckboxItem = (props) => {
 	const {
@@ -10,7 +11,10 @@ const CheckboxItem = (props) => {
 		selected: node.events.selected,
 	}))
 	return (
-		<div ref={connect} className="relative flex items-start">
+		<div
+			ref={connect}
+			className="relative flex items-center justify-between py-4 px-8 rounded-full border border-gray-200 mx-4"
+		>
 			<div className="flex items-center h-5">
 				<input
 					id="comments"
@@ -21,14 +25,12 @@ const CheckboxItem = (props) => {
 				/>
 			</div>
 			<div className="ml-3 text-sm flex items-center justify-between">
-				<label htmlFor="comments" className="font-medium text-gray-700">
-					{props.text}
-				</label>
-				<img
-					src={props.src}
-					className="rounded cursor-pointer hover:border-indigo-500 medium-icon"
-				/>
+				<Element is={Text} id="cb_title" />
 			</div>
+			<img
+				src={props.src}
+				className="rounded cursor-pointer hover:border-indigo-500 large-icon"
+			/>
 		</div>
 	)
 }
@@ -36,7 +38,7 @@ const CheckboxItem = (props) => {
 CheckboxItem.craft = {
 	displayName: 'Choice',
 	props: {
-		src: '',
+		src: 'https://cdn-icons-png.flaticon.com/128/1384/1384015.png',
 		text: '',
 	},
 	related: {

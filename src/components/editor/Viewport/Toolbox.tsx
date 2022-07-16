@@ -132,7 +132,7 @@ export const Toolbox = () => {
 				/>
 				<ToolboxItem
 					isCanva={true}
-					title="Icons"
+					title="List"
 					Icon={CodeOutlined}
 					component={CheckboxComponent}
 				/>

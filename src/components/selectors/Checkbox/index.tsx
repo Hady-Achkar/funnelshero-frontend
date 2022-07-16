@@ -10,8 +10,8 @@ const CheckboxComponent = () => {
 		selected: node.events.selected,
 	}))
 	return (
-		<fieldset className="border-t border-b border-gray-200">
-			<div className="divide-y divide-gray-200">
+		<fieldset ref={connect}>
+			<div className="space-y-6 my-5">
 				<Element is={CheckboxItem} id="cb_1" />
 				<Element is={CheckboxItem} id="cb_2" />
 				<Element is={CheckboxItem} id="cb_3" />
