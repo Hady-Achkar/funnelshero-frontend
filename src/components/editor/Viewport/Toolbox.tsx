@@ -15,6 +15,7 @@ import {
 	Quizz,
 	CodeBlockComponent,
 	IconObject,
+	QuestionBox,
 } from '../../selectors'
 import {
 	BlurLinear,
@@ -128,6 +129,12 @@ export const Toolbox = () => {
 					title="Icons"
 					Icon={CodeOutlined}
 					component={IconObject}
+				/>
+				<ToolboxItem
+					isCanva={true}
+					title="Question"
+					Icon={CodeOutlined}
+					component={QuestionBox}
 				/>
 				{/* <ToolboxItem
 					isCanva={false}
