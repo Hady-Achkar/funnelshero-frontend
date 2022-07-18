@@ -55,7 +55,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 	}, [])
 
 	return (
-		<SidebarDiv enabled={enabled} className="sidebar transition bg-gray-100 w-2">
+		<SidebarDiv enabled={enabled} className="sidebar transition  w-2">
 			<div className="flex flex-col h-full">
 				<SidebarItem
 					icon={CustomizeIcon}
@@ -78,7 +78,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 						<Layers expandRootOnLoad={false} />
 					</div>
 				</SidebarItem> */}
-
+{/* 
 				<SidebarItem
 					//@ts-ignore
 					icon={PagesIcon}
@@ -173,7 +173,7 @@ export const Sidebar: React.FC<IProps> = (props) => {
 							</div>
 						)
 					})}
-				</SidebarItem>
+				</SidebarItem> */}
 			</div>
 			<NewPageModal
 				open={newPageModalOpen}

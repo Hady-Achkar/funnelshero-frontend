@@ -139,8 +139,8 @@ export const Header: React.FC<IProps> = (props) => {
 									<ArrowLeftIcon
 										className={
 											!canUndo
-												? 'text-gray-400 w-6 h-6'
-												: 'text-indigo-800 w-6 h-6'
+												? 'text-gray-400 w-5 h-5'
+												: 'text-indigo-800 w-5 h-5'
 										}
 									/>
 								</button>
@@ -156,8 +156,8 @@ export const Header: React.FC<IProps> = (props) => {
 									<ArrowRightIcon
 										className={
 											!canRedo
-												? 'text-gray-400 w-6 h-6'
-												: 'text-indigo-800 w-6 h-6'
+												? 'text-gray-400 w-5 h-5'
+												: 'text-indigo-800 w-5 h-5'
 										}
 									/>
 								</button>
@@ -168,33 +168,40 @@ export const Header: React.FC<IProps> = (props) => {
 				<div className="mt-3 flex sm:mt-0 sm:ml-4">
 					{enabled ? (
 						<React.Fragment>
-							
+							<Tooltip title="Preview" placement="bottom">
+								<button
+									type="button"
+									className="inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+									onClick={() => {
+										actions.setOptions((options) => (options.enabled = !enabled))
+										// handleDecode()
+									}}
+								>
+									<PlayIcon className='text-white-400 w-5 h-5' />
+								</button>
+							</Tooltip>
+							<Tooltip title="Publish" placement="bottom">
 							<button
 								type="button"
-								className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-								onClick={() => {
-									actions.setOptions((options) => (options.enabled = !enabled))
-									// handleDecode()
-								}}
-							>
-								<PlayIcon className='text-white-400 w-6 h-6' />
-							</button>
-							<button
-								type="button"
-								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+								className="ml-3 inline-flex items-center px-3 py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
 								onClick={() => setOpenConfirmPublish(true)}
 								disabled={isPublished}
 							>
-								<PaperAirplaneIcon className='text-white-400 w-6 h-6'/>
+								<PaperAirplaneIcon className='text-white-400 w-5 h-5'/>
 							</button>
-							<button
-								type="button"
-								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-								onClick={handleDecode}
-							>
-								<BookmarkIcon className='text-white-400 w-6 h-6'/>
-							</button>
+							</Tooltip>
+							<Tooltip title="Save" placement="bottom">
+								<button
+									type="button"
+									className="ml-3 inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+									onClick={handleDecode}
+								>
+									<BookmarkIcon className='text-white-400 w-5 h-5'/>
+								</button>
+							</Tooltip>
+							
 							<div className="inline-flex items-center cursor-pointer hover:opacity-80 ml-3">
+								
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="h-6 w-6 text-gray-500"

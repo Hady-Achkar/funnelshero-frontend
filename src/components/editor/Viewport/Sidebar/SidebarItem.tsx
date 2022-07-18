@@ -46,14 +46,14 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 		<SidebarItemDiv
 			visible={visible}
 			height={height}
-			className="flex flex-col  bg-gray-100  shadow-sm mt-2  py-3"
+			className={`flex flex-col shadow-sm mt-2  py-3 ${title=="Pages"?"bg-white":"bg-gray-100"}`}
 		>
 			<HeaderDiv
-				className={`rounded flex bg-gray-100 items-center px-2  ${
+				className={`rounded flex items-center px-2  ${
 					visible ? 'shadow-sm' : ''
 				}`}
 			>
-				<div className="flex-1 bg-gray-100 flex items-center">
+				<div className="flex-1 flex items-center">
 					{/* {React.createElement(icon, {className: 'w-4 h-4 mr-2'})} */}
 					<img className="w-4 h-4 mr-2" src={icon} />
 					<h2 className="text-sm text-gray-700">{title}</h2>
@@ -77,7 +77,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 				</Chevron>
 			</HeaderDiv>
 			{visible ? (
-				<div className="w-full flex-1 bg-gray-100 overflow-auto">{children}</div>
+				<div className={`w-full flex-1 overflow-auto  ${title=="Pages"?"bg-white":"bg-gray-100"}`}>{children}</div>
 			) : null}
 		</SidebarItemDiv>
 	)

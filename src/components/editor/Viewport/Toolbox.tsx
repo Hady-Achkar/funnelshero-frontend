@@ -68,7 +68,7 @@ export const Toolbox = () => {
 			enabled={enabled && enabled}
 			className="toolbox transition overscroll-none h-full flex flex-col bg-white"
 		>
-			<div className="flex-1 flex flex-col min-h-0 overflow-y-scroll bg-indigo-600">
+			<div className="flex-1 flex flex-col min-h-0  bg-indigo-600">
 				<ToolboxItem
 					isCanva={false}
 					title="Image"
