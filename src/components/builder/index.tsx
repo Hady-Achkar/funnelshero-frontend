@@ -27,7 +27,8 @@ import {
 	CodeBlockComponent,
 	QuestionBox,
 	CheckboxComponent,
-	CheckboxItem,
+	// CheckboxItem,
+	// CheckboxContainer,
 } from '../'
 import {IFunnel, IPage} from '../../types'
 
@@ -55,7 +56,7 @@ const Builder: React.FC<IProps> = (props) => {
 		Text,
 		Image,
 		CheckboxComponent,
-		CheckboxItem,
+		// CheckboxItem,
 		Button,
 		Video,
 		HyperLink,
@@ -75,6 +76,7 @@ const Builder: React.FC<IProps> = (props) => {
 		InputComponent,
 		CodeBlockComponent,
 		QuestionBox,
+		// CheckboxContainer,
 	}
 
 	const ref = useRef<string>()

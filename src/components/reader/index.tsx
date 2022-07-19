@@ -22,6 +22,9 @@ import {
 	QuestionBox,
 	Paragraph,
 	CodeBlockComponent,
+	CheckboxComponent,
+	CheckboxItem,
+	CheckboxContainer,
 } from '../reader-components'
 
 const contentElements = {
@@ -45,6 +48,9 @@ const contentElements = {
 	InputComponent,
 	Paragraph,
 	CodeBlockComponent,
+	CheckboxComponent,
+	CheckboxItem,
+	CheckboxContainer,
 }
 
 function createElementFromNode({

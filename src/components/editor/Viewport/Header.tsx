@@ -9,7 +9,7 @@ import {
 	RewindIcon,
 } from '@heroicons/react/outline'
 import {GetSingleFunnel} from '../../../services'
-import {useHistory, Prompt} from 'react-router-dom'
+import {useHistory, Prompt, Link} from 'react-router-dom'
 import {startSavePageData, startPublishPage} from '../../../actions'
 import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../../types'
@@ -18,6 +18,7 @@ import FunnelsSettings from '../../common/FunnelSettings'
 import {Reader} from '../..'
 import {Tooltip} from '@material-ui/core'
 import {FirstPage, LastPage} from '@mui/icons-material'
+import {useCopyToClipboard} from '../../../hooks'
 interface IProps {
 	data: IFunnel
 	handleChangePage: (page: IPage) => void
@@ -81,6 +82,7 @@ export const Header: React.FC<IProps> = (props) => {
 
 	const [settingsModal, setSettingsModal] = useState(false)
 
+	const [value, copy] = useCopyToClipboard()
 	return (
 		<div className="bg-white p-3 shadow-sm">
 			<div className="sm:flex sm:items-center sm:justify-between">
@@ -190,8 +192,7 @@ export const Header: React.FC<IProps> = (props) => {
 									/>
 								</svg>
 							</div>
-							<button
-								type="button"
+							<a
 								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
 								onClick={() => {
 									actions.setOptions((options) => (options.enabled = !enabled))
@@ -199,7 +200,7 @@ export const Header: React.FC<IProps> = (props) => {
 								}}
 							>
 								Preview
-							</button>
+							</a>
 							<button
 								type="button"
 								className="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
@@ -236,6 +237,16 @@ export const Header: React.FC<IProps> = (props) => {
 						</div>
 					)}
 				</div>
+			</div>
+
+			<div>
+				<button
+					type="button"
+					className="bg-indigo-50 flex space-x-4 px-2 py-1.5 rounded-md text-sm font-medium text-indigo-800 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-50 focus:ring-indigo-600"
+					onClick={() => copy(data.baseDomain)}
+				>
+					Copy preview link
+				</button>
 			</div>
 			<ConfirmationModal
 				open={openConfirmPublish}

@@ -7,8 +7,8 @@ const Index = (props) => {
 			<div className="mt-1 mb-5 border-b border-gray-300 focus-within:border-black">
 				<textarea
 					rows={4}
-					name="answer"
-					id="answer"
+					name="name"
+					id="name"
 					className="block w-full border-0 border-b border-transparent  focus:border-black focus:ring-0 sm:text-sm"
 					placeholder={props.placeholder}
 				/>
