@@ -38,7 +38,7 @@ export const ButtonSettings = () => {
 								full={true}
 								propKey="background"
 								type="bg"
-								label="Background"
+								label="Hello this is background"
 							/>
 							<ToolbarItem
 								full={true}

@@ -2,8 +2,6 @@ import {Editor, Frame} from '@craftjs/core'
 import {ThemeProvider} from '@material-ui/styles'
 import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {createTheme} from '@material-ui/core/styles'
-import lz from 'lzutf8'
-import saveFunnel from '../../services/EditPage'
 import {
 	Button,
 	Container,
@@ -28,10 +26,10 @@ import {
 	IconObject,
 	CodeBlockComponent,
 	QuestionBox,
+	CheckboxComponent,
+	CheckboxItem,
 } from '../'
-import {useDispatch} from 'react-redux'
 import {IFunnel, IPage} from '../../types'
-import {Prompt} from 'react-router-dom'
 
 interface IProps {
 	data: IFunnel
@@ -56,6 +54,8 @@ const Builder: React.FC<IProps> = (props) => {
 		Container,
 		Text,
 		Image,
+		CheckboxComponent,
+		CheckboxItem,
 		Button,
 		Video,
 		HyperLink,
@@ -77,7 +77,6 @@ const Builder: React.FC<IProps> = (props) => {
 		QuestionBox,
 	}
 
-	const dispatch = useDispatch()
 	const ref = useRef<string>()
 	useEffect(() => {
 		ref.current = mainPage?._id
@@ -85,31 +84,6 @@ const Builder: React.FC<IProps> = (props) => {
 
 	// const html = new htmlCreator(mainPage?.data)
 	// console.log(html)
-
-	const [blocking, setBlocking] = useState(false)
-
-	function deepEqual(object1, object2) {
-		const keys1 = Object.keys(object1)
-		const keys2 = Object.keys(object2)
-		if (keys1.length !== keys2.length) {
-			return false
-		}
-		for (const key of keys1) {
-			const val1 = object1[key]
-			const val2 = object2[key]
-			const areObjects = isObject(val1) && isObject(val2)
-			if (
-				(areObjects && !deepEqual(val1, val2)) ||
-				(!areObjects && val1 !== val2)
-			) {
-				return false
-			}
-		}
-		return true
-	}
-	function isObject(object) {
-		return object != null && typeof object === 'object'
-	}
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -119,6 +93,7 @@ const Builder: React.FC<IProps> = (props) => {
 					enabled={true}
 					onRender={RenderNode}
 					indicator={{success: '#2d9d78', error: '#e34850'}}
+					onNodesChange={(nodes) => {}}
 				>
 					<Viewport
 						data={data}
