@@ -54,7 +54,7 @@ export const Icons = (props: any) => {
 export const IconObject = (props) => {
 	return (
 		<ComponentLayout>
-			<div className="w-full my-5 flex justify-around items-center">
+			<div className="flex justify-around items-center">
 				{props.linkedNodes['icon_wrapper'].children}
 			</div>
 		</ComponentLayout>

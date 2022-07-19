@@ -74,13 +74,18 @@ export const Icons = (props: Partial<IconProps>) => {
 }
 
 export const IconObject = () => {
+	const {
+		connectors: {connect},
+	} = useNode()
 	return (
-		<Element canvas id="icon_wrapper" is={IconsWrapper}>
-			<Element is={Icons} id="icon_1" />
-			<Element is={Icons} id="icon_2" />
-			<Element is={Icons} id="icon_3" />
-			<Element is={Icons} id="icon_4" />
-		</Element>
+		<div ref={connect}>
+			<Element canvas id="icon_wrapper" is={IconsWrapper}>
+				<Element is={Icons} id="icon_1" />
+				<Element is={Icons} id="icon_2" />
+				<Element is={Icons} id="icon_3" />
+				<Element is={Icons} id="icon_4" />
+			</Element>
+		</div>
 	)
 }
 
@@ -92,8 +97,8 @@ Icons.craft = {
 	displayName: 'Icon',
 	props: {
 		src: 'https://images-ext-2.discordapp.net/external/zKY3beS6qB3gQPAb5HCvH-Apyrp5PWEFygiCut97d_E/https/cdn-icons-png.flaticon.com/128/1864/1864640.png',
-		size: IconSize.MEDIUM,
-		href: 'https://www.google.com',
+		size: IconSize.LARGE,
+		href: 'https://www.funnelshero.com',
 	},
 	related: {toolbar: IconsSettings},
 }

@@ -57,7 +57,6 @@ const CheckboxItemSettings = (props) => {
 	}, [])
 	return (
 		<React.Fragment>
-			<ToolbarItem type="text" propKey="text" label="Text" />
 			<ButtonsGroup title="Icon size">
 				<ButtonsGroup.Item title="S" id="SMALL" name="size" align="left" />
 				<ButtonsGroup.Item title="M" id="MEDIUM" name="size" align="middle" />

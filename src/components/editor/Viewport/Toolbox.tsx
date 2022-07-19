@@ -20,15 +20,14 @@ import {
 } from '../../selectors'
 import {
 	BlurLinear,
-	CropLandscape,
 	CropOriginal,
 	InsertEmoticon,
-	Link,
 	PowerInput,
 	TextFormat,
 	VideoLibrary,
-	CompareArrows,
+	HelpOutline,
 	CodeOutlined,
+	FormatListBulletedOutlined,
 } from '@material-ui/icons'
 import SmartButtonIcon from '@mui/icons-material/SmartButton'
 import ToolboxItem from './ToolboxItem'
@@ -95,6 +94,12 @@ export const Toolbox = () => {
 					Icon={VideoLibrary}
 					component={Video}
 				/>
+				{/* <ToolboxItem
+					isCanva={true}
+					title="List"
+					Icon={FormatListBulletedOutlined}
+					component={CheckboxComponent}
+				/> */}
 				<ToolboxItem
 					isCanva={false}
 					title="Divider"
@@ -128,33 +133,15 @@ export const Toolbox = () => {
 				<ToolboxItem
 					isCanva={true}
 					title="Icons"
-					Icon={CodeOutlined}
+					Icon={InsertEmoticon}
 					component={IconObject}
 				/>
-        <ToolboxItem
+				<ToolboxItem
 					isCanva={true}
 					title="Question"
-					Icon={CodeOutlined}
+					Icon={HelpOutline}
 					component={QuestionBox}
 				/>
-        <ToolboxItem
-					isCanva={true}
-					title="List"
-					Icon={CodeOutlined}
-					component={CheckboxComponent}
-				/>
-        <ToolboxItem
-					isCanva={false}
-					title="Header"
-					Icon={BlurLinear}
-					component={HeaderComponent}
-				/>
-				<ToolboxItem
-					isCanva={false}
-					title="footer"
-					Icon={BlurLinear}
-					component={FooterComponent}
-				/> */}
 			</div>
 		</ToolboxDiv>
 	)

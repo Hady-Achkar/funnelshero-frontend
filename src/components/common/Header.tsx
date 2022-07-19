@@ -108,8 +108,8 @@ const Header = () => {
 												</Menu.Item>
 												<Menu.Item>
 													{({active}) => (
-														<a
-															href="#"
+														<Link
+															to="/dashboard"
 															className={classNames(
 																active
 																	? 'bg-gray-100 text-gray-900'
@@ -118,7 +118,7 @@ const Header = () => {
 															)}
 														>
 															Dashboard
-														</a>
+														</Link>
 													)}
 												</Menu.Item>
 											</div>

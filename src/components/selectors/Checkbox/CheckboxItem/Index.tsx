@@ -25,7 +25,7 @@ const CheckboxItem = (props) => {
 				/>
 			</div>
 			<div className="ml-3 text-sm flex items-center justify-between">
-				<Element is={Text} id="cb_title" />
+				<Element is={Text} id="cb_title" text="Cool stuff here!" />
 			</div>
 			<img
 				src={props.src}
