@@ -244,7 +244,6 @@ const Index = () => {
 										</button>
 									</div>
 								</div>
-								<pre>{JSON.stringify(formData)}</pre>
 							</form>
 						</section>
 					</div>

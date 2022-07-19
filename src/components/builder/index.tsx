@@ -25,6 +25,7 @@ import {
 	InputComponent,
 	IconObject,
 	CodeBlockComponent,
+	QuestionBox,
 	CheckboxComponent,
 	CheckboxItem,
 } from '../'
@@ -73,6 +74,7 @@ const Builder: React.FC<IProps> = (props) => {
 		TextContainer,
 		InputComponent,
 		CodeBlockComponent,
+		QuestionBox,
 	}
 
 	const ref = useRef<string>()
