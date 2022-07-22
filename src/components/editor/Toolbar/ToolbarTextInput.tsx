@@ -13,24 +13,31 @@ const useStyles = makeStyles({
 		// borderRadius: '100px',
 		border: 'none',
 		margin: 0,
-		marginTop: 7,
+		marginTop: 0,
 		position: 'relative',
 		borderRadius: '15px',
 	},
 	input: {
 		background: 'rgb(238,242,255)',
 		borderColor: '#101010',
-		borderRadius: '15px',
+		// borderRadius: '15px',
 		fontSize: '12px',
-		paddingLeft: '28px',
+		paddingLeft: '10px',
 		paddingBottom: '8px',
 		paddingTop: '8px',
 		margin: 0,
+		"&:focus": {
+			border: "none",
+			outline: "none",
+			outlineOffset: "0px",
+			boxShadow: "none"
+		}
 	}, // a style rule
 	// notchedOutline: {
 	//   borderColor:'transparent',
 	//   borderRadius: "100px"
 	// }
+
 })
 
 const useLabelStyles = makeStyles({
@@ -38,13 +45,17 @@ const useLabelStyles = makeStyles({
 		color: 'rgb(128,128,128)',
 	},
 	formControl: {
-		fontSize: '18px',
-		borderRadius: '15px',
-		paddingLeft: '0px',
-		paddingTop: '3px',
-		marginBottom: '3px',
+		transform: 'scale(1) !important',
+		width: '100%',
+		fontSize: '13px',
+		// borderRadius: '15px',
+		paddingLeft: '10px',
+		paddingTop: '9px',
+		paddingBottom: '9px',
+		// marginBottom: '3px',
 		position: 'relative',
-		left: '-12px',
+		// left: '-12px',
+		background: '#fff',
 	}, // a style rule
 })
 
@@ -90,7 +101,7 @@ const ToolbarTextInput = ({
 					}}
 				>
 					<div
-						className="fixed top-0 left-0 w-full h-full cursor-pointer bg-indi"
+						className="fixed top-0 left-0 w-full h-full cursor-pointer"
 						onClick={(e) => {
 							e.preventDefault()
 							e.stopPropagation()
@@ -109,7 +120,7 @@ const ToolbarTextInput = ({
 				label={label}
 				style={{margin: 0, width: '100%'}}
 				value={internalValue || ''}
-				className="focus:ring-indigo-500 bg-white focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+				className="focus:ring-indigo-500  focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md shadow-sm w-ful text_field-dev"
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') {
 						onChange((e.target as any).value)

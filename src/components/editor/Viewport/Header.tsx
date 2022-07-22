@@ -168,7 +168,8 @@ export const Header: React.FC<IProps> = (props) => {
 				<div className="mt-3 flex sm:mt-0 sm:ml-4">
 					{enabled ? (
 						<React.Fragment>
-							<Tooltip title="Preview" placement="bottom">
+							
+								<div className="text-center">
 								<button
 									type="button"
 									className="inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
@@ -179,26 +180,40 @@ export const Header: React.FC<IProps> = (props) => {
 								>
 									<PlayIcon className='text-white-400 w-5 h-5' />
 								</button>
-							</Tooltip>
-							<Tooltip title="Publish" placement="bottom">
-							<button
-								type="button"
-								className="ml-3 inline-flex items-center px-3 py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-								onClick={() => setOpenConfirmPublish(true)}
-								disabled={isPublished}
-							>
-								<PaperAirplaneIcon className='text-white-400 w-5 h-5'/>
-							</button>
-							</Tooltip>
-							<Tooltip title="Save" placement="bottom">
-								<button
+								<p className='text-xs text-center'>Preview</p>
+								</div>
+								
+							
+							
+
+								<div className="text-center">
+									<button
 									type="button"
-									className="ml-3 inline-flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
-									onClick={handleDecode}
+									className="ml-3 inline-flex items-center px-3 py-2  border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+									onClick={() => setOpenConfirmPublish(true)}
+									disabled={isPublished}
 								>
-									<BookmarkIcon className='text-white-400 w-5 h-5'/>
+									<PaperAirplaneIcon className='text-white-400 w-5 h-5'/>
 								</button>
-							</Tooltip>
+								<p className='ml-3 text-xs text-center'> Publish</p>
+								</div>
+							
+						
+						
+
+								<div className="text-center">
+								<button
+										type="button"
+										className="ml-3 flex items-center px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 "
+										onClick={handleDecode}
+									>
+										<BookmarkIcon className='text-white-400 w-5 h-5'/>
+									</button>
+									<p className='ml-3 text-xs text-center'>Save</p>
+								</div>
+						
+								
+						
 							
 							<div className="inline-flex items-center cursor-pointer hover:opacity-80 ml-3">
 								

@@ -53,10 +53,10 @@ const ToolbarSection = ({title, props, summary, children}: any) => {
 	return (
 		<ExpansionPanel className="" classes={panelClasses}>
 			<ExpansionPanelSummary className=" text-sm font-medium text-left text-indigo-900 bg-indigo-100 rounded-lg  ">
-				<div className="px-6 w-full bg-indigo-50 py-3 rounded">
+				<div className="px-6 w-full bg-blue-100	 py-3 rounded">
 					<Grid container direction="row" alignItems="center" spacing={3}>
 						<Grid item xs={4}>
-							<p className=" text-left text-sm text-indigo-700">{title}</p>
+							<p className=" text-left text-sm text-slate-800" >{title}</p>
 						</Grid>
 						{summary && props ? (
 							<Grid item xs={8}>

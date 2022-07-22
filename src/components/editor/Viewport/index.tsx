@@ -148,12 +148,12 @@ const Viewport: React.FC<IProps> = (props) => {
               <div className="">
                 {/* Start left column area */}
                 <div className=" relative" style={{ minHeight: '12rem' }}>
-                  <div className="tab_items w-full flex w-full flex-wrap mt-2 mb-2 content-center items-center justify-center">
+                  <div className="tab_items w-full flex w-full flex-wrap content-center items-center bg-gray-200 justify-center">
                     <p
-                      className={`tab_item m-2  pb-2 hover:border-indigo-100 border-transparent border-b-2 cursor-pointer ${tabs ? " border-indigo-600" : ""}`} onClick={()=>{setTabs(!tabs)}} >
+                      className={`tab_item cursor-pointer  ${tabs ? " active_switch" : ""}`} onClick={()=>{setTabs(!tabs)}} >
                       Pages
                     </p>
-                    <p className={`tab_item m-2 pb-2 hover:border-indigo-100 border-transparent border-b-2 cursor-pointer ${tabs ? "" : " border-indigo-600"}`} onClick={()=>{setTabs(!tabs)}}>
+                    <p className={`tab_item cursor-pointer ${tabs ? "" : " active_switch"}`} onClick={()=>{setTabs(!tabs)}}>
                       Components
                     </p>
                   </div>
@@ -286,7 +286,7 @@ const Viewport: React.FC<IProps> = (props) => {
                 {/* End main area */}
               </div>
             </div>
-            <div className="pr-4 lg:flex-shrink-0 lg:border-gray-200 bg-gray-100 hc overflow-y-scroll">
+            <div className="pr-4 lg:flex-shrink-0 border-gray-200 border-l-2 bg-gray-50 hc overflow-y-scroll">
               <div className="lg:w-80">
                 {/* Start right column area */}
                 <div className="relative" style={{ minHeight: '16rem' }}>

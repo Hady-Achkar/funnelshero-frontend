@@ -111,7 +111,7 @@ export const ImageSettings = () => {
 	return (
 		<React.Fragment>
 			<ToolbarSection title="Source">
-				<ToolbarItem full={true} propKey="src" type="text" label="Image URL" />
+				<ToolbarItem full={true} propKey="src" type="text" label="Image URL"  />
 				{/* <div>
 					<button
 						onClick={handleOpenUpload}
